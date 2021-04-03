@@ -129,11 +129,11 @@ def index(request):
             fecha = vsf.fecha_entmcia
             fecha10 = fecha + timedelta(days=10)
             if today > fecha10:
-                print 'El viaje: '+ str(vsf.pk) + ', del cliente '+ str(vsf.cliente) +', con la Fecha de Salida del ' + str(fecha) + 'y fecha de entrega ' + str(vsf.fecha_entmcia) 
+                ##print 'El viaje: '+ str(vsf.pk) + ', del cliente '+ str(vsf.cliente) +', con la Fecha de Salida del ' + str(fecha) + 'y fecha de entrega ' + str(vsf.fecha_entmcia) 
                 listadoVSF.append(viajesSinFactura)
-                print 'Envia correo'
+                33print 'Envia correo'
             else:
-                print 'No en la lista'
+                ##print 'No en la lista'
     msg1 = 'LISTA DE VIAJES NO FACTURADOS  \n\n\n\n'
     msg2 = '-----------------------------------------------------------------\n '.join(listadoVSF)
     msg3 = '\n\n\n\n Contacto: \n\n  departamento de sistemas. '
@@ -145,7 +145,7 @@ def index(request):
     ##['ivonne@logisticavitesse.com.mx', 'alejandromc@logisticavitesse.com.mx', 'mara@logisticavitesse.com.mx', 'griselda@logisticavitesse.com.mx', 'carlos@logisticavitesse.com.mx'], fail_silently=False)
 
 
-    ########## Acutaliza colo de los viajes cerrados hace 15 dias y que no esten facturados ####
+    ########## Acutaliza color de los viajes cerrados hace 7 dias y que no esten facturados ####
 
     for vnf in viajes_Sin_Factura:
         if vnf.fecha_entmcia != None:
@@ -154,7 +154,7 @@ def index(request):
             print vnf.fecha_entmcia
             ##print 'Fecha de cierre'
             fechaSalida =vnf.fecha_salida
-            fechaMaxima = fechaSalida + timedelta(days=15)
+            fechaMaxima = fechaSalida + timedelta(days=7)
             if today > fechaMaxima and vnf.status_doc <= 7:
                 #print 'Estos viajes superan los 15 dias sin factura despues de su cierre'
                 #print vnf.id
