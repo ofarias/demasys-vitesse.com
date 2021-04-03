@@ -7,7 +7,7 @@ BASE_PATH = dirname(dirname(abspath(__file__)))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-LOCAL = False
+LOCAL = True
 
 INTERNAL_IPS = ('192.168.100.128',) ###'127.0.0.1' o 0.0.0.0
  
