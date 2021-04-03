@@ -131,7 +131,7 @@ def index(request):
             if today > fecha10:
                 ##print 'El viaje: '+ str(vsf.pk) + ', del cliente '+ str(vsf.cliente) +', con la Fecha de Salida del ' + str(fecha) + 'y fecha de entrega ' + str(vsf.fecha_entmcia) 
                 listadoVSF.append(viajesSinFactura)
-                33print 'Envia correo'
+                ##print 'Envia correo'
             else:
                 ##print 'No en la lista'
     msg1 = 'LISTA DE VIAJES NO FACTURADOS  \n\n\n\n'
