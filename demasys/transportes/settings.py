@@ -9,8 +9,8 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 LOCAL = False
 
-INTERNAL_IPS = ('0.0.0.0',) ###'127.0.0.1'
-
+INTERNAL_IPS = ('192.168.100.128',) ###'127.0.0.1' o 0.0.0.0
+ 
 ADMINS = (
    (u'Anu', '@codefire.mx'),
 )
