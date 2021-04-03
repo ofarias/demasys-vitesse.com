@@ -1,0 +1,264 @@
+{% extends "easy_pdf/base.html" %}
+{% load humanize %}
+{% load sepomex_filters %}
+{% block content %}
+    <div id="content">
+        <table border="0" cellpadding="3">
+        	<tr>        		
+        		<td align="center" width="80%">
+        			<table cellpadding="3">
+        				<tr>
+        					<td width="35%"> img src="{{MEDIA_URL}}img/logo_cartaporte.jpg" width="100%" / &nbsp;</td>
+        					<td width="65%" align="center">
+        						
+        						<h1>VITESSE OPCIONES EN DISTRIBUCION SA DE CV.</h1>
+        						<p>CAMINO A SANTA CRUZ 27 S/N NUMERO<br>LA ALTEÑA II MEXICO C.P. 53120</p>
+        						&nbsp;
+        					</td>
+        				</tr>
+        			</table>        			        			        			
+        		</td>
+        		<td align="center" width="20%">
+        			<h1>CARTA PORTE</h1>
+        			        			
+        			<p>{{viaje}}</p>        			        			        		
+        		</td>
+        	</tr>
+        </table>
+        <table border="1" bordercolor="#666" cellpadding="3">
+        	<tr>
+        		<td>LUGAR Y FECHA DE EXPEDICIÓN:</td>
+        		<td colspan="3">{{viaje.fecha_salida}}, Estado de México</td>
+        	</tr>
+        	<tr>
+        		<td>ORIGEN:</td>
+        		<td>{{viaje.origen_clave_municipio|estado}}</td>
+        		<td>DESTINO:</td>
+        		<td>
+        			{% for destino in viaje.destino_set.all %}
+						{{destino.destino_clave_municipio|municipio}}, 
+					{% endfor %}
+        		</td>
+        	</tr>
+        	<tr>
+        		<td>REMITENTE:</td>
+        		<td>{{viaje.cliente.nombre}}</td>
+        		<td>DESTINATARIO:</td>
+        		<td></td>
+        	</tr>
+        	<tr>
+        		<td>RFC:</td>
+        		<td>{{viaje.cliente.rfc|default_if_none:""}}</td>
+        		<td>RFC:</td>
+        		<td></td>
+        	</tr>
+        	<tr>
+        		<td>DOMICILIO:</td>
+        		<td>{{viaje.cliente.facturacion_calle}} {{viaje.cliente.facturacion_numero}}, {{viaje.cliente.facturacion_colonia}}</td>
+        		<td>DOMICILIO:</td>
+        		<td></td>
+        	</tr>
+        	<tr>
+        		<td>SE RECOGERA EN:</td>
+        		<td>{{viaje.origen_clave_municipio|municipio}}, {{viaje.origen_calle}} {{viaje.origen_numero}}, {{viaje.origen_colonia}}</td>
+        		<td>SE ENTREGARA EN:</td>
+        		<td></td>
+        	</tr>
+        </table>
+        <table border="1" bordercolor="#666" cellpadding="3">
+        	<tr>
+        		<td width="50%">VALOR UNITARIO, CUOTA CONVENIDA POR TONELADA O CARGA FRACCIONADA</td>
+        		<td width="30%">AREA</td>        		
+        		<td width="20%">CONDICIONES DE PAGO</td>        		
+        	</tr>
+        	<tr>
+        		<td></td>
+        		<td>{{viaje.departamento}}</td>
+        		<td></td>
+        	</tr>
+        </table>
+        <table border="1" bordercolor="#666" cellpadding="3">
+        	<tr>
+        		<td colspan="2" align="center">BULTOS</td>
+        		<td rowspan="2" align="center">QUE EL REMITENTE DICE QUE CONTIENE</td>
+        		<td rowspan="2" align="center" width="15%">PESO</td>
+        		<td colspan="2" align="center">VOLUMEN</td>
+        		<td rowspan="2" align="center" width="45%">CONCEPTO</td>
+        		<td rowspan="2" align="center" width="30%">IMPORTE</td>
+        	</tr>
+        	<tr>
+        		<td align="center" width="20%">NUMERO</td>
+        		<td align="center" width="20%">EMBALAJE</td>
+        		<td align="center" width="20%">M3</td>
+        		<td align="center" width="20%">PESO ESTIMADO</td>
+        	</tr>
+        	<tr>
+        		<td></td>
+        		<td>1</td>
+        		<td>{{viaje.contiene}}</td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td>FLETE</td>
+        		<td align="right">$ {{importe|floatformat:2|intcomma}}</td>
+        	</tr>
+        	<tr>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td>CARGO DE SEGURO</td>
+        		<td align="right">$ 0.00</td>
+        	</tr>
+        	<tr>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td>MANIOBRAS</td>
+        		<td align="right">$ 0.00</td>
+        	</tr>
+        	<tr>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td>AUTOPISTAS, LIBRAMIENTOS Y TRANSBORDADORES</td>
+        		<td align="right">$ 0.00</td>
+        	</tr>
+        	<tr>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td>OTROS</td>
+        		<td align="right">$ 0.00</td>
+        	</tr>
+        	<tr>
+        		<td colspan="2" rowspan="2">OBSERVACIONES</td>
+        		<td colspan="4" rowspan="2"></td>
+        		<td align="right"><strong>IMPORTE $</strong></td>
+        		<td align="right">{{importe|floatformat:2|intcomma}}</td>
+        	</tr>
+        	<tr>
+        		<td align="right"><strong>IVA $</strong></td>
+        		<td align="right">{{iva|floatformat:2|intcomma}}</td>
+        	</tr>
+        	<tr>
+        		<td colspan="2" rowspan="2">OPERADOR</td>
+        		<td rowspan="2">{{viaje.operador}}</td>
+        		<td>ECO:</td>
+        		<td colspan="2">{{viaje.economico.pk}}</td>
+        		<td align="right"><strong>SUBTOTAL $</strong></td>
+        		<td align="right">{{subtotal|floatformat:2|intcomma}}</td>
+        	</tr>
+        	<tr>
+        		<td>FOLIO</td>
+        		<td colspan="2"></td>
+        		<td align="right"><strong>RETENCION IVA $</strong></td>
+        		<td align="right">{{retencion|floatformat:2|intcomma}}</td>
+        	</tr>
+        </table>
+        <table border="1" bordercolor="#666" cellpadding="3">
+        	<tr>
+        		<td rowspan="3" width="60%"><img src="{{MEDIA_URL}}img/rfc.jpg" width="100%" /></td>
+        		<td colspan="2">IMPUESTO RETENIDO DE CONFORMIDAD CON LA LEY DEL IMPUESTO AL VALOR AGREGADO</td>
+        		<td align="right" width="37%"><strong>TOTAL $</strong></td>
+        		<td width="25%" align="right">{{total|floatformat:2|intcomma}}</td>
+        	</tr>
+        	<tr>
+        		<td>IMPORTE CON LETRA</td>        		
+        		<td colspan="3">{{importe_letra}} MN</td>
+        	</tr>
+        	<tr>
+        		<td colspan="2"></td>
+        		<td colspan="2" align="center">
+        			<p>RECIBÍ DE CONFORMIDAD</p>
+        			<p></p>
+        			<p>______________________</p>
+        			<p>FIRMA DEL INTERESADO</p>
+        		</td>
+        	</tr>
+        </table>
+        <P>&nbsp;</P>
+        <P>&nbsp;</P>
+        <table border="1" bordercolor="#666" cellpadding="3">
+        	<tr>
+        		<td align="center" rowspan="2" colspan="6"><h1>COMPROBANTE DE VIATICOS</h1></td>
+        		<td align="center" width="25%" colspan="2"><h1>CARTA PORTE</h1></td>
+        	</tr>
+        	<tr>
+        		<td align="center" colspan="2">No. {{viaje}}</td>
+        	</tr>
+        	<tr>
+        		<td>ECO:</td>
+        		<td>{{viaje.economico.pk}}</td>
+        		<td>FOLIO:</td>
+        		<td></td>
+        		<td>FACTURA:</td>
+        		<td></td>
+        		<td>FECHA:</td>
+        		<td>{{viaje.fecha_salida}}</td>
+        	</tr>
+        	<tr>
+        		<td colspan="2">OPERADOR:</td>
+        		<td colspan="2">{{viaje.operador}}</td>
+        		<td colspan="2">DESTINO:</td>
+        		<td colspan="2">
+        			{% for destino in viaje.destino_set.all %}
+						{{destino.destino_clave_municipio|municipio}}, 
+					{% endfor %}
+        		</td>
+        	</tr>
+        	<tr>
+				<td colspan="8" valign="top">
+				<table width="100%" border="1" bordercolor="#666" cellpadding="3">
+        				<tr>
+        					<td colspan="2" align="center">RESUMEN DE GASTOS</td>
+        				</tr>
+        				{% for gasto in movimientos %}
+        				<tr>
+        					<td>{{gasto.concepto}}</td>
+			        		<td align="right">$ {{gasto.importe|floatformat:2|intcomma}}</td>
+			        	</tr>
+			        	{% endfor %}
+			        	<tr>
+			        		<td>TOTAL:</td>
+			        		<td align="right">$ {{totalMov|floatformat:2|intcomma}}</td>
+			        	</tr>
+        			</table>
+				</td>
+
+        	</tr>        	
+        </table>
+        <table border="1" bordercolor="#666" cellpadding="3">
+        	<tr>
+        		<td align="center">
+        			
+        		</td>
+        		<td align="center">
+        			<p>RECIBI</p>
+        			<p>_______________________</p>
+        			<p>NOMBRE Y FIRMA</p>
+        		</td>
+        		<td align="left" valign="middle">
+        			<p>A PAGAR: </p>         			
+        		</td>
+        	</tr>
+        </table>
+    </div>  
+{% endblock %}
+
+{%block page_foot%}
+    
+        <pdf:pagenumber />
+    
+{%endblock%}

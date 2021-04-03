@@ -1,0 +1,329 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+
+{% block title %}{{action}} Nuevo Viaje{% endblock %}
+{% block content_title %} Nuevo Viaje {% endblock %}
+
+{% block nav-viajes %}<li class="active">{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/bootstrap-datepicker/css/datepicker3.css"/>
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/select2/select2.css"/>
+{% endblock %}
+
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="{% url 'viajes.views.index' %}">Viajes</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>	
+	<li>
+		<a href="#">{{action}}</a>
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+							<div class="modal fade" id="ajax" role="basic" aria-hidden="true">
+								<div class="page-loading page-loading-boxed">
+									<img src="{{MEDIA_URL}}img/loading-spinner-grey.gif" alt="" class="loading">
+									<span>
+									&nbsp;&nbsp;Cargando... </span>
+								</div>
+								<div class="modal-dialog">
+									<div class="modal-content">
+									</div>
+								</div>
+							</div>
+		<div class="row">
+            <div class="col-md-12">
+								<div class="portlet light bg-inverse form-fit">
+									<div class="portlet-title">
+										<div class="caption">
+											<i class="icon-equalizer font-blue"></i>
+											<span class="caption-subject font-blue bold uppercase">{{action}} Viaje</span>											
+										</div>										
+									</div>
+									<div class="portlet-body form">
+										<!-- BEGIN FORM-->
+										<form action="" class="form-horizontal form-row-seperated" method="post">
+											{% csrf_token %}
+											<div class="form-body">												
+												<h3 class="form-section">Datos Generales</h3>
+												<div class="form-group {% if form.cliente.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.cliente.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.cliente}}
+														{% if form.cliente.errors %}<span class="help-block">{{form.cliente.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.departamento.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.departamento.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.departamento}}
+														{% if form.departamento.errors %}<span class="help-block">{{form.departamento.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.referencia.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Bill/Load</label>
+													<div class="col-md-9">
+														{{form.referencia}}
+														{% if form.referencia.errors %}<span class="help-block">{{form.referencia.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.economico.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.economico.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.economico}}
+														{% if form.economico.errors %}<span class="help-block">{{form.economico.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.operador.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.operador.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.operador}}
+														{% if form.operador.errors %}<span class="help-block">{{form.operador.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.ruta.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.ruta.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														<div class="input-group">
+														{{form.ruta}}
+															
+							{% if perms.viajes.add_ruta %}
+								<span class="input-group-btn">
+																<a href="{% url 'viajes.views.rutasmodal' %}" data-target="#ajax" data-toggle="modal" class="btn blue">
+																	<i class="fa fa-plus-square fa-fw"></i>
+																	Agregar Ruta 
+																</a>			
+															</span>
+								
+								{% endif %}
+
+														</div>								
+															{% if form.ruta.errors %}<span class="help-block">{{form.ruta.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.tipo_ruta.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Tipo de ruta<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.tipo_ruta}}
+														{% if form.tipo_ruta.errors %}<span class="help-block">{{form.tipo_ruta.errors}}</span>{% endif %}
+													</div>
+												</div>												
+												<div class="form-group {% if form.contiene.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Contiene<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.contiene}}
+														{% if form.contiene.errors %}<span class="help-block">{{form.contiene.errors}}</span>{% endif %}
+													</div>
+												</div>	
+												<h3>Datos de Origen</h3>
+												<div class="form-group {% if form.fecha_salida.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.fecha_salida.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														<div class="input-group date date-picker" data-date-format="dd-mm-yyyy">
+														{{form.fecha_salida}}
+															<span class="input-group-btn">
+																<button class="btn blue" type="button">
+																	<i class="fa fa-calendar"></i>																	
+																</button>				
+															</span>		
+														</div>	
+														{% if form.fecha_salida.errors %}<span class="help-block">{{form.fecha_salida.errors}}</span>{% endif %}
+													</div>
+												</div>	
+												<div class="form-group last">
+													<label class="control-label col-md-3"></label>
+													<div class="col-md-4">
+														<a class="btn blue" href="#" id="copyaddress">
+														Usar dirección del cliente <i class="fa fa-share"></i>
+														</a>
+													</div>
+												</div>
+												<div class="form-group {% if form.origen_cp.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.origen_cp.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.origen_cp}}
+														{% if form.origen_cp.errors %}<span class="help-block">{{form.origen_cp.errors}}</span>{% endif %}
+													</div>
+												</div>												
+												<div class="form-group {% if form.origen_clave_municipio.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Estado y municipio<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.origen_clave_municipio}}
+														{% if form.origen_clave_municipio.errors %}<span class="help-block">{{form.origen_clave_municipio.errors}}</span>{% endif %}
+													</div>
+												</div>												
+												<div class="form-group {% if form.origen_colonia.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.origen_colonia.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.origen_colonia}}
+														{% if form.origen_colonia.errors %}<span class="help-block">{{form.origen_colonia.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.origen_calle.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.origen_calle.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-4">
+														{{form.origen_calle}}
+														{% if form.origen_calle.errors %}<span class="help-block">{{form.origen_calle.errors}}</span>{% endif %}
+													</div>
+													<label class="control-label col-md-2">Número<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-3">
+														{{form.origen_numero}}
+														{% if form.origen_numero.errors %}<span class="help-block">{{form.origen_numero.errors}}</span>{% endif %}
+													</div>
+												</div>												
+												<h3>Datos de Destino</h3>													
+												<div class="form-group {% if form.destinos.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Destino(s)<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.destinos}}
+														{% if form.destinos.errors %}<span class="help-block">{{form.destinos.errors}}</span>{% endif %}													
+													</div>
+												</div>		
+												<h3>Observaciones</h3>													
+												<div class="form-group {% if form.observaciones.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">&nbsp;</label>
+													<div class="col-md-9">
+														{{form.observaciones}}
+														{% if form.observaciones.errors %}<span class="help-block">{{form.observaciones.errors}}</span>{% endif %}													
+													</div>
+												</div>	
+											
+											</div>
+											<div class="form-actions">
+												<div class="row">
+													<div class="col-md-offset-3 col-md-9">
+														<button type="submit" class="btn blue"><i class="fa fa-pencil"></i> {{action}}</button>														
+													</div>
+												</div>
+											</div>
+										</form>
+										<!-- END FORM-->
+									</div>
+								</div>
+            </div>
+         </div>
+{% endblock %}
+
+{% block extra_script %}
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/select2/select2.js"></script>
+{% endblock %}
+
+{% block script_ready %}
+	$('body').on('hidden.bs.modal', '.modal', function () {
+  		$(this).removeData('bs.modal');
+	});
+	
+	$('.date-picker').datepicker({
+        rtl: Metronic.isRTL(),
+        orientation: "auto",
+        autoclose: true        
+    });
+    
+    function sepomexFormatResult(municipio) {            
+            return municipio.municipio+', '+municipio.estado;
+        }
+
+        function sepomexFormatSelection(municipio) {
+            return municipio.municipio;
+        }
+        
+       
+       
+    $('#id_cliente').select2();
+    $("#id_departamento").select2();
+    $("#id_economico").select2();
+    $("#id_operador").select2();
+    $("#id_ruta").select2();
+    $("#id_contiene").select2({    	
+    	tags:["Equipo de comunicación", "Electrónica"],
+    	maximumSelectionSize: 1        
+    });
+    $("#id_origen_clave_municipio").select2({
+    	placeholder: "Seleccionar origen",    	
+    	minimumInputLength: 2,
+        ajax: {   
+        	url: '{% url 'sepomex.views.direccion' %}',
+        	dataType: 'json',
+                data: function(term, page) {
+
+                    return {
+                        term: term
+                    };
+                },
+                results: function(data, page) {
+                    return {
+                        results: data
+                    };
+            }
+        },
+        initSelection: function(element, callback) {
+	        var ids = $(element).val();	        
+	        if (ids!=="") {
+	            $.ajax("{% url 'sepomex.views.direccion_recupera_unico' %}", {
+	                data: {
+	                    ids: ids
+	                },
+	                dataType: "json"
+	            }).done(function(data) { callback(data); });
+	        }
+	    },
+		formatResult: sepomexFormatResult, // omitted for brevity, see the source of this page
+        formatSelection: sepomexFormatSelection, // omitted for brevity, see the source of this page   	
+	});
+    $("#id_destinos").select2({
+    	placeholder: "Seleccionar destino",
+    	multiple: true,
+    	minimumInputLength: 2,
+        ajax: {   
+        	url: '{% url 'sepomex.views.direccion' %}',
+        	dataType: 'json',
+                data: function(term, page) {
+
+                    return {
+                        term: term
+                    };
+                },
+                results: function(data, page) {
+                    return {
+                        results: data
+                    };
+            }
+        },
+		formatResult: sepomexFormatResult, // omitted for brevity, see the source of this page
+        formatSelection: sepomexFormatSelection, // omitted for brevity, see the source of this page   	
+	});
+	$('#copyaddress').click(function(e){
+		e.preventDefault();
+		var cliente_id = $('#id_cliente').val();
+		if(cliente_id==''){
+			alert('Debe seleccionar un cliente');
+		}else{
+			$.ajax({
+				url: '{% url 'clientes.views.recoleccion' 99 %}'.replace('99', cliente_id),
+				dataType: 'json',
+				success: function(data){
+					$('#id_origen_cp').val(data.recoleccion_cp);
+					$("#id_origen_clave_municipio").select2("val", data.recoleccion_clave_municipio);
+					$('#id_origen_colonia').val(data.recoleccion_colonia);
+					$('#id_origen_calle').val(data.recoleccion_calle);
+					$('#id_origen_numero').val(data.recoleccion_numero);
+				}
+			});	
+		}		
+	});
+{% endblock %}

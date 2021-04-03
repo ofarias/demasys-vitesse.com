@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load bootstrap_pagination %}
+
+{% block title %}Casetas{% endblock %}
+{% block content_title %} Catálogo de Casetas{% endblock %}
+
+{% block nav-catalogos %}<li class="active open">{% endblock %}
+{% block nav-casetas %}<li class="active">{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Catalogos</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Casetas</a>							
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+		<div class="row">
+            <div class="col-md-12">
+				<div class="portlet box grey-cascade">
+						<div class="portlet-title">
+							<div class="caption">
+								Listado de casetas
+							</div>							
+						</div>
+						<div class="portlet-body">
+							<div class="table-toolbar">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="btn-group">
+								{% if perms.catalogos.add_caseta %}
+								<a href="{% url 'catalogos.views.casetasadd' %}" class="btn blue">
+											Agregar nueva <i class="fa fa-plus"></i>
+								</a>
+								{% else %}
+								<div class="alert alert-dismissable alert-danger">
+									<button class="close" aria-hidden="true" data-dismiss="alert" type="button"></button>
+									{{user.get_short_name}} no tiene permisos para Agregar.<br/> Solicite permisos al administrador.
+								</div>
+								{% endif %}
+											
+										</div>
+									</div>
+									<div class="col-md-6">
+										
+									</div>
+								</div>
+							</div>
+							<div class="table-scrollable">
+								<table class="table table-striped table-bordered table-hover" id="sample_1">
+								<thead>
+								<tr>
+									<th>
+										 Vía
+									</th>									
+									<th>
+										 Auto
+									</th>
+									<th>
+										 2 ejes
+									</th>									
+									<th>
+										 Editar
+									</th>
+									<th>
+										 Eliminar
+									</th>								
+								</tr>
+								</thead>
+								<tbody>
+								{% for caseta in casetas %}
+								<tr class="odd gradeX">
+									<td>
+										{{caseta}}
+									</td>
+									<td>
+										{{caseta.autos}}
+									</td>
+									<td>
+										{{caseta.autobus_2_ejes}}
+									</td>									
+									<td>
+								{% if perms.catalogos.change_caseta %}
+									<a href="{% url 'catalogos.views.casetasedit' caseta.pk %}" class="btn default btn-xs blue-stripe">Editar</a>
+								{% else %}
+								<div class="alert alert-dismissable alert-danger">
+									<button class="close" aria-hidden="true" data-dismiss="alert" type="button"></button>
+									{{user.get_short_name}} no tiene permisos para Editar.<br/> Solicite permisos al administrador.
+								</div>
+								{% endif %}	 
+									</td>
+									<td>
+								{% if perms.catalogos.delete_caseta %}
+									<a href="{% url 'catalogos.views.casetasdelete' caseta.pk %}" onclick="return confirm('Seguro que desea eliminar la caseta: {{caseta}}?')" class="btn default btn-xs red-stripe">Eliminar</a>
+								{% else %}
+								<div class="alert alert-dismissable alert-danger">
+									<button class="close" aria-hidden="true" data-dismiss="alert" type="button"></button>
+									{{user.get_short_name}} no tiene permisos para Eliminar.<br/> Solicite permisos al administrador.
+								</div>
+								{% endif %}
+										 
+									</td>
+								</tr>
+								{% endfor %}							
+								</tbody>
+								</table>
+								{% bootstrap_paginate casetas range=10 show_first_last=true %}
+							</div>
+						</div>
+					</div>					
+            </div>
+         </div>
+{% endblock %}

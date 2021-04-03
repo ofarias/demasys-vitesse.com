@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load bootstrap_pagination %}
+
+{% block title %}Lista XLSX {% endblock %}
+{% block content_title %} Listado de Archivos en Excel {% endblock %}
+
+{% block nav-viajes_sub %}<li class="active open">{% endblock %}
+{% block nav-ListaXLS %}<li class="active">{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">XLSX</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Listado de Excel</a>							
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+		<div class="row">
+            <div class="col-md-12">
+				<div class="portlet box grey-cascade">
+						<div class="portlet-title">
+							<div class="caption">
+								Lista de Archivos Cargados en Excel.
+							</div>							
+						</div>
+						<div class="portlet-body">
+							
+							<div class="table-scrollable">
+							<table class="table table-striped table-bordered table-hover" id="sample_1">
+							<thead>
+							<tr>
+								<th>
+									Usuario
+								</th>
+								<th>
+									 Fecha 
+								</th>
+								<th>
+									 Archivo
+								</th>
+							</tr>
+							</thead>
+							<tbody>
+							{% for listado in lista_xls %}
+							<!--<tr class="odd gradeX">-->
+							<tr class="odd gradeX {{movimiento.get_tipo_display}}">
+								<td>
+									{{listado.usuario}}
+								</td>
+								<td>
+									{{listado.fecha_upload}}
+								</td>
+								<td>
+									<a href="{% url 'viajes.views.descargarXLS' listado.docfile %}">{{listado.docfile}}</a>
+								</td>									
+							</tr>
+							{% endfor %}							
+							</tbody>
+							</table>
+							{% bootstrap_paginate lista_xls %}
+							</div>
+						</div>
+					</div>					
+            </div>
+         </div>
+{% endblock %}
+
+
+
+
+

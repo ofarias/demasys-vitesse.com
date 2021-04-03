@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load i18n humanize %}
+
+{% block title %}{{action}} Solicitud{% endblock %}
+{% block content_title %} Agregar Personal {% endblock %}
+
+{% block nav-RH %}<li class="active open">{% endblock %}
+{% block nav-Empleados %}<li class="active">{% endblock %}
+
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/bootstrap-datepicker/css/datepicker3.css">
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/select2/select2.css"/>
+
+{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="{% url 'solicitudes.views.index_con' %}">Ingreso de Personal</a>	<!-- Esto se cambia con la vista de la aplicacion actual, que debe tener la classe Index-->
+		<i class="fa fa-angle-right"></i>					
+	</li>	
+	<li>
+		<a href="#">{{action}}</a>
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+{% block content %}
+
+
+	
+  	<form action="" class="form-horizontal form-row-seperated" method="post">
+											{% csrf_token %}
+														
+											<span class="caption-subject font-blue bold uppercase">Datos Generales 
+											</span>	
+											
+											<div class="form-group {% if form.operador.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Empleado: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.empleado}}
+														{% if form.empleado.errors %}<span class="help-block">{{form.empleado.errors}}</span>{% endif %}
+													</div>
+												</div>
+											<div class="form-group {% if form.operador.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Calle: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.calle}}
+														{% if form.calle.errors %}<span class="help-block">{{form.calle.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.marca.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Numero Exterior: </label>
+													<div class="col-md-9">
+														{{form.exterior}}
+														{% if form.exterior.errors %}<span class="help-block">{{form.exterior.errors}}</span>{% endif %}
+													</div>
+												</div>
+												
+												<div class="form-group {% if form.submarca.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">No Interior: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.interior}}
+														{% if form.interior.errors %}<span class="help-block">{{form.interior.errors}}</span>{% endif %}
+													</div>
+												</div>
+												
+												<div class="form-group {% if form.modelo.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Colonia:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.colonia}}
+														{% if form.colonia.errors %}<span class="help-block">{{form.colonia.errors}}</span>{% endif %}
+													</div>
+												</div>
+									
+									<div class="form-body">
+												<div class="form-group {% if form.color.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Estado:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.estado}}
+														{% if form.estado.errors %}<span class="help-block">{{form.estado.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.placas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Pais:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.pais}}
+														{% if form.pais.errors %}<span class="help-block">{{form.pais.errors}}</span>{% endif %}
+													</div>
+												</div>										
+												<div class="form-group {% if form.placas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Telefono Particular:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.tel_casa}}
+														{% if form.tel_casa.errors %}<span class="help-block">{{form.tel_casa.errors}}</span>{% endif %}
+													</div>
+												</div>										
+												<div class="form-group {% if form.placas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Telefono Celular:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.tel_cel}}
+														{% if form.tel_cel.errors %}<span class="help-block">{{form.tel_cel.errors}}</span>{% endif %}
+													</div>
+												</div>										
+												
+												<div class="form-group {% if form.placas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Telefono Asignado:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.tel_oficina}}
+														{% if form.tel_oficina.errors %}<span class="help-block">{{form.tel_oficina.errors}}</span>{% endif %}
+													</div>
+												</div>										
+												<div class="form-group {% if form.placas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Numero de Cuenta o Tarjeta:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.cuenta}}
+														{% if form.cuenta.errors %}<span class="help-block">{{form.cuenta.errors}}</span>{% endif %}
+													</div>
+												</div>										
+												<div class="form-group {% if form.placas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Banco:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.banco}}
+														{% if form.banco.errors %}<span class="help-block">{{form.banco.errors}}</span>{% endif %}
+													</div>
+												</div>										
+												
+												
+							<button type="submit" class="btn blue"><i class="fa fa-pencil"></i> {{action}}</button>													
+					</form>	
+								
+  {% endblock %}
+
+
+
+{% block extra_script %}
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/select2/select2.js"></script>
+{% endblock %}
+
+{% block script_ready %}
+	
+	
+	$('.date-picker').datepicker({
+        rtl: Metronic.isRTL(),
+        orientation: "auto",
+        autoclose: true        
+    });
+    
+{% endblock %}

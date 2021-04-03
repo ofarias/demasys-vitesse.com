@@ -1,0 +1,298 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load i18n humanize %}
+
+{% block title %}{{action}} Solicitud de Empleo{% endblock %}
+{% block content_title %} Solicitud de Empleo {% endblock %}
+
+{% block nav-sol2 %}<li class="active">{% endblock %} <!-- se debe definir en Base.html para que se seleccione--> 
+	
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/bootstrap-datepicker/css/datepicker3.css">
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/select2/select2.css"/>
+
+{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>
+		<i class="fa fa-archive"></i>		
+		<a href="#">Recursos Humanos</a>	<!-- Esto se cambia con la vista de la aplicacion actual, que debe tener la classe Index-->
+		<i class="fa fa-angle-right"></i>					
+	</li>	
+	<li>
+		<i class="fa fa-pencil-square-o"></i>
+		<a href="#">Solicitud de Empleo</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+{% block content %}
+
+	
+  	<form action="" class="form-horizontal form-row-seperated" method="post">
+	
+										{% csrf_token %}
+<div class="row">	
+	<div class="col-lg-6">
+
+												<div class="form-group {% if form.fechaSol.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Fecha: </label>
+												<div class="col-md-9">
+													<div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+														{{form.fechaSol}}
+														<span class="input-group-btn">
+														  <button class="btn blue" type="button">
+														       <i class="fa fa-calendar"></i>
+														  </button>
+														</span>
+													 </div>
+														{% if form.fechaSol.errors %}<span class="help-block">{{form.fechaSol.errors}}</span >{% endif %}
+													</div >
+													</div >
+</div>
+<div class="col-lg-6">
+								<div class="form-group {% if form.puestoSol.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Puesto Solicitado: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.puestoSol}}
+														{% if form.puestoSol.errors %}<span class="help-block">{{form.puestoSol.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+<div class="col-lg-6">
+
+											<div class="form-group {% if form.sueldo.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Sueldo Mensual Deseado: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.sueldo}}
+														{% if form.sueldo.errors %}<span class="help-block">{{form.sueldo.errors}}</span>{% endif %}
+													</div>
+												</div>	
+</div>
+
+<div class="col-lg-6">
+	&nbsp;
+</div>	
+<div class="col-lg-6">
+	&nbsp;
+</div>
+
+<br/><br/><br/><h3>
+
+
+
+											<span class="caption-subject font-blue bold uppercase">DATOS PERSONALES 
+											</span>	
+											<br/><br/>
+<hr/><div class="col-lg-6">										
+											<div class="form-group {% if form.nombreCompleto.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Nombre Completo: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.nombreCompleto}}
+														{% if form.nombreCompleto.errors %}<span class="help-block">{{form.nombreCompleto.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+<div class="col-lg-6">
+												<div class="form-group {% if form.edad.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Edad:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.edad}}
+														{% if form.edad.errors %}<span class="help-block">{{form.edad.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+
+
+</div>
+<div class="col-lg-6">
+
+												<div class="form-group {% if form.domicilio.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Domicilio: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.domicilio}}
+														{% if form.domicilio.errors %}<span class="help-block">{{form.domicilio.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+<div class="col-lg-6">
+												
+												<div class="form-group {% if form.colonia.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Colonia: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.colonia}}
+														{% if form.colonia.errors %}<span class="help-block">{{form.colonia.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+<div class="col-lg-6">							
+												<div class="form-group {% if form.cp.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">CP:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.cp}}
+														{% if form.cp.errors %}<span class="help-block">{{form.cp.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+<div class="col-lg-6">
+											<div class="form-group {% if form.telefono.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Teléfono local: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.telefono}}
+														{% if form.telefono.errors %}<span class="help-block">{{form.telefono.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+<div class="col-lg-6">
+												<div class="form-group {% if form.celular.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Celular: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.celular}}
+														{% if form.celular.errors %}<span class="help-block">{{form.celular.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+<div class="col-lg-6">							
+												<div class="form-group {% if form.lugarNacimiento.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Lugar de Nacimiento: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.lugarNacimiento}}
+														{% if form.lugarNacimiento.errors %}<span class="help-block">{{form.lugarNacimiento.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+<div class="col-lg-6">
+												
+													<div class="form-group {% if form.fechaNacimiento.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Fecha Nacimiento: </label>
+												<div class="col-md-9">
+													<div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+														{{form.fechaNacimiento}}
+														<span class="input-group-btn">
+														  <button class="btn blue" type="button">
+														       <i class="fa fa-calendar"></i>
+														  </button>
+														</span>
+													 </div>
+														{% if form.fechaNacimiento.errors %}<span class="help-block">{{form.fechaNacimiento.errors}}</span >{% endif %}
+													</div >
+													</div >
+</div>
+<div class="col-lg-6">
+													<div class="form-group {% if form.nacionalidad.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Nacionalidad:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.nacionalidad}}
+														{% if form.nacionalidad.errors %}<span class="help-block">{{form.nacionalidad.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+<div class="col-lg-6">
+												<div class="form-group {% if form.viveCon.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Vive con:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.viveCon}}
+														{% if form.viveCon.errors %}<span class="help-block">{{form.viveCon.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+<div class="col-lg-6">
+												<div class="form-group {% if form.dependientes.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Dependientes: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.dependientes}}
+														{% if form.dependientes.errors %}<span class="help-block">{{form.dependientes}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+
+
+
+<div class="col-lg-6">
+												<div class="form-group {% if form.sexo.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Sexo:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.sexo}}
+														{% if form.sexo.errors %}<span class="help-block">{{form.sexo.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												
+
+
+												<div class="form-group {% if form.email.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Email: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.email}}
+														{% if form.email.errors %}<span class="help-block">{{form.email.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+
+</div>
+<div class="col-lg-6">
+							<div class="form-group {% if form.estadoCivil.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Estado Civil:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.estadoCivil}}
+														{% if form.estadoCivil.errors %}<span class="help-block">{{form.estadoCivil.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+
+<div class="col-lg-6">
+	&nbsp;
+</div>	
+<div class="col-lg-6">
+	&nbsp;
+</div>
+
+											
+												
+											<!--	
+												<a href="{% url 'empleados.views.index' %}" class="btn default blue-stripe">
+															<i class="glyphicon glyphicon-arrow-left"></i> Regresar
+														</a>	
+												-->
+												
+												
+
+														<button type="submit" class="btn blue"><i class="fa fa-pencil"></i> {{action}}</button>													
+														
+																					
+																			
+										</form>	
+								
+  {% endblock %}
+
+
+
+{% block extra_script %}
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/select2/select2.js"></script>
+{% endblock %}
+
+{% block script_ready %}
+	
+	
+	$('.date-picker').datepicker({
+        rtl: Metronic.isRTL(),
+        orientation: "auto",
+        autoclose: true        
+    });
+    
+{% endblock %}

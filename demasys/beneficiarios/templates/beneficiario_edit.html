@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load i18n humanize %}
+
+{% block title %}{{action}} Beneficiario{% endblock %}
+{% block content_title %} Registro de Beneficiarios {% endblock %}
+
+{% block nav-beneficiarios %}<li class="active">{% endblock %} <!-- se debe definir en Base.html para que se seleccione--> 
+	
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/bootstrap-datepicker/css/datepicker3.css">
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/select2/select2.css"/>
+
+{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="{% url 'beneficiarios.views.index' %}">Beneficiarios</a>	<!-- Esto se cambia con la vista de la aplicacion actual, que debe tener la classe Index-->
+		<i class="fa fa-angle-right"></i>					
+	</li>	
+	<li>
+		<a href="#">{{action}}</a>
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+{% block content %}
+{{user}}
+
+ 	<form action="" class="form-horizontal form-row-seperated" method="post">
+											{% csrf_token %}
+											<div class="form-body">
+													<div class="form-group {% if form.tipo.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.tipo.label}}<span class="required" aria-required="True"> * </span></label>
+													<div class="col-md-5">
+														{{form.tipo}}
+														{% if form.tipo.errors %}<span class="help-block">{{form.tipo.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.colonia.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.nombre.label}}<span class="required" aria-required="True"> * </span></label>
+													<div class="col-md-5">
+														{{form.nombre}}
+														{% if form.nombre.errors %}<span class="help-block">{{form.nombre.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.colonia.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Apellido Paterno<span class="required" aria-required="False">  </span></label>
+													<div class="col-md-5">
+														{{form.a_paterno}}
+														{% if form.a_paterno.errors %}<span class="help-block">{{form.a_paterno.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.colonia.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Apellido Materno<span class="required" aria-required="False">  </span></label>
+													<div class="col-md-5">
+														{{form.a_materno}}
+														{% if form.a_materno.errors %}<span class="help-block">{{form.a_materno.errors}}</span>{% endif %}
+													</div>
+												</div>	
+												<div class="form-group {% if form.producto.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.producto.label}}<span class="required" aria-required="True"> * </span></label>
+													<div class="col-md-5">
+														{{form.producto}}
+														{% if form.producto.errors %}<span class="help-block">{{form.producto.errors}}</span>{% endif %}
+													</div>
+												 </div>
+												 <div class="form-group {% if form.calle.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Calle<span class="required" aria-required="False">  </span></label>
+													<div class="col-md-8">
+														{{form.calle}}
+														{% if form.calle.errors %}<span class="help-block">{{form.calle.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.no_ext.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">No. Exterior<span class="required" aria-required="False">  </span></label>
+													<div class="col-md-5">
+														{{form.no_ext}}
+														{% if form.no_ext.errors %}<span class="help-block">{{form.no_ext.errors}}</span>{% endif %}
+													</div>
+												 </div>
+												<div class="form-group {% if form.no_int.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">No. Interior<span class="required" aria-required="False">  </span></label>
+													<div class="col-md-5">
+														{{form.no_int}}
+														{% if form.no_int.errors %}<span class="help-block">{{form.no_int.errors}}</span>{% endif %}
+													</div>
+												 </div>
+												<div class="form-group {% if form.col.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Colonia<span class="required" aria-required="False">  </span></label>
+													<div class="col-md-5">
+														{{form.col}}
+														{% if form.col.errors %}<span class="help-block">{{form.col.errors}}</span>{% endif %}
+													</div>
+												 </div>
+												<div class="form-group {% if form.mun_est.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Municipio o Estado<span class="required" aria-required="False">  </span></label>
+													<div class="col-md-5">
+														{{form.mun_est}}
+														{% if form.mun_est.errors %}<span class="help-block">{{form.mun_est.errors}}</span>{% endif %}
+													</div>
+												 </div>
+												<div class="form-group {% if form.cp.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Codigo Postal<span class="required" aria-required="False">  </span></label>
+													<div class="col-md-5">
+														{{form.cp}}
+														{% if form.cp.errors %}<span class="help-block">{{form.cp.errors}}</span>{% endif %}
+													</div>
+												 </div>
+												<div class="form-group {% if form.no_cta.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Numero de Cuenta<span class="required" aria-required="False">  </span></label>
+													<div class="col-md-5">
+														{{form.no_cta}}
+														{% if form.no_cta.errors %}<span class="help-block">{{form.no_cta.errors}}</span>{% endif %}
+													</div>
+												 </div>
+												<div class="form-group {% if form.ban.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Banco<span class="required" aria-required="False">  </span></label>
+													<div class="col-md-5">
+														{{form.ban}}
+														{% if form.ban.errors %}<span class="help-block">{{form.ban.errors}}</span>{% endif %}
+													</div>
+												 </div>
+												<div class="form-group {% if form.clabe.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Clabe Interbancaria<span class="required" aria-required="False">  </span></label>
+													<div class="col-md-5">
+														{{form.clabe}}
+														{% if form.clabe.errors %}<span class="help-block">{{form.clabe.errors}}</span>{% endif %}
+													</div>
+												 </div>
+											<div class="form-actions">
+												<div class="row">
+													<div class="col-md-offset-3 col-md-9">
+														<button type="submit" class="btn blue"><i class="fa fa-pencil"></i> {{action}}</button>														
+													</div>
+												</div>
+											</div>
+										</div>
+										
+										</form>	
+								<!--		
+										ERROR:{{form}}
+									{% if form.errors %}
+									<h1>ERRORES::</h1>
+									
+										{% for field in form %}
+											{% for error in field.errors %}
+												<div class="alert alert-error">
+													<strong>{{ error|escape }}</strong>
+												</div>
+											{% endfor %}
+										{% endfor %}
+										{% for error in form.non_field_errors %}
+											<div class="alert alert-error">
+												<strong>{{ error|escape }}</strong>
+											</div>
+										{% endfor %}
+										<h1>:::::::::::::::::::::</h1>
+									
+									{% endif %}
+								-->
+
+  {% endblock %}
+
+
+
+
+

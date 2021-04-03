@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load i18n humanize %}
+
+{% block title %}{{action}} Documentos{% endblock %}
+{% block content_title %} Carga de fotos {% endblock %}
+
+{% block nav-sol2 %}<li class="active">{% endblock %} <!-- se debe definir en Base.html para que se seleccione--> 
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/bootstrap-datepicker/css/datepicker3.css">
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/select2/select2.css"/>
+
+	<style>
+
+
+    img.foto {
+            height: 3cm;
+            width: 2.5cm;
+    }
+	img.barras[src=""] {
+   		display: none;
+	}
+	var img = document.getElementById("imgBarras");
+img.onerror = function () {
+    this.style.display = "none";
+}
+
+</style>
+{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="{% url 'solicitudes.views.index_con' %}">Fotos de empleado</a>	<!-- Esto se cambia con la vista de la aplicacion actual, que debe tener la classe Index-->
+		<i class="fa fa-angle-right"></i>					
+	</li>	
+	<li>
+		<a href="#">{{action}} (.jpg)</a>
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+{% block content %}
+
+
+<h3>Empleado:{{nombre.nombre}} {{nombre.segundo_nombre}} {{nombre.apellidop}} {{nombre.apellidom}} </h3>
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light form-fit">
+			<div class="portlet-body form">
+				<div class="portlet light bg-inverse">
+					<div class="portlet-title">
+						<div class="caption">
+							<i class="icon-equalizer font-blue"></i>
+							<span class="caption-subject font-blue bold uppercase">
+								Seleccione los archivos (.jpg)</span>
+								<span class="caption-helper"></span>
+							</div>
+							<div class="actions">
+
+							</div>
+						</div>
+						<form action="" class="form-horizontal form-row-seperated" method="post" 
+						enctype="multipart/form-data">
+						{% csrf_token %}
+						<span class="caption-subject font-blue bold uppercase">Para agregar o modificar fotos debe seleccionar  archivos en formato (.jpg) 
+						</span>	
+						<hr>
+						<div style="position:relative;">
+							<a class='btn btn-primary' href='javascript:;'>
+								<span class="glyphicon glyphicon-paperclip">&nbsp;</span>	Selecione Foto del Empleado
+								{{ formImagen.imagen1 }}
+							</a>
+							&nbsp;&nbsp;&nbsp;
+							<span class='label label-info' id="upload-file-info"></span>
+							 <img class="foto" src="{{MEDIA_URL}}imgEmpleados/{{empleadopk}}_FOTO.jpg" style="visibility:{{fotosFlag}}">
+						</div>
+						<hr>
+						<div style="position:relative;">
+							<a class='btn btn-primary' href='javascript:;'>
+								<span class="glyphicon glyphicon-paperclip">&nbsp;</span>	Selecione Código Barras
+								{{ formImagen.imagen2 }}
+							</a>
+							&nbsp;&nbsp;&nbsp;
+							<span class='label label-info' id="upload-file-info"></span>
+							<img src="{{MEDIA_URL}}imgEmpleados/{{empleadopk}}_BARRAS.jpg" width="250" height="150"  style="visibility:{{barrasFlag}}">
+						</div>
+						<hr>
+						<div style="position:relative;">
+							<a class='btn btn-primary' href='javascript:;'>
+								<span class="glyphicon glyphicon-paperclip">&nbsp;</span>	Selecione Código QR
+								{{ formImagen.imagen3 }}
+							</a>
+							&nbsp;&nbsp;&nbsp;
+							<span class='label label-info' id="upload-file-info"></span>
+							<img src="{{MEDIA_URL}}imgEmpleados/{{empleadopk}}_QR.jpg" width="150" height="150" class="qrClass" style="visibility:{{qrFlag}}">
+						</div>
+						<hr>
+						
+						<button type="submit" class="btn green"><i class="glyphicon glyphicon-arrow-up"></i> {{action}}</button>	
+					</form>									
+
+
+		</div>
+
+
+
+
+	</div>
+</div>
+</div>
+</div>
+{% endblock %}

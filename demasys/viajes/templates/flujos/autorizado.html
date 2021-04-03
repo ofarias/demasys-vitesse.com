@@ -1,0 +1,307 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load sepomex_filters %}
+{% load url from future %}
+{% load humanize %}
+
+{% block title %}Viajes{% endblock %}
+{% block content_title %} Viaje {{viaje}} - {{current.state}}{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/bootstrap-datepicker/css/datepicker3.css"/>
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/select2/select2.css"/>
+{% endblock %}
+
+{% block nav-viajes %}<li class="active">{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="{% url 'viajes.views.index' %}">Viajes</a>		
+		<i class="fa fa-angle-right"></i>				
+	</li>	
+	<li>		
+		<a href="#">Carta {{viaje}}</a>							
+	</li>	
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+            <div class="col-md-12">
+        		<div class="portlet-body form">
+					<!-- BEGIN FORM-->
+					<form class="form-horizontal" role="form">
+						<div class="form-body">							
+							<h3 class="form-section">Datos Generales</h3>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Carta porte:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Fecha de salida:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.fecha_salida|date:"d-m-Y"}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Cliente:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.cliente}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Departamento:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.departamento}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Bill/Load:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.referencia}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Operador:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.operador}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Economico:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.economico}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Ruta:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.ruta}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Contenido:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.contiene}}
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<h3 class="form-section">Origen</h3>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Municipio:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.origen_clave_municipio|municipio}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Colonia:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.origen_colonia}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Calle:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.origen_calle}} No. {{viaje.origen_numero}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">CP:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.origen_cp}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+							</div>
+							<h3 class="form-section">Destino</h3>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Destino:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 <ul class="list-inline">
+												{% for destino in viaje.destino_set.all %}
+													<li>{{destino.destino_clave_municipio|municipio}}</li>
+												{% endfor %}
+												</ul>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>	
+							<h3 class="form-section">Observaciones</h3>
+							<div class="row">																				
+								<div class="form-group {% if form.observaciones.errors %}has-error{% endif %}">
+									<label class="control-label col-md-3">Observaciones</label>
+									<div class="col-md-9">
+										<p class="form-control-static">
+										{{viaje.observaciones}}
+										</p>																							
+									</div>
+								</div>
+							</div>						
+						</div>
+					</form>
+					<!-- END FORM-->
+				</div>
+			</div>
+		</div>
+	<div class="row">		
+		<div class="col-md-12">
+			<div class="portlet light bg-inverse form-fit">				
+				<div class="portlet-body form">
+					<!-- BEGIN FORM-->									
+					<form class="form-horizontal form-row-seperated" action="{% url 'viajes.views.cambio' viaje.pk %}" method="post" id="statusform">
+						{% csrf_token %}	
+						{{form.referencia.as_hidden}}
+						{{form.observaciones.as_hidden}}									
+						<div class="form-actions">
+							<div class="row">
+								<div class="col-md-offset-3 col-md-9">
+									{{form.status}}
+									{{form.nota}}
+									<a href="{% url 'viajes.views.index' %}" class="btn default">
+										Regresar
+									</a>
+									{% for transicion in transiciones %}
+									<button type="submit" name="status" value="{{transicion.pk}}" class="btn {% if transicion.name == 'Cancelar' %}red{% else %}blue{% endif %}" data-status="{{transicion.pk}}" data-name="{{transicion.name}}">
+										 {{transicion.name}}
+									</button>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+					</form>
+					<!-- END FORM-->
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block extra_script %}
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/select2/select2.js"></script>
+<script src="{{MEDIA_URL}}plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block script_ready %}
+			
+	var status = '';
+	var name = '';
+	$("form button[type=submit]").click(function() {	    
+	    status = $(this).data("status");
+	    name = $(this).data("name");
+	    $('#id_status').val(status);
+	});
+	
+	$('#statusform').submit(function(event){		
+		event.preventDefault();	
+		var myform = this;
+				
+		if(name == 'Cancelar'){
+			bootbox.prompt("¿Cual es el motivo de la cancelación?", function(result) {
+           		if (result === null) {
+					alert('Para cancelar, debe especificar el motivo');
+				}else{
+					if(result!=''){
+						$('#id_nota').val(result);
+						myform.submit();	
+					}else{
+						alert('Para cancelar, debe especificar el motivo');
+					}				
+				}
+			});
+		}else{
+			myform.submit();
+		}		
+	});
+{% endblock %}

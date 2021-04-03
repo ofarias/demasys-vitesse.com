@@ -1,0 +1,943 @@
+{% extends "easy_pdf/base.html" %}
+{% block content %}
+
+{% load i18n %}
+{% load url from future %}
+{% load i18n humanize %}
+
+
+											<h3><span class="caption-subject font-blue bold uppercase">SOLICITUD
+											</span>	</h3><hr/>
+<div class="row">	
+	<div class="col-lg-6">
+
+												<div class="form-group {% if form.fechaSol.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Fecha: {{form.fechaSol}}</label>
+												</div >
+</div>
+<div class="col-lg-6">
+								<div class="form-group {% if form.puestoSol.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Puesto Solicitado: {{form.puestoSol}}</label>
+
+												</div>
+</div>
+<div class="col-lg-6">
+
+											<div class="form-group {% if form.sueldo.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Sueldo Mensual Deseado: {{form.sueldo}}</label>
+
+												</div>	
+</div>
+
+	<br/><h3>
+
+
+
+											<span class="caption-subject font-blue bold uppercase">DATOS PERSONALES 
+											</span>	</h3><hr/>
+											<br/>
+
+	<div class="col-lg-6">
+											<div class="form-group {% if form.nombreCompleto.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Nombre Completo: {{form.nombre}} {{form.segundoNombre}} {{form.paterno}} {{form.materno}}</label>
+												</div>
+</div>
+<div class="col-lg-6">
+												<div class="form-group {% if form.edad.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Edad: {{form.edad}}</label>
+												</div>
+
+
+
+</div>
+<div class="col-lg-6">
+
+												<div class="form-group {% if form.domicilio.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Domicilio: {{form.domicilio}}</label>
+												</div>
+</div>
+<div class="col-lg-6">
+												
+												<div class="form-group {% if form.colonia.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Colonia: {{form.colonia}}</label>
+												</div>
+</div>
+<div class="col-lg-6">							
+												<div class="form-group {% if form.cp.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">CP: {{form.cp}}</label>
+												</div>
+
+</div>
+<div class="col-lg-6">
+											<div class="form-group {% if form.telefono.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Teléfono local: {{form.telefono}}</label>
+												</div>
+</div>
+<div class="col-lg-6">
+												<div class="form-group {% if form.celular.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Celular: {{form.celular}}</label>
+												</div>
+</div>
+<div class="col-lg-6">							
+												<div class="form-group {% if form.lugarNacimiento.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Lugar de Nacimiento: {{form.lugarNacimiento}}</label>
+												</div>
+
+</div>
+<div class="col-lg-6">
+												
+													<div class="form-group {% if form.fechaNacimiento.errors %}has-error{% endif %}">
+														<label class="control-label col-md-3">Fecha Nacimiento: {{form.fechaNacimiento}}</label>
+													</div >
+</div>
+<div class="col-lg-6">
+													<div class="form-group {% if form.nacionalidad.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Nacionalidad: {{nacionalidad}}</label>
+												</div>
+</div>
+<div class="col-lg-6">
+												<div class="form-group {% if form.viveCon.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Vive con: {{viveCon}}</label>
+												</div>
+</div>
+<div class="col-lg-6">
+												<div class="form-group {% if form.dependientes.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Dependientes: {{dependientes}}</label>
+												</div>
+</div>
+
+
+
+
+<div class="col-lg-6">
+												<div class="form-group {% if form.sexo.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Sexo: {{sexo}}</label>
+												</div>
+
+												
+
+
+												<div class="form-group {% if form.email.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Email: {{form.email}}</label>
+												</div>
+
+
+</div>
+<div class="col-lg-6">
+							<div class="form-group {% if form.estadoCivil.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Estado Civil: {{estadoCivil}}</label>
+												</div>
+
+</div>
+
+<br/><h3>
+
+
+
+											<span class="caption-subject font-blue bold uppercase">DOCUMENTACION 
+											</span>	</h3><hr/>
+
+<div class="col-lg-6">
+
+					<div class="form-group {% if form.rfc.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Reg. Fed. Contribuyentes: {{form.rfc}}</label>
+												</div>
+
+</div>
+<div class="col-lg-6">
+
+					<div class="form-group {% if form.nss.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Afiliación Seguro Social No: {{form.nss}}</label>
+												</div>
+
+</div>
+
+
+<div class="col-lg-6">
+
+					<div class="form-group {% if form.numCartilla.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Cartilla Servicio Militar No: {{form.numCartilla}}</label>
+												</div>
+
+</div>
+
+<div class="col-lg-6">
+
+					<div class="form-group {% if form.pasaporte.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Pasaporte No: {{form.pasaporte}}</label>
+												</div>
+
+</div>
+	<div class="col-lg-6">
+							<div class="form-group {% if form.tipoLicencia.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Tiene Licencia de Manejo: {{form.tieneLicencia}}</label>
+												</div>
+
+</div>
+<div class="col-lg-6">
+
+					<div class="form-group {% if form.numLicencia.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Clase y No. de Licencia: {{form.numLicencia}}</label>
+												</div>
+
+</div>
+
+
+<div class="col-lg-6">
+
+					<div class="form-group {% if form.curp.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">CURP: {{form.curp}}</label>
+												</div>
+
+</div>
+	<div class="col-lg-6">
+
+					<div class="form-group {% if form.afore.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Afore: {{form.afore}}</label>
+												</div>
+
+</div>
+
+
+
+<br/><h3>
+
+
+
+											<span class="caption-subject font-blue bold uppercase">ESTADO DE SALUD Y HABITOS PERSONALES 
+											</span>	</h3>
+											<hr/>
+
+<div class="col-lg-6">
+							<div class="form-group {% if form.salud.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Su Estado de Salud es: {{salud}}</label>
+												</div>
+
+</div>
+
+<div class="col-lg-6">
+							<div class="form-group {% if form.cronico.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Padece enfermedad Crónica: {{cronico}}</label>
+												</div>
+
+</div>
+
+<div class="col-lg-6">
+
+					<div class="form-group {% if form.descripcion.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Descripcion Enfermedad Cronica: {{form.descripcion}}</label>
+												</div>
+
+</div>
+
+<div class="col-lg-6">
+							<div class="form-group {% if form.deporte.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Practica algun Deporte: {{form.deporte}}</label>
+												</div>
+
+</div>
+
+<div class="col-lg-6">
+							<div class="form-group {% if form.club.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Pertenece algun Club Social: {{form.club}}</label>
+												</div>
+
+</div>
+<div class="col-lg-12">
+
+					<div class="form-group {% if form.hobbie.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿En que ocupa su tiempo libre?: {{form.hobbie}}</label>
+												</div>
+
+</div>
+
+<div class="col-lg-12">
+
+					<div class="form-group {% if form.meta.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Cual es su meta de vida?: {{form.meta}}</label>
+												</div>
+
+</div>
+
+
+<br/><h3>
+
+
+
+											<span class="caption-subject font-blue bold uppercase">CONOCIMIENTOS GENERALES 
+											</span>	</h3>
+											<hr/>
+
+
+						<div class="form-group {% if form.idiomas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Idiomas que domina: {{form.idiomas}}</label>
+												</div>
+
+
+
+
+
+						<div class="form-group {% if form.equipo.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Maquinas y o Equipo de Oficina que sepa manejar: {{form.equipo}}</label>
+												</div>
+
+
+
+
+
+						<div class="form-group {% if form.funciones.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Funciones de Oficina que domine: {{form.funciones}}</label>
+												</div>
+
+
+
+
+
+						<div class="form-group {% if form.otros.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Otros Trabajos o Funciones que domine: {{form.otros}}</label>
+												</div>
+
+
+<br/><h3>
+
+
+
+											<span class="caption-subject font-blue bold uppercase">DATOS GENERALES 
+											</span>	</h3>
+											<hr/>
+
+
+												<div class="form-group {% if form.medio.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Como se enteró del Empleo?: {{medio}}</label>
+												</div>
+
+
+
+												<div class="form-group {% if form.afianzado.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Ha estado Afianzado?: {{afianzado}}</label>
+
+
+
+												<div class="form-group {% if form.ciaFianza.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Nombre CIA: {{form.ciaFianza}}</label>
+												</div>
+
+
+												<div class="form-group {% if form.seguro.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Tiene Seguro de Vida?: {{seguro}}</label>
+												</div>
+
+												<div class="form-group {% if form.ciaSeguro.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">De que CIA: {{form.ciaSeguro}}</label>
+												</div>
+
+												<div class="form-group {% if form.residencia.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Esta dispuesto a cambiar de lugar de Residencia?: {{residencia}}</label>
+												</div>
+
+												<div class="form-group {% if form.razonReside.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Razones: {{form.razonReside}}</label>
+												</div>
+
+												<div class="form-group {% if form.familiares.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Tienes Familiares que trabajen en la Empresa?: {{familiaresT}}</label>
+												</div>
+
+												<div class="form-group {% if form.nombres.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Nómbrelos: </label>
+													{{form.nombres}}
+												</div>
+
+												<div class="form-group {% if form.sindicato.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Pertenece a algun Sindicato?: {{sindicato}}</label>
+												</div>
+
+												<div class="form-group {% if form.nombreSin.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿A cual?: {{form.nombreSin}}</label>
+												</div>
+
+												<div class="form-group {% if form.viajar.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Puede Viajar?: {{viajar}}</label>
+												</div>
+
+												<div class="form-group {% if form.razonViaje.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Razones: {{form.razonViaje}}</label>
+												</div>
+
+												<div class="form-group {% if form.presentar.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Fecha en que podria presentarse a trabajar?: {{form.presentar}}</label>
+												</div>
+
+<br/><h3>
+
+
+
+											<span class="caption-subject font-blue bold uppercase">DATOS ECONOMICOS 
+											</span>	</h3>
+											<hr/>
+
+
+												<div class="form-group {% if form.ingreso.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Tiene otros Ingresos?: {{ingreso}}</label>
+												</div>
+
+												<div class="form-group {% if form.modo.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Cuales?: {{form.modo}}</label>
+												</div>
+
+												<div class="form-group {% if form.importe.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Importe Mensual: {{form.importe}}</label>
+												</div>
+
+												<div class="form-group {% if form.casa.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Vive en Casa Propia?: {{casa}}</label>
+												</div>
+
+												<div class="form-group {% if form.importeCasa.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Importe de la Casa: {{form.importeCasa}}</label>
+												</div>
+
+												<div class="form-group {% if form.auto.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Tiene Auto?: {{auto}}</label>
+												</div>
+
+												<div class="form-group {% if form.placas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Placas: {{form.placas}}</label>
+												</div>
+
+												<div class="form-group {% if form.marca.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Marca: {{form.marca}}</label>
+												</div>
+
+												<div class="form-group {% if form.modelo.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Modelo: {{form.modelo}}</label>
+												</div>
+
+												<div class="form-group {% if form.ingresos.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Ingresos: {{form.ingresos}}</label>
+												</div>
+
+												<div class="form-group {% if form.egresos.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Egresos: {{form.egresos}}</label>
+												</div>
+
+												<div class="form-group {% if form.ahorros.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Ahorros: {{form.ahorros}}</label>
+												</div>
+
+
+												<div class="form-group {% if form.total.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Total: {{form.total}}</label>
+												</div>
+
+												<div class="form-group {% if form.conyuge.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Su conyuge Trabaja?: {{conyuge}}</label>
+												</div>
+
+												<div class="form-group {% if form.ingresoCony.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Ingresos Conyuge: {{form.ingresoCony}}</label>
+												</div>
+
+												<div class="form-group {% if form.renta.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Paga Renta?: {{renta}}</label>
+												</div>
+
+												<div class="form-group {% if form.rentaMensual.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Importe Renta Mensual: {{form.rentaMensual}}</label>
+												</div>
+
+												<div class="form-group {% if form.deudas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Tiene Deudas?: {{deudas}}</label>
+												</div>
+
+												<div class="form-group {% if form.impDeuda.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Importe Deuda: {{form.impDeuda}}</label>
+												</div>
+
+												<div class="form-group {% if form.abonoMensual.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Abono Mensual Deuda: {{form.abonoMensual}}</label>
+												</div>
+
+
+                                <br/><h3><span class="caption-subject font-blue bold uppercase">DATOS FAMILIARES</span></h3>
+											<hr/>
+<table class="table table-striped table-hover table-bordered" id="regreso_table">
+	<tbody>
+								{% for formF in formset_familiares %}
+
+									<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Parentesco: {{parentesco|get_item:formF.parentesco}}</label>
+											</td>
+									</tr>
+									<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Nombre Completo: {{formF.nombreFamiliar}}</label>
+											</td>
+													</tr>
+										<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Edad: {{formF.edadFam}}</label>
+										</td>
+													</tr>
+										<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-2">Vive/Finado: {{viveFinado|get_item:formF.viveFinado}}</label>
+											</td>
+													</tr>
+										<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Domicilio: {{formF.domicilioFam}}</label>
+											</td>
+													</tr>
+										<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Ocupación: {{formF.ocupacion}}</label>
+										</td>
+									</tr>
+								<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3"><p>******************************************************************************************</p></label>
+										</td>
+									</tr>
+
+								{% endfor %}
+								</tbody>
+	</table>
+
+
+
+
+
+	<br/><h3><span class="caption-subject font-blue bold uppercase">ESCOLARIDAD</span></h3>
+											<hr/>
+<table class="table table-striped table-hover table-bordered" >
+	<tbody>
+								{% for formE in formset_escolaridad %}
+
+									<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Nombre: {{formE.nombreEscuela}}</label>
+											</td>
+									</tr>
+									<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Nivel: {{nivel|get_item:formE.nivel}}</label>
+											</td>
+													</tr>
+										<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Domicilio: {{formE.domicilioEscuela}}</label>
+										</td>
+													</tr>
+										<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-2">Inicio: {{formE.inicial}}</label>
+											</td>
+													</tr>
+										<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Fin: {{formE.final}}</label>
+											</td>
+													</tr>
+										<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Años: {{formE.anios}}</label>
+										</td>
+									</tr>
+								<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Título obtenido: {{formE.titulo}}</label>
+										</td>
+									</tr>
+								<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3"><p>******************************************************************************************</p></label>
+										</td>
+									</tr>
+
+								{% endfor %}
+								</tbody>
+	</table>
+
+
+
+
+	<br/><h3><span class="caption-subject font-blue bold uppercase">EMPLEO ACTUAL Y ANTERIORES</span></h3>
+											<hr/>
+<table class="table table-striped table-hover table-bordered" >
+	<tbody>
+								{% for formEmp in formset_empleos %}
+
+									<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Nombre: {{formEmp.nombreEmp}}</label>
+											</td>
+									</tr>
+									<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Domicilio: {{formEmp.domicilioEmp}}</label>
+											</td>
+													</tr>
+										<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Teléfono: {{formEmp.telefonoEmp}}</label>
+										</td>
+													</tr>
+										<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-2">Tiempo: {{formEmp.tiempo}}</label>
+											</td>
+													</tr>
+										<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Puesto Inicial: {{formEmp.puestoIni}}</label>
+											</td>
+													</tr>
+										<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Puesto Final: {{formEmp.puestoFin}}</label>
+										</td>
+									</tr>
+								<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Sueldo inicial: {{formEmp.sueldoIni}}</label>
+										</td>
+									</tr>
+								<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Sueldo Final: {{formEmp.sueldoFin}}</label>
+										</td>
+									</tr>
+								<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Motivo: {{formEmp.motivo}}</label>
+										</td>
+									</tr><tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Jefe: {{formEmp.jefe}}</label>
+										</td>
+									</tr>
+								<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Actividades: {{formEmp.actividad}}</label>
+										</td>
+									</tr>
+								<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">¿Podemos solicitar informes de usted?: {{formEmp.permiso}}</label>
+										</td>
+									</tr>
+								<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Porque no: {{formEmp.noRazon}}</label>
+										</td>
+									</tr>
+								<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3"><p>******************************************************************************************</p></label>
+										</td>
+									</tr>
+
+								{% endfor %}
+								</tbody>
+	</table>
+
+
+
+
+
+
+													<br/><h3><span class="caption-subject font-blue bold uppercase">REFERENCIAS PERSONALES</span></h3>
+											<hr/>
+<table class="table table-striped table-hover table-bordered" >
+	<tbody>
+								{% for formRef in formset_referencia %}
+
+									<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Nombre: {{formRef.nombreRef}}</label>
+											</td>
+									</tr>
+									<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Domicilio: {{formRef.domicilioRef}}</label>
+											</td>
+													</tr>
+										<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Teléfono: {{formRef.telefonoRef}}</label>
+										</td>
+													</tr>
+										<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-2">Ocupacion: {{formRef.ocupacionRef}}</label>
+											</td>
+													</tr>
+										<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Tiempo de conocerlo: {{formRef.tiempoRef}}</label>
+											</td>
+													</tr>
+
+								<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3"><p>******************************************************************************************</p></label>
+										</td>
+									</tr>
+
+								{% endfor %}
+								</tbody>
+	</table>
+
+													
+													
+													
+													
+													
+<br/>
+        <h3>
+            <span class="caption-subject font-blue bold uppercase">CUESTIONARIO</span>
+        </h3>
+<hr/>
+
+													<div class="form-group ">
+	    <label class="control-label col-md-3">Nombre Completo: {{formQ.nombreCompleto}}</label>
+														</div>
+
+														<div class="form-group">
+        <label class="control-label col-md-2">Teléfono: {{formQ.telefono}}</label>
+															</div>
+
+															<div class="form-group ">
+	    <label class="control-label col-md-3">Estado Civil: {{formQ.edoCivil}}</label>
+																</div>
+
+																<div class="form-group ">
+        <label class="control-label col-md-3">Casado por: {{formQ.cadadoPor}}</label>
+																	</div>
+
+
+    <div class="form-group {% if form.numHijos.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">¿Cuantos hijos tiene?: {{formQ.numHijos}}</label>
+	</div>
+
+	<table class="table table-striped table-hover table-bordered" id="regreso_table_esc">
+								
+								<tbody>
+									{% for formH in hijosFormSet %}
+
+									<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Nombre: {{ formH.nombre }}</label>
+											</td>
+									</tr>
+									<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Edad: {{ formH.edad }}</label>
+											</td>
+													</tr>
+
+										<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-2">Ocupacion: {{formH.ocupacion}}</label>
+											</td>
+													</tr>
+
+
+								<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3"><p>******************************************************************************************</p></label>
+										</td>
+									</tr>
+
+										{% endfor %}
+									</tbody>
+								</table>												
+													
+													
+													
+													
+													
+													
+													
+													
+													
+													
+													
+    <div class="form-group {% if form.nomEsposa.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">Nombre de su esposa: {{formQ.nomEsposa}}</label>
+	</div>
+    <div class="form-group {% if form.ocupacionEsp.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">Ocupación de su esposa: {{formQ.ocupacionEsp}}</label>
+	</div>
+    <div class="form-group {% if form.vivenPadres.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">¿Viven sus papás?: {{formQ.vivenPadres}}</label>
+	</div>
+    <div class="form-group {% if form.ocupacionPadres.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">¿A que se dedican?: {{formQ.ocupacionPadres}}</label>
+	</div>
+    <div class="form-group {% if form.ultimaEmp.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">Nombre de la última empresa donde laboró: {{formQ.ultimaEmp}}</label>
+	</div>
+    <div class="form-group {% if form.telEmp.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">Teléfono: {{formQ.telEmp}}</label>
+	</div>
+    <div class="form-group {% if form.nombreJefe.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">Nombre de su último jefe: {{formQ.nombreJefe}}</label>
+	</div>
+    <div class="form-group {% if form.puestoJefe.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">Puesto de su último jefe: {{formQ.puestoJefe}}</label>
+	</div>
+    <div class="form-group {% if form.razonEmp.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">¿Porqué has dejado tu último empleo?: {{formQ.razonEmp}}</label>
+    </div>
+    <div class="form-group {% if form.explicaEmp.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">Explique: {{formQ.explicaEmp}}</label>
+    </div>
+    <div class="form-group {% if form.demandas.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">¿Has tenido demandas civiles judiciales o laborales?: {{formQ.demandas}}</label>
+    <div class="form-group {% if form.explicaDem.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">Explique: {{formQ.explicaDem}}</label>
+    </div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Cuentas con licencia?: {{formQ.tieneLic}}</label>
+        <label class="control-label col-md-3">¿Qué tipo?: {{formQ.tipoLic}}</label>
+    </div>
+
+
+    <div class="form-group">
+	    <label class="control-label col-md-3">Número: {{formQ.numeroLic}}</label>
+        <label class="control-label col-md-3">Vigencia: {{formQ.vigenciaLic}}</label>
+    </div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Vives en casa propia?: {{formQ.casaPropia}}</label>
+        <label class="control-label col-md-3">¿Cuántas personas viven ahí?: {{formQ.numHabitantes}}</label>
+    </div>
+		
+		
+		
+		
+		
+		
+		
+		
+<div class="form-group">
+	    <label class="control-label col-md-3">¿Ingieres bebidas alcoholicas?: {{form2.bebida}}</label>
+        <label class="control-label col-md-3">¿Con que frecuencia?: {{form2.freBebida}}</label>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Fumas?: {{form2.fuma}}</label>
+        <label class="control-label col-md-3">¿Con que frecuencia?: {{form2.freFuma}}</label>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Has utilizado alguna droga?: {{form2.drog}}</label>
+		</div>
+        <label class="control-label col-md-3">¿Por cuanto tiempo?: {{form2.tiempoDrog}}</label>
+	</div>
+    <div class="form-group {% if form.numHijos.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">¿Que haces cuando tienes tiempo libre?: {{form2.actividad}}</label>
+	</div>
+    <div class="form-group {% if form.numHijos.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">¿Que nivel de escolaridad tienes?: {{form2.escolaridad}}</label>
+	</div>
+    <div class="form-group {% if form.numHijos.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">¿Tienes auto?: {{form2.auto}}</label>
+	</div>
+    <div class="form-group {% if form.numHijos.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">¿Porque debemos darte la oportunidad de trabajar en Vitesse?: {{form2.oportunidad}}</label>
+	</div>
+    <div class="form-group {% if form.numHijos.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">¿Cual sería tu compromiso para integrarte a nuestro equipo?: {{form2.compromiso}}</label>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Cuanto pretendes ganar?: {{form2.pretenciones}}</label>
+        <label class="control-label col-md-3">¿A cuanto ascienden tus gastos?: {{form2.gastos}}</label>
+	</div>
+
+
+
+
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Como te ves en 3 años?: {{form2.futuro}}</label>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Quién te recomienda?: {{form2.recomienda}}</label>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Qué beneficio obtendremos de tu trabajo?: {{form2.beneficiosVit}}</label>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-5">¿Estás de acuerdo en que deberás firmar una responsiva por la unidad y el sistema de comunicación que se te asigne?: {{form2.firma}}</label>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-5">¿Qué harías si ves a un compañero robando una refacción de la camioneta?:</label>
+		<div class="col-md-7">
+		{{form2.opinionRef}}
+		</div>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-5">¿Qué harías si detectas que algún compañero esta robando mercancia?:</label>
+		<div class="col-md-7">
+		{{form2.opinionMer}}
+		</div>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-5">¿Te gustaría traerle algún regalo o souvenir a tu coordinador de los lugares donde viajas?: {{form2.suvenir}}</label>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Porqué razón?: {{form2.razonSuvenir}}</label>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Cómo te ganas a la gente?: {{form2.ganarGente}}</label>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">Cuando te llaman la atención, ¿Cual es tu reacción?:</label>
+		<div class="col-md-8">
+		{{form2.reaccion}}
+		</div>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Te gusta correr en carretera?: {{form2.correr}}</label>
+        <label class="control-label col-md-3">¿Qué velocidad promedio?: {{form2.velocidad}}</label>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Qué ciudades te gustan más visitar?: {{form2.ciudad}}</label>
+        <label class="control-label col-md-3">¿Porqué?: {{form2.razonCiudad}}</label>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Cual es tu meta en la vida?:</label>
+		<div class="col-md-8">
+		{{form2.metaVida}}
+		</div>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Con quién de tu familia te identificas más?: {{form2.familiaIdent}}</label>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Qué piensas de la situación actual del país?:</label>
+		<div class="col-md-8">
+		{{form2.sitPais}}
+		</div>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Qué te gustaría que tus hijos fueran de grandes?:</label>
+		<div class="col-md-8">
+		{{form2.futuroHijo}}
+		</div>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Qué haces los sábados, domingos o días de asueto con tu familia?:</label>
+		<div class="col-md-8">
+		{{form2.finesSemana}}
+		</div>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Tienes algún apodo?: {{form2.apodo}}</label>
+	</div>		
+
+													
+													
+													
+													
+{% endblock %}

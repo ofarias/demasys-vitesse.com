@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load i18n humanize %}
+{% load url from future %}
+{% block title %}Reportes{% endblock %}
+{% block content_title %} Reporte de Maniobras{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/bootstrap-datepicker/css/datepicker3.css"/>
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/select2/select2.css"/>
+{% endblock %}
+{% block nav-repGasto %}<li class="active">{% endblock %}
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>
+		<i class="fa fa-file-excel-o"></i>		
+		<a href="{% url 'viajes.views.reporteManiobras' %}">Reporte de Maniobras</a>
+		<i class="fa fa-angle-right"></i>				
+	</li>	
+</ul>
+{% endblock %}
+{% block actions %}
+{% endblock %}
+{% block content %}	
+<form class="form-horizontal form-row-seperated" role="form" action="{% url 'viajes.views.generaReporteMani' %}" method="post"  id="statusform" >
+	{% csrf_token %}
+	<div class="row"  id="carta-general">
+		<div class="col-md-12">
+			<div class="portlet-body form">					
+				<div class="form-body">							
+					<h3 class="form-section">Opciones de búsqueda <span id="opciones"></span></h3>
+					<div class="row">
+						<div class="col-md-6" id="carta-porte">
+							<div class="form-group ">
+								<label class="control-label col-md-3">Carta porte:</label>
+								<div class="col-md-9">
+									{{form.id_viaje}}
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6" id="concepto-porte">
+							<div class="form-group ">
+								<label class="control-label col-md-3">Concepto:</label>
+								<div class="col-md-9">
+									{{form.concepto}}
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+					<div class="row">
+						<div class="col-md-6" id="inicial-porte">
+							<div class="form-group">
+								<label class="control-label col-md-3">Fecha Inicial de Movimiento :</label>
+								<div class="col-md-9">
+									<div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
+											{{form.fecha_ini}}
+										<span class="input-group-btn">
+											<button class="btn blue" type="button">
+												<i class="fa fa-calendar"></i>	
+											</button>				
+										</span>		
+									</div>										
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-6" id="final-porte">
+							<div class="form-group">
+								<label class="control-label col-md-3">Fecha Final de Movimiento:</label>
+								<div class="col-md-9">
+									<div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
+											{{form.fecha_fin}}
+										<span class="input-group-btn">
+											<button class="btn blue" type="button">
+												<i class="fa fa-calendar"></i>
+											</button>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+					</div>
+					<h3 class="form-section"></h3>
+					
+				</div>
+			</div>	
+		</div>
+		<div class="form-actions">
+			<div class="row">
+				<div class="col-md-offset-5 col-md-9">
+					<button onclick="javascript:location.reload();" 
+					class=" btn btn-info" type="button">
+					<i class="fa fa-search"></i> Nuevo Filtro
+					</button>
+					<button id="btn_add_destino" class="btn green">
+						<i class="fa fa-file-excel-o"></i> Generar Reporte
+					</button>
+				</div>
+			</div>
+		</div> 
+	</form>
+<div>	
+<div class="modal modal-static fade" id="processing-modal" role="dialog" 
+aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="text-center">
+                    <h1>Filtra tu busqueda por</h1>
+                    <br/><br/>
+                    <div class="col-md-12">
+                    <div class="form-group">
+							<label class="control-label col-md-7">
+								Carta Porte y Concepto :
+							</label>	
+                    		<input type="radio" name="filtro" id="radioP" class="rad" value="P">
+                	</div>
+                	<div class="form-group">
+							<label class="control-label col-md-7">
+								Concepto y un Rango de Fechas:
+							</label>
+                      		<input type="radio" name="filtro" id="radioC" class="rad" value="C">
+                    </div>  		
+                	</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+	{% endblock %}
+	{% block extra_script %}
+	<script type="text/javascript" src="{{MEDIA_URL}}plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript" src="{{MEDIA_URL}}plugins/select2/select2.js"></script>
+	{% endblock %}
+{% block script_ready %}
+
+	$('.radio').removeAttr('class');	
+	$('#processing-modal').modal('show');
+	$('#inicial-porte').hide();
+	$('#final-porte').hide();
+
+	$('.rad').click(function(){ 
+		//Carta porte y concepto
+        if($('#radioP').is(':checked')){
+        	if(this.value === 'P'){
+				$('#processing-modal').modal('hide');
+				$('#opciones').text('por Carta Porte y Concepto');
+				$('#carta-porte').show();
+				$('#concepto-porte').show();
+				$('#inicial-porte').hide();
+				$('#final-porte').hide();
+        	}  
+        }
+        // concepto y un rango de fechas
+        if($('#radioC').is(':checked')){ 
+        	if(this.value === 'C'){
+        		$('#processing-modal').modal('hide');
+        		$('#opciones').text('por Concepto y un Rango de Fechas');
+        		$('#carta-porte').hide();
+        		$('#concepto-porte').show();
+				$('#inicial-porte').show();
+				$('#final-porte').show();
+        	}
+        } 
+    });
+	$('.date-picker').datepicker({
+		rtl: Metronic.isRTL(),
+		orientation: "auto",
+		autoclose: true        
+	});
+	$(".concepto").select2({
+		tags: {{conceptos|safe}},
+		maximumSelectionSize: 1
+	});
+	$("#id_operador").select2(); 
+
+{% endblock %}

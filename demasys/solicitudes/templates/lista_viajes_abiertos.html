@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load sepomex_filters %}
+{% load url from future %}
+{% load bootstrap_pagination %}
+
+{% block title %}Viajes{% endblock %}
+{% block content_title %} Lista de Viajes Abiertos{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/bootstrap-datepicker/css/datepicker3.css"/>
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/select2/select2.css"/>
+{% endblock %}
+
+{% block nav-viajes %}<li class="active">{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Lista de Viajes Abiertos </a>						
+	</li>	
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+		<div class="modal fade" id="history" role="basic" aria-hidden="true">
+			<div class="page-loading page-loading-boxed">
+				<img src="{{MEDIA_URL}}img/loading-spinner-grey.gif" alt="" class="loading">
+				<span>
+				&nbsp;&nbsp;Cargando... </span>
+			</div>
+			<div class="modal-dialog">
+				<div class="modal-content">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">					
+					<!-- Begin: life time stats -->
+					<div class="portlet">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-rocket"></i>Listado de viajes abirtos apartir del Julio del 2016
+							</div>
+							</div>
+											
+						<div class="portlet-body">							
+								<div class="row">
+									<div class="col-md-12">										
+									</div>
+								</div>				
+								<div class="table-responsive">				
+								<table class="table table-striped table-bordered table-hover" id="datatable_ajax">
+								<thead>
+								<tr role="row" class="heading">
+									<th width="10%">
+										 Carta #
+									</th>
+									<th width="12%">
+										 Fecha
+									</th>
+									<th width="10%">
+										 Cliente
+									</th>
+									<th width="10%">
+										 Bill/Load
+									</th>
+									<th width="18%">
+										 Económico
+									</th>
+									<th width="20%">
+										 Operador
+									</th>
+									<th width="10%">
+										 Fecha Entrega
+									</th>
+								</tr>
+								{% for viajes in lista_viajes %}
+								<tr role="row" class="filter">									
+									<td>
+										{{viajes.pk}}
+										{{viajes.status}}
+									</td>
+									<td>
+										{{viajes.fecha_salida}}
+									</td>
+									<td>
+										{{viajes.cliente}}
+										{{viajes.departamento}}
+									</td>
+									<td>										
+										{{viajes.referencia}}										
+									</td>
+									<td>
+										{{viajes.economico}}
+									</td>
+									<td>
+										{{viajes.operador}}
+									</td>
+									<td>
+										{{viajes.fecha_ent}}
+									</td>
+								</tr>
+								</form>
+								</thead>
+								<tbody>
+									
+									<tr>
+										<td>
+											
+										</td>
+										
+									</tr>
+									{% empty %}
+									<tr>
+										<td colspan="9">No se encontrarón resultados</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+								</table>
+								{% bootstrap_paginate lista_viajes %}
+							</div>
+						</div>
+					</div>
+					<!-- End: life time stats -->
+				</div>								
+			</div>		
+{% endblock %}
+
+{% block extra_script %}
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/select2/select2.js"></script>
+<script src="{{MEDIA_URL}}plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+{% endblock %}
+
+
+{% block script_ready %}
+	$('.date-picker').datepicker({
+        rtl: Metronic.isRTL(),
+        orientation: "auto",
+        autoclose: true        
+    });
+    
+    function sepomexFormatResult(municipio) {            
+    	return municipio.municipio+', '+municipio.estado;
+    }
+
+    function sepomexFormatSelection(municipio) {
+        return municipio.municipio;
+    }
+    
+    $('.select2').select2();
+    $("#id_destino").select2({    	
+    	minimumInputLength: 2,
+    	allowClear: true,
+        ajax: {   
+        	url: '{% url 'sepomex.views.direccion' %}',
+        	dataType: 'json',
+                data: function(term, page) {
+
+                    return {
+                        term: term
+                    };
+                },
+                results: function(data, page) {
+                    return {
+                        results: data
+                    };
+            }
+        },
+        initSelection: function(element, callback) {
+	        var ids = $(element).val();	        
+	        if (ids!=="") {
+	            $.ajax("{% url 'sepomex.views.direccion_recupera_unico' %}", {
+	                data: {
+	                    ids: ids
+	                },
+	                dataType: "json"
+	            }).done(function(data) { callback(data); });
+	        }
+	    },
+		formatResult: sepomexFormatResult, // omitted for brevity, see the source of this page
+        formatSelection: sepomexFormatSelection, // omitted for brevity, see the source of this page   	
+	});			
+{% endblock %}

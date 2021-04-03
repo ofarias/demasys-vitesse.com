@@ -1,0 +1,4 @@
+*.class
+*.pyc
+*.pyo
+transportes/local_settings.py

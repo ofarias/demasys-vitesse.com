@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load i18n humanize %}
+
+{% block title %}{{action}} Solicitud de Empleo{% endblock %}
+{% block content_title %} Solicitud de Empleo {% endblock %}
+
+{% block nav-sol2 %}<li class="active">{% endblock %} <!-- se debe definir en Base.html para que se seleccione--> 
+	
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/bootstrap-datepicker/css/datepicker3.css">
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/select2/select2.css"/>
+
+{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>
+		<i class="fa fa-archive"></i>		
+		<a href="#">Recursos Humanos</a>	<!-- Esto se cambia con la vista de la aplicacion actual, que debe tener la classe Index-->
+		<i class="fa fa-angle-right"></i>					
+	</li>	
+	<li>
+		<i class="fa fa-pencil-square-o"></i>
+		<a href="#">Solicitud de Empleo</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+{% block content %}
+
+	
+  	<form action="" class="form-horizontal form-row-seperated" method="post">
+	
+										{% csrf_token %}
+
+
+<br/><h3>
+
+
+
+											<span class="caption-subject font-blue bold uppercase">DOCUMENTACION
+											</span></h3>
+											<br/><br/><hr/>
+
+<div class="col-lg-6">
+
+					<div class="form-group {% if formDocumentacion.rfc.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Reg. Fed. Contribuyentes: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														<p hidden>{{ formDocumentacion.idsolicitante }}</p>
+														{{formDocumentacion.rfc}}
+														{% if formDocumentacion.rfc.errors %}<span class="help-block">{{formDocumentacion.rfc.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+<div class="col-lg-6">
+
+					<div class="form-group {% if formDocumentacion.nss.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Afiliación Seguro Social No: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formDocumentacion.nss}}
+														{% if formDocumentacion.nss.errors %}<span class="help-block">{{formDocumentacion.nss.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+
+
+<div class="col-lg-6">
+
+					<div class="form-group {% if formDocumentacion.numCartilla.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Cartilla Servicio Militar No: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formDocumentacion.numCartilla}}
+														{% if formDocumentacion.numCartilla.errors %}<span class="help-block">{{formDocumentacion.numCartilla.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+
+<div class="col-lg-6">
+
+					<div class="form-group {% if formDocumentacion.pasaporte.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Pasaporte No: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formDocumentacion.pasaporte}}
+														{% if formDocumentacion.pasaporte.errors %}<span class="help-block">{{formDocumentacion.pasaporte.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+
+<div class="col-lg-6">
+							<div class="form-group {% if formDocumentacion.tieneLicencia.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Tiene Licencia de Manejo:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formDocumentacion.tieneLicencia}}
+														{% if formDocumentacion.tieneLicencia.errors %}<span class="help-block">{{formDocumentacion.tieneLicencia.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+
+<div class="col-lg-6">
+
+					<div class="form-group {% if formDocumentacion.tipoLicencia.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Clase de Licencia: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formDocumentacion.tipoLicencia}}
+														{% if formDocumentacion.tipoLicencia.errors %}<span class="help-block">{{formDocumentacion.tipoLicencia.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+<div class="col-lg-6">
+
+					<div class="form-group {% if formDocumentacion.numLicencia.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">No. de Licencia: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formDocumentacion.numLicencia}}
+														{% if formDocumentacion.numLicencia.errors %}<span class="help-block">{{formDocumentacion.numLicencia.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+
+
+<div class="col-lg-6">
+
+					<div class="form-group {% if formDocumentacion.curp.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">CURP: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formDocumentacion.curp}}
+														{% if formDocumentacion.curp.errors %}<span class="help-block">{{formDocumentacion.curp.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+
+
+
+<div class="col-lg-6">
+
+					<div class="form-group {% if formDocumentacion.afore.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">No. AFORE: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formDocumentacion.afore}}
+														{% if formDocumentacion.afore.errors %}<span class="help-block">{{formDocumentacion.afore.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+
+
+<div class="col-lg-6">
+	&nbsp;
+</div>
+<div class="col-lg-6">
+	&nbsp;
+</div>
+											
+												
+											<!--	
+												<a href="{% url 'empleados.views.index' %}" class="btn default blue-stripe">
+															<i class="glyphicon glyphicon-arrow-left"></i> Regresar
+														</a>	
+												-->
+												
+												
+
+														<button type="submit" class="btn blue"><i class="fa fa-pencil"></i> {{action}}</button>													
+														
+																					
+																			
+</form>
+								
+  {% endblock %}
+
+
+
+{% block extra_script %}
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/select2/select2.js"></script>
+{% endblock %}
+
+{% block script_ready %}
+	
+	
+	$('.date-picker').datepicker({
+        rtl: Metronic.isRTL(),
+        orientation: "auto",
+        autoclose: true        
+    });
+    
+{% endblock %}

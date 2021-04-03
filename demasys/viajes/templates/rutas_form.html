@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+
+{% block title %}{{action}} Ruta{% endblock %}
+{% block content_title %} Rutas disponibles {% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/select2/select2.css"/>
+{% endblock %}
+
+{% block nav-rutas %}<li class="active">{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="{% url 'viajes.views.rutas' %}">Rutas</a>	
+		<i class="fa fa-angle-right"></i>						
+	</li>
+	<li>
+		<a href="#">{{action}}</a>
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+		<div class="row">
+            <div class="col-md-12">
+								<div class="portlet light bg-inverse form-fit">
+									<div class="portlet-title">
+										<div class="caption">
+											<i class="icon-equalizer font-blue"></i>
+											<span class="caption-subject font-blue bold uppercase">{{action}} Ruta</span>											
+										</div>										
+									</div>
+									<div class="portlet-body form">
+										<!-- BEGIN FORM-->
+										<form action="" class="form-horizontal form-row-seperated" method="post">
+											{% csrf_token %}
+											<div class="form-body">
+												<div class="form-group {% if form.modelo.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.nombre.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.nombre}}
+														{% if form.nombre.errors %}<span class="help-block">{{form.nombre.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.casetas_salida.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.casetas_salida.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.casetas_salida}}
+														{% if form.casetas_salida.errors %}<span class="help-block">{{form.casetas_salida.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.casetas_regreso.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.casetas_regreso.label}}</label>
+													<div class="col-md-9">
+														{{form.casetas_regreso}}
+														{% if form.casetas_regreso.errors %}<span class="help-block">{{form.casetas_regreso.errors}}</span>{% endif %}
+													</div>
+												</div>	
+												<div class="form-group {% if form.activo.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.activo.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														<div class="checkbox-list" data-error-container="#form_2_services_error">
+														<label>
+														{{form.activo}} Si
+														</div>
+														{% if form.activo.errors %}<span class="help-block">{{form.activo.errors}}</span>{% endif %}
+													</div>
+												</div>												
+											</div>
+											<div class="form-actions">
+												<div class="row">
+													<div class="col-md-offset-3 col-md-9">
+														<button type="submit" class="btn blue"><i class="fa fa-pencil"></i> {{action}}</button>														
+													</div>
+												</div>
+											</div>
+										</form>
+										<!-- END FORM-->
+									</div>
+								</div>
+            </div>
+         </div>
+{% endblock %}
+
+{% block extra_script %}
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/select2/select2.js"></script>
+{% endblock %}
+
+{% block script_ready %}
+	$('#id_casetas_salida').select2();
+	$('#id_casetas_regreso').select2();
+{% endblock %}

@@ -1,0 +1,251 @@
+
+drop table demasys_vitesse_new.empleados_referencias;
+drop table demasys_vitesse_new.empleados_empleos;
+drop table demasys_vitesse_new.empleados_escolaridad;
+drop table demasys_vitesse_new.empleados_familiares;
+drop table  demasys_vitesse_new.empleados_solicitud;
+drop table demasys_vitesse_new.empleados_infohijos;
+drop table demasys_vitesse_new.empleados_cuestionario;
+drop table demasys_vitesse_new.empleados_infogral;
+drop table demasys_vitesse_new.externo_datos;
+
+
+create table demasys_vitesse_new.empleados_solicitud(
+    id			bigint auto_increment,
+    nombre			varchar(50) not null,
+	segundoNombre	varchar(50) null,
+	paterno			varchar(50) null,
+	materno			varchar(50) null,
+    edad			int(2),
+    domicilio		varchar(100) not null,
+    colonia			varchar(100) not null,
+    cp				int(10),
+    telefono    	varchar(15),
+    celular			varchar(15),
+    lugarNacimiento varchar(100),
+    email			varchar(60),
+    fechaNacimiento	date,
+    nacionalidad	varchar(20),
+    viveCon			varchar(30),
+    dependientes	varchar(30),
+    estatura		decimal(4,2),
+    peso			decimal(5,2),
+    sexo			varchar(10),
+    estadoCivil		varchar(10),
+    casadoPor		varchar(20),
+    fechaSol		date,
+    puestoSol		varchar(30),
+    sueldo			decimal(7,2),
+
+	rfc				varchar(15),
+    nss				varchar(20),
+    numCartilla		varchar(20),
+    pasaporte		varchar(20),
+	tieneLicencia   varchar(2),
+    tipoLicencia	varchar(20),
+    numLicencia		varchar(20),
+    vigLicencia		varchar(20),
+    curp			varchar(20),
+	afore			varchar(20),
+
+	salud			varchar(15),
+    cronico			varchar(2),
+    descripcion		varchar(60),
+    deporte			varchar(2),
+    club			varchar(2),
+    hobbie			varchar(160),
+    meta			varchar(255),	
+
+	idiomas			varchar(100),
+    equipo			varchar(200),
+    funciones		varchar(200),
+    otros			varchar(200),
+
+	medio			varchar(60),
+    afianzado		varchar(2),
+    ciaFianza		varchar(50),
+    seguro			varchar(2),
+    ciaSeguro		varchar(50),
+    residencia		varchar(2),
+    razonReside		varchar(50),
+    familiaresT		varchar(2),
+    nombres			varchar(100),
+    sindicato		varchar(2),
+    nombreSin		varchar(60),
+    viajar			varchar(2),
+    razonViaje		varchar(60),
+    presentar		varchar(60),
+
+	ingreso			varchar(2),
+    modo			varchar(20),
+    importe			varchar(20),
+    casa			varchar(2),
+    importeCasa		varchar(15),
+    habitantes		int(2),
+    auto		 	varchar(2),
+    placas			varchar(10),
+    marca			varchar(10),
+    modelo			varchar(5),
+    ingresos		varchar(10),
+    egresos			varchar(10),
+    ahorros			varchar(10),
+    total			varchar(10),
+    conyuge			varchar(2),
+    ingresoCony		varchar(10),
+    renta			varchar(2),
+    rentaMensual	varchar(10),
+    deudas			varchar(2),
+    clase			varchar(10),
+    impDeuda		varchar(10),
+    abonoMensual	varchar(10),
+
+	estatus 		int(1),
+    primary key (id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci comment='datos de solicitante de empleo';
+
+create table demasys_vitesse_new.empleados_familiares(
+	id			bigint auto_increment,
+	idsolicitante 	bigint not null,
+	nombreFamiliar	varchar(255),
+    parentesco		varchar(15),
+    domicilioFam	varchar(255),
+    ocupacion		varchar(255),
+    edadFam			int(2),
+    viveFinado		varchar(15),
+	primary key (id),
+FOREIGN KEY (idsolicitante) REFERENCES demasys_vitesse_new.empleados_solicitud(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+create table demasys_vitesse_new.empleados_escolaridad(
+	id			bigint auto_increment,
+	idsolicitante 	bigint not null,
+	nombreEscuela	varchar(255),
+	domicilioEscuela varchar(255),
+    inicial			varchar(25),
+    final			varchar(25),
+    anios			int(2),
+    titulo			varchar(25),
+    nivel			varchar(25),
+	primary key (id),
+FOREIGN KEY (idsolicitante) REFERENCES demasys_vitesse_new.empleados_solicitud(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+
+create table demasys_vitesse_new.empleados_empleos(
+	id			bigint auto_increment,
+	idsolicitante 	bigint not null,
+	tiempo			varchar(150),
+    nombreEmp		varchar(150),
+    domicilioEmp		varchar(200),
+    telefonoEmp		varchar(30),
+    puestoIni		varchar(30),
+    puestoFin		varchar(30),
+    sueldoIni		varchar(30),
+    sueldoFin		varchar(30),
+    motivo			varchar(100),
+    jefe			varchar(80),
+    actividad		varchar(60),
+    permiso			varchar(2),
+    noRazon			varchar(160),
+	primary key (id),
+FOREIGN KEY (idsolicitante) REFERENCES demasys_vitesse_new.empleados_solicitud(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+create table demasys_vitesse_new.empleados_referencias(
+	id			bigint auto_increment,
+	idsolicitante 	bigint not null,
+	nombreRef		varchar(100),
+    domicilioRef	varchar(100),
+    telefonoRef		varchar(30),
+    ocupacionRef	varchar(30),
+    tiempoRef		varchar(10),
+primary key (id),
+FOREIGN KEY (idsolicitante) REFERENCES demasys_vitesse_new.empleados_solicitud(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+
+create table demasys_vitesse_new.empleados_infogral(
+    id				bigint auto_increment,
+	idsolicitante 	bigint not null,
+    nombreCompleto 	varchar(60),
+    telefono 		varchar(30),
+    edoCivil 		varchar(20),
+    cadadoPor 		varchar(30),
+    numHijos 		varchar(2),
+    nomEsposa 		varchar(30),
+    ocupacionEsp 	varchar(40),
+    vivenPadres 	varchar(10),
+    ocupacionPadres varchar(50),
+    ultimaEmp 		varchar(40),
+    telEmp 			varchar(30),
+    nombreJefe 		varchar(60),
+    puestoJefe 		varchar(30),
+    razonEmp 		varchar(80),
+    explicaEmp 		varchar(160),
+    demandas 		varchar(30),
+    explicaDem 		varchar(160),
+    tieneLic 		varchar(3),
+    tipoLic 		varchar(10),
+    numeroLic 		varchar(20),
+    vigenciaLic 	varchar(20),
+    casaPropia 		varchar(5),
+    numHabitantes 	varchar(3),
+    primary key (id),
+	FOREIGN KEY (idsolicitante) REFERENCES demasys_vitesse_new.empleados_solicitud(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+
+create table demasys_vitesse_new.empleados_cuestionario(
+	id				bigint auto_increment,
+    idsolicitante 	bigint not null,
+	bebida			varchar(2),
+    freBebida		varchar(20),
+    fuma			varchar(2),
+    freFuma			varchar(20),
+    drog			varchar(2),
+    tiempoDrog		varchar(20),
+	actividad		varchar(30),
+	escolaridad		varchar(30),
+	auto			varchar(2),
+    oportunidad		varchar(160),
+    compromiso		varchar(160),
+	pretenciones	varchar(20),
+	gastos			varchar(20),
+    futuro			varchar(160),
+    recomienda		varchar(60),
+    beneficiosVit	varchar(100),
+    firma			varchar(2),
+    opinionRef		varchar(160),
+    opinionMer		varchar(160),
+    suvenir			varchar(2),
+    razonSuvenir	varchar(40),
+    ganarGente		varchar(40),
+    reaccion		varchar(40),
+    correr			varchar(2),
+    velocidad		varchar(20),
+    ciudad			varchar(20),
+	razonCiudad		varchar(40),
+	metaVida		varchar(60),
+    familiaIdent	varchar(20),
+    sitPais			varchar(60),
+    futuroHijo		varchar(60),
+    finesSemana		varchar(60),
+    apodo			varchar(20),
+    primary key (id),
+	FOREIGN KEY (idsolicitante) REFERENCES demasys_vitesse_new.empleados_solicitud(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+
+create table demasys_vitesse_new.empleados_infohijos(
+    id				bigint auto_increment,
+	idsolicitante 	bigint not null,
+    nombre 			varchar(60),
+	edad			int(2),
+	ocupacion		varchar(40),
+    primary key (id),
+	FOREIGN KEY (idsolicitante) REFERENCES demasys_vitesse_new.empleados_solicitud(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+
+
+-- alter table demasys_vitesse_new.empleados_solicitud add column estatus int(1);

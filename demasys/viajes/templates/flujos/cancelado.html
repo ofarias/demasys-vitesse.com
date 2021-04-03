@@ -1,0 +1,246 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load sepomex_filters %}
+{% load url from future %}
+
+{% block title %}Viajes{% endblock %}
+{% block content_title %} Viaje {{viaje}} - {{current.state}}{% endblock %}
+
+{% block nav-viajes %}<li class="active">{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="{% url 'viajes.views.index' %}">Viajes</a>		
+		<i class="fa fa-angle-right"></i>				
+	</li>	
+	<li>		
+		<a href="#">Carta {{viaje}}</a>							
+	</li>	
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}	
+
+		<div class="row">
+            <div class="col-md-12">
+        		<div class="portlet-body form">
+					<!-- BEGIN FORM-->
+					<form class="form-horizontal" role="form">
+						<div class="form-body">
+							<h3 class="form-section">Información de cancelación</h3>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Cancelado por:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{current.participant}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Motivo de cancelación:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{current.note}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+							</div>
+							<h3 class="form-section">Datos Generales</h3>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Carta porte:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Fecha de salida:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.fecha_salida|date:"d-m-Y"}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Cliente:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.cliente}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Departamento:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.departamento}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Bill/Load:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.referencia}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Operador:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.operador}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Economico:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.economico}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Ruta:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.ruta}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Contenido:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.contiene}}
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<h3 class="form-section">Origen</h3>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Municipio:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.origen_clave_municipio|municipio}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Colonia:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.origen_colonia}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Calle:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.origen_calle}} No. {{viaje.origen_numero}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">CP:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.origen_cp}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+							</div>
+							<h3 class="form-section">Destino</h3>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Destino:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 <ul class="list-inline">
+												{% for destino in viaje.destino_set.all %}
+													<li>{{destino.destino_clave_municipio|municipio}}</li>
+												{% endfor %}
+												</ul>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+					<!-- END FORM-->
+				</div>
+			</div>
+		</div>
+{% endblock %}                   	

@@ -1,0 +1,272 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+
+{% block title %}{{action}} Cliente{% endblock %}
+{% block content_title %} Catálogo de Clientes {% endblock %}
+
+{% block nav-clientes %}<li class="active">{% endblock %}
+	
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/select2/select2.css"/>
+{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="{% url 'clientes.views.index' %}">Clientes</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>	
+	<li>
+		<a href="#">{{action}}</a>
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+		<div class="row">
+            <div class="col-md-12">
+								<div class="portlet light bg-inverse form-fit">
+									<div class="portlet-title">
+										<div class="caption">
+											<i class="icon-equalizer font-blue"></i>
+											<span class="caption-subject font-blue bold uppercase">{{action}} Cliente</span>											
+										</div>										
+									</div>
+									<div class="portlet-body form">
+										<!-- BEGIN FORM-->
+										<form action="" class="form-horizontal form-row-seperated" method="post">
+											{% csrf_token %}
+											<div class="form-body">
+												<div class="form-group {% if form.nombre.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.nombre.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.nombre}}
+														{% if form.nombre.errors %}<span class="help-block">{{form.nombre.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.nombre_corto.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.nombre_corto.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.nombre_corto}}
+														{% if form.nombre_corto.errors %}<span class="help-block">{{form.nombre_corto.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.contacto.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Contacto: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.contacto}}
+														{% if form.contacto.errors %}<span class="help-block">{{form.contacto.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.telefono.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Telefono: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.telefono}}
+														{% if form.telefono.errors %}<span class="help-block">{{form.telefono.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.nombre_corto.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Correo Electronico: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.correo}}
+														{% if form.correo.errors %}<span class="help-block">{{form.correo.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.datos_bancarios.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Datos Bancarios: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.datos_bancarios}}
+														{% if form.datos_bancarios.errors %}<span class="help-block">{{form.datos_bancarios.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.rfc.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.rfc.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.rfc}}
+														{% if form.rfc.errors %}<span class="help-block">{{form.rfc.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<h3>Dirección de Facturación</h3>
+												<div class="form-group {% if form.estado.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Estado y municipio<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.facturacion_clave_municipio}}
+														{% if form.facturacion_clave_municipio.errors %}<span class="help-block">{{form.facturacion_clave_municipio.errors}}</span>{% endif %}
+													</div>
+												</div>											
+												<div class="form-group {% if form.colonia.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.facturacion_colonia.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.facturacion_colonia}}
+														{% if form.facturacion_colonia.errors %}<span class="help-block">{{form.facturacion_colonia.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.calle.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.facturacion_calle.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.facturacion_calle}}
+														{% if form.facturacion_calle.errors %}<span class="help-block">{{form.facturacion_calle.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.numero.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.facturacion_numero.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.facturacion_numero}}
+														{% if form.facturacion_numero.errors %}<span class="help-block">{{form.facturacion_numero.errors}}</span>{% endif %}
+													</div>
+												</div>	
+												<div class="form-group {% if form.numero.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Código Postal:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.facturacion_cp}}
+														{% if form.facturacion_cp.errors %}<span class="help-block">{{form.facturacion_cp.errors}}</span>{% endif %}
+													</div>
+												</div>		
+												<h3>Dirección de Recolección</h3>																							
+												<div class="form-group {% if form.origen_clave_municipio.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Estado y municipio<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.recoleccion_clave_municipio}}
+														{% if form.recoleccion_clave_municipio.errors %}<span class="help-block">{{form.recoleccion_clave_municipio.errors}}</span>{% endif %}
+													</div>
+												</div>												
+												<div class="form-group {% if form.origen_colonia.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.recoleccion_colonia.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.recoleccion_colonia}}
+														{% if form.recoleccion_colonia.errors %}<span class="help-block">{{form.recoleccion_colonia.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.origen_calle.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.recoleccion_calle.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-4">
+														{{form.recoleccion_calle}}
+														{% if form.recoleccion_calle.errors %}<span class="help-block">{{form.recoleccion_calle.errors}}</span>{% endif %}
+													</div>
+													<label class="control-label col-md-2">Número<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-3">
+														{{form.recoleccion_numero}}
+														{% if form.recoleccion_numero.errors %}<span class="help-block">{{form.recoleccion_numero.errors}}</span>{% endif %}
+													</div>													
+												</div>
+												<div class="form-group {% if form.origen_cp.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.recoleccion_cp.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.recoleccion_cp}}
+														{% if form.recoleccion_cp.errors %}<span class="help-block">{{form.recoleccion_cp.errors}}</span>{% endif %}
+													</div>
+												</div>	
+												<div class="form-group {% if form.activo.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.activo.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														<div class="checkbox-list" data-error-container="#form_2_services_error">
+														<label>
+														{{form.activo}} Si
+														</div>
+														{% if form.activo.errors %}<span class="help-block">{{form.activo.errors}}</span>{% endif %}
+													</div>
+												</div>																		
+											</div>
+											<div class="form-actions">
+												<div class="row">
+													<div class="col-md-offset-3 col-md-9">
+														<button type="submit" class="btn blue"><i class="fa fa-pencil"></i> {{action}}</button>														
+													</div>
+												</div>
+											</div>
+										</form>
+										<!-- END FORM-->
+									</div>
+								</div>
+            </div>
+         </div>
+{% endblock %}
+
+{% block extra_script %}
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/select2/select2.js"></script>
+{% endblock %}
+
+{% block script_ready %}
+    function sepomexFormatResult(municipio) {            
+            return municipio.municipio+', '+municipio.estado;
+        }
+
+        function sepomexFormatSelection(municipio) {
+            return municipio.municipio;
+        }
+        
+             
+    $("#id_facturacion_clave_municipio").select2({
+    	placeholder: "Seleccionar origen",    	
+    	minimumInputLength: 2,
+        ajax: {   
+        	url: '{% url 'sepomex.views.direccion' %}',
+        	dataType: 'json',
+                data: function(term, page) {
+
+                    return {
+                        term: term
+                    };
+                },
+                results: function(data, page) {
+                    return {
+                        results: data
+                    };
+            }
+        },
+        initSelection: function(element, callback) {
+	        var ids = $(element).val();	        
+	        if (ids!=="") {
+	            $.ajax("{% url 'sepomex.views.direccion_recupera_unico' %}", {
+	                data: {
+	                    ids: ids
+	                },
+	                dataType: "json"
+	            }).done(function(data) { callback(data); });
+	        }
+	    },
+		formatResult: sepomexFormatResult, // omitted for brevity, see the source of this page
+        formatSelection: sepomexFormatSelection, // omitted for brevity, see the source of this page   	
+	});
+    $("#id_recoleccion_clave_municipio").select2({
+    	placeholder: "Seleccionar destino",    	
+    	minimumInputLength: 2,
+        ajax: {   
+        	url: '{% url 'sepomex.views.direccion' %}',
+        	dataType: 'json',
+                data: function(term, page) {
+
+                    return {
+                        term: term
+                    };
+                },
+                results: function(data, page) {
+                    return {
+                        results: data
+                    };
+            }
+        },
+        initSelection: function(element, callback) {
+	        var ids = $(element).val();	        
+	        if (ids!=="") {
+	            $.ajax("{% url 'sepomex.views.direccion_recupera_unico' %}", {
+	                data: {
+	                    ids: ids
+	                },
+	                dataType: "json"
+	            }).done(function(data) { callback(data); });
+	        }
+	    },
+		formatResult: sepomexFormatResult, // omitted for brevity, see the source of this page
+        formatSelection: sepomexFormatSelection, // omitted for brevity, see the source of this page   	
+	});
+{% endblock %}

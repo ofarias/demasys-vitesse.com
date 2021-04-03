@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load i18n humanize %}
+
+{% block title %}{{action}} Solicitud de Empleo{% endblock %}
+{% block content_title %} Solicitud de Empleo {% endblock %}
+
+{% block nav-sol2 %}<li class="active">{% endblock %} <!-- se debe definir en Base.html para que se seleccione--> 
+	
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/bootstrap-datepicker/css/datepicker3.css">
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/select2/select2.css"/>
+
+{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>
+		<i class="fa fa-archive"></i>		
+		<a href="#">Recursos Humanos</a>	<!-- Esto se cambia con la vista de la aplicacion actual, que debe tener la classe Index-->
+		<i class="fa fa-angle-right"></i>					
+	</li>	
+	<li>
+		<i class="fa fa-pencil-square-o"></i>
+		<a href="#">Solicitud de Empleo</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+{% block content %}
+
+	
+  	<form action="" class="form-horizontal form-row-seperated" method="post">
+	
+										{% csrf_token %}
+
+
+<br/><h3>
+
+
+
+											<span class="caption-subject font-blue bold uppercase">ESTADO DE SALUD Y HABITOS PERSONALES 
+											</span></h3>
+											<br/><br/><hr/>
+
+<div class="col-lg-6">
+							<div class="form-group {% if formSalhabForm.salud.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Su Estado de Salud es:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														<p hidden>{{ formSalhabForm.idsolicitante }}</p>
+														{{formSalhabForm.salud}}
+														{% if formSalhabForm.salud.errors %}<span class="help-block">{{formSalhabForm.salud.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+
+<div class="col-lg-6">
+							<div class="form-group {% if formSalhabForm.cronico.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Padece enfermedad Cronica:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formSalhabForm.cronico}}
+														{% if formSalhabForm.cronico.errors %}<span class="help-block">{{formSalhabForm.cronico.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+
+<div class="col-lg-6">
+
+					<div class="form-group {% if formSalhabForm.descripcion.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Descripcion Enfermedad Cronica: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formSalhabForm.descripcion}}
+														{% if formSalhabForm.descripcion.errors %}<span class="help-block">{{formSalhabForm.descripcion.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+
+<div class="col-lg-6">
+							<div class="form-group {% if formSalhabForm.deporte.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Practica algun Deporte:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formSalhabForm.deporte}}
+														{% if formSalhabForm.deporte.errors %}<span class="help-block">{{formSalhabForm.deporte.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+
+<div class="col-lg-6">
+							<div class="form-group {% if formSalhabForm.club.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Pertenece algun Club Social:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formSalhabForm.club}}
+														{% if formSalhabForm.club.errors %}<span class="help-block">{{formSalhabForm.club.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+<div class="col-lg-6">
+
+					<div class="form-group {% if formSalhabForm.hobbie.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿En que ocupa su tiempo libre?: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formSalhabForm.hobbie}}
+														{% if formSalhabForm.hobbie.errors %}<span class="help-block">{{formSalhabForm.hobbie.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+
+<div class="col-lg-6">
+
+					<div class="form-group {% if formSalhabForm.meta.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Cual es su meta de vida?: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formSalhabForm.meta}}
+														{% if formSalhabForm.meta.errors %}<span class="help-block">{{formSalhabForm.meta.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+
+<div class="col-lg-6">
+	&nbsp;
+</div>
+<div class="col-lg-6">
+	&nbsp;
+</div>
+											
+												
+											<!--	
+												<a href="{% url 'empleados.views.index' %}" class="btn default blue-stripe">
+															<i class="glyphicon glyphicon-arrow-left"></i> Regresar
+														</a>	
+												-->
+												
+												
+
+														<button type="submit" class="btn blue"><i class="fa fa-pencil"></i> {{action}}</button>													
+														
+																					
+																			
+										</form>	
+								
+  {% endblock %}
+
+
+
+{% block extra_script %}
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/select2/select2.js"></script>
+{% endblock %}
+
+{% block script_ready %}
+	
+	
+	$('.date-picker').datepicker({
+        rtl: Metronic.isRTL(),
+        orientation: "auto",
+        autoclose: true        
+    });
+    
+{% endblock %}

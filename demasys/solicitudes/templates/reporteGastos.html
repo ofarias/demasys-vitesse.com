@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load i18n humanize %}
+{% load sepomex_filters %}
+{% load url from future %}
+{% block title %}Reportes{% endblock %}
+{% block content_title %} Reporte de gastos {% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/bootstrap-datepicker/css/datepicker3.css"/>
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/select2/select2.css"/>
+{% endblock %}
+{% block nav-repGasto %}<li class="active">{% endblock %}
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>
+		<i class="fa fa-file-excel-o"></i>		
+		<a href="{% url 'solicitudes.views.reporteGastos' %}">Reporte gastos</a>
+		<i class="fa fa-angle-right"></i>				
+	</li>	
+</ul>
+{% endblock %}
+{% block actions %}
+{% endblock %}
+{% block content %}	
+<form class="form-horizontal form-row-seperated" role="form" action="{% url 'solicitudes.views.generaReporte' %}" method="post" id="statusform">
+	{% csrf_token %}
+	<div class="row">
+		<div class="col-md-12">
+			<div class="portlet-body form">					
+				<div class="form-body">							
+					<h3 class="form-section">Filtros</h3>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group ">
+								<label class="control-label col-md-3">Carta porte:</label>
+								<div class="col-md-9">
+									{{form.id_viaje}}
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group ">
+								<label class="control-label col-md-3">Operador:</label>
+								<div class="col-md-9">
+									{{form.operador}}
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">Fecha de Asignacion desde:</label>
+								<div class="col-md-9">
+									<div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
+										{{form.fecha_from}}	
+										<span class="input-group-btn">
+											<button class="btn blue" type="button">
+												<i class="fa fa-calendar"></i>	
+											</button>				
+										</span>		
+									</div>										
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">Fecha de Asignacion hasta:</label>
+								<div class="col-md-9">
+									<div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
+										{{form.fecha_to}}	
+										<span class="input-group-btn">
+											<button class="btn blue" type="button">
+												<i class="fa fa-calendar"></i>	
+											</button>				
+										</span>		
+									</div>										
+								</div>
+							</div>
+						</div>
+						
+						
+						<!--/span-->
+					</div>
+					<h3 class="form-section"></h3>
+					
+				</div>
+			</div>	
+		</div>
+		<div class="form-actions">
+			<div class="row">
+				<div class="col-md-offset-5 col-md-9">
+					<button id="btn_add_destino" class="btn green">
+						<i class="fa fa-file-excel-o"></i> Generar Excel
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
+	{% endblock %}
+	{% block extra_script %}
+	<script type="text/javascript" src="{{MEDIA_URL}}plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript" src="{{MEDIA_URL}}plugins/select2/select2.js"></script>
+	{% endblock %}
+	{% block script_ready %}
+	$('.date-picker').datepicker({
+	rtl: Metronic.isRTL(),
+	orientation: "auto",
+	autoclose: true        
+});               
+$("#id_operador").select2(); 
+{% endblock %}

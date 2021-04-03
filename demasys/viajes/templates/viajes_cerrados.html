@@ -1,0 +1,310 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load sepomex_filters %}
+{% load url from future %}
+{% load bootstrap_pagination %}
+
+{% block title %}Viajes{% endblock %}
+{% block content_title %} Viajes por status{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/bootstrap-datepicker/css/datepicker3.css"/>
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/select2/select2.css"/>
+
+{% endblock %}
+
+{% block nav-viajes %}<li class="active">{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Viajes</a>						
+	</li>	
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+		<div class="modal fade" id="history" role="basic" aria-hidden="true">
+			<div class="page-loading page-loading-boxed">
+				<img src="{{MEDIA_URL}}img/loading-spinner-grey.gif" alt="" class="loading">
+				<span>
+				&nbsp;&nbsp;Cargando... </span>
+			</div>
+			<div class="modal-dialog">
+				<div class="modal-content">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">					
+					<!-- Begin: life time stats -->
+					<div class="portlet">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-rocket"></i>Listado de viajes
+							</div>
+							<div class="actions">
+								<a href="{% url 'viajes.views.impRepCerrados' %}" class="btn btn-warning">
+								<i class="fa fa-file-excel-o" aria-hidden="true"></i>
+								<span class="hidden-480">
+								Descargar en Excel </span>
+								</a>
+							</div>
+						</div>						
+						<div class="portlet-body">
+								<div class="row">
+									<div class="col-md-12">										
+									</div>
+								</div>				
+								<div class="table-scrollable">
+								<table class="table table-striped table-hover" id="datatable_ajax">
+								<thead class="table table-striped sticky-header">
+								<tr role="row" class="heading">
+									<th width="10%">
+										 Carta #
+									</th>
+									<th>
+										Salida
+									</th>
+									<th>
+										Cliente
+									</th>
+									<th>
+										Departamento
+									</th>
+									<th>
+										Referencia
+									</th>
+									<th>
+										Destinos
+									</th>
+									<th>
+										Economico
+									</th>
+									<th>
+										Operador
+									</th>
+
+									<th width="10%">
+										 Entrega Chofer
+									</th>
+									<th width="10%">
+										 Libera a Cliente
+									</th>
+									<th width="10%">
+										 Cliente a Vitesse
+									</th>
+									<th width="10%">
+										 Recibe Facturacion
+									</th>
+								</tr>								
+								<tr role="row" class="filter">									
+									<form action="" id="search-form" method="get">
+									<td>
+										{{searchform.pk}}
+									</td>
+									<td>
+										<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
+											{{searchform.fecha_from}}
+											<span class="input-group-btn">
+											<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
+											</span>
+										</div>
+										<div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
+											{{searchform.fecha_to}}
+											<span class="input-group-btn">
+											<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
+											</span>
+										</div>
+									</td>
+									<td>
+										{{searchform.cliente}}
+									</td>
+									<td>
+										{{searchform.departamento}}
+									</td>
+									<td>										
+										{{searchform.referencia}}										
+									</td>
+									<td>
+										{{searchform.destino}}
+									</td>
+									<td>
+										{{searchform.economico}}
+									</td>
+									<td>
+										{{searchform.operador}}
+									</td>
+									<td>
+										<div class="margin-bottom-5">
+											<button type="submit" class="btn btn-sm blue filter-submit margin-bottom"><i class="fa fa-search"></i> Buscar</button>
+										</div>
+									</td>
+									</form>
+								</tr>
+								</thead>
+								<tbody>
+									{% for viaje in viajes_cerrados %}
+									<tr class="odd gradeX {{viaje.get_status_doc_display}}">
+										<td>
+											{{viaje.id}}
+										</td>
+										<td>
+											{{viaje.fecha_salida|date:"d-m-Y"}}	
+										</td>
+										<td>
+											{{viaje.cliente}} 
+										</td>
+										<td>
+											({{viaje.departamento}})
+										</td>
+										<td>	
+											{{viaje.referencia|default_if_none:"N/D"}}
+										</td>
+										<td>	
+											<ul class="list-inline">
+											{% for destino in viaje.destino_set.all %}
+												<li>{{destino.destino_clave_municipio|municipio}}</li>
+											{% endfor %}
+											
+											</ul>
+										</td>
+										<td>
+											{{viaje.economico.pk}}
+										</td>
+										<td>	
+											{{viaje.operador}}
+										</td>
+										<td>
+										 {%if viaje.status_doc == 1 or viaje.status_doc == 11 %}
+											<button class="btn btn-info btn-sm " value="{{viaje.pk}}|{{viaje.status_doc}}"> Entrega Chofer </button>
+										 {% else %}
+										 	{{ viaje.libera_chofer}}
+										 	{{ viaje.u_libera_chofer|default:""}} 
+										 {% endif %}
+										</td>
+										<td>
+											{% if viaje.status_doc == 2 or viaje.status_doc == 12 %}
+											<button class="btn btn-sm yellow" value="{{viaje.pk}}|{{viaje.status_doc}}"> Libera a Cliente </button>
+											{% else %}
+											{{ viaje.liberado_cliente|default:""}}
+											{{ viaje.u_liberado_cliente|default:""}}
+											{% endif %}
+										</td>
+										<td>
+											{% if viaje.status_doc == 3 or viaje.status_doc == 13 %}
+											<button class="btn btn-sm red" value="{{viaje.pk}}|{{viaje.status_doc}}"> Cliente a Vitesse </button>
+											{% else %}
+											{{viaje.entrego_cliente|default:""}}
+											{{viaje.u_entrego_cliente|default:""}}
+											{% endif %}	
+										</td>
+										<td>
+										{% if user.get_username == 'ivonne.teran' or user.get_username == 'Cinthia' or user.get_username == 'alejandro.macias' or viaje.recibido_facturacion  %}
+											{% if viaje.status_doc == 4 or viaje.status_doc == 14 %}
+											<button class="btn btn-sm green" value="{{viaje.pk}}|{{viaje.status_doc}}"> Recibe Facturación </button>
+											{% else %}
+											{{viaje.recibido_facturacion|default:""}}
+											{{viaje.u_recibido_facturacion|default:""}}
+											{% endif %}
+										{% else %}
+											<label> Solo Facturacion </label>
+										{% endif %}
+										</td>
+										
+									</tr>
+									{% empty %}
+									<tr>
+										<td colspan="9">No se encontrarón resultados</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+								</table>
+						
+								{% bootstrap_paginate viajes_cerrados %}
+							</div>
+						</div>
+					</div>
+					<!-- End: life time stats -->
+				</div>								
+			</div>		
+{% endblock %}
+
+{% block extra_script %}
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/select2/select2.js"></script>
+<script src="{{MEDIA_URL}}plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+{% endblock %}
+
+
+{% block script_ready %}
+
+	$('.date-picker').datepicker({
+        rtl: Metronic.isRTL(),
+        orientation: "auto",
+        autoclose: true        
+    });
+    
+    function sepomexFormatResult(municipio) {            
+    	return municipio.municipio+', '+municipio.estado;
+    }
+
+    function sepomexFormatSelection(municipio) {
+        return municipio.municipio;
+    }
+    
+    $('.select2').select2();
+    $("#id_destino").select2({    	
+    	minimumInputLength: 2,
+    	allowClear: true,
+        ajax: {   
+        	url: '{% url 'sepomex.views.direccion' %}',
+        	dataType: 'json',
+                data: function(term, page) {
+
+                    return {
+                        term: term
+                    };
+                },
+                results: function(data, page) {
+                    return {
+                        results: data
+                    };
+            }
+        },
+        initSelection: function(element, callback) {
+	        var ids = $(element).val();	        
+	        if (ids!=="") {
+	            $.ajax("{% url 'sepomex.views.direccion_recupera_unico' %}", {
+	                data: {
+	                    ids: ids
+	                },
+	                dataType: "json"
+	            }).done(function(data) { callback(data); });
+	        }
+	    },
+		formatResult: sepomexFormatResult, // omitted for brevity, see the source of this page
+        formatSelection: sepomexFormatSelection, // omitted for brevity, see the source of this page   	
+	});
+
+	$('.btn.btn-info.btn-sm,.btn.btn-sm.yellow,.btn.btn-sm.red,.btn.btn-sm.green').click(function(){
+
+		$.ajax("{% url 'viajes.views.cambia_doc_hold_screen' %}", {
+	                data: {
+	                    param: $(this).val()
+	                },
+	                dataType: "json"
+	            }).done(function() { $("form").submit(); });
+	});
+
+
+
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+
+{% block title %}{{action}} Producto{% endblock %}
+{% block content_title %} Compra de Producto {% endblock %}
+
+{% block nav-inventario %}<li class="active open">{% endblock %}
+{% block nav-invProd %}<li class="active">{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Inventario</a>
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="{% url 'inventario.views.productoadd' %}">Productos</a>
+		<i class="fa fa-angle-right"></i>						
+	</li>
+	<li>
+		<a href="#">{{action}}</a>
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+		<div class="row">
+            <div class="col-md-12">
+								<div class="portlet light bg-inverse form-fit">
+									<div class="portlet-title">
+										<div class="caption">
+											<i class="icon-equalizer font-blue"></i>
+											<span class="caption-subject font-blue bold uppercase">{{action}} Producto</span>
+										</div>										
+									</div>
+									<div class="portlet-body form">
+										<!-- BEGIN FORM-->
+										<form action="" class="form-horizontal form-row-seperated" method="post">
+											{% csrf_token %}
+											<div class="form-body">
+											
+													  <div class="form-group {% if form.fecha.errors %}has-error{% endif %}">
+												<label class="control-label col-md-3">Fecha de Compra:<span class="required" aria-required="true"> * </span></label>
+												<div class="col-md-9">
+													<div class="input-group date date-picker" data-date-format="dd-mm-yyyy">
+														{{form.fecha}}
+														<span class="input-group-btn">
+														  <button class="btn blue" type="button">
+														       <i class="fa fa-calendar"></i>
+														  </button>
+														</span>
+													 </div>
+														{% if form.fecha.errors %}<span class="help-block">{{form.fecha.errors}}</span >{% endif %}
+													</div >
+												</div>		
+												<div class="form-group {% if form.nombre.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Producto:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.idProducto}}
+														{% if form.idProducto.errors %}<span class="help-block">{{form.idProducto.errors}}</span>{% endif %}
+													</div>
+												</div>
+													<div class="form-group {% if form.nombre.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Cantidad:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.unidades}}
+														{% if form.unidades.errors %}<span class="help-block">{{form.unidades.errors}}</span>{% endif %}
+													</div>
+												</div>												
+												<div class="form-group {% if form.direccion.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Solicitud:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.idSolicitud}}
+														{% if form.idSolicitud.errors %}<span class="help-block">{{form.idSolicitud.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.costo.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Costo Unitario (Neto):<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.costo}}
+														{% if form.costo.errors %}<span class="help-block">{{form.costo.errors}}</span>{% endif %}
+													</div>
+												</div>
+											</div>
+											<div class="form-actions">
+												<div class="row">
+													<div class="col-md-offset-3 col-md-9">
+														<button type="submit" class="btn blue"><i class="fa fa-pencil"></i> {{action}}</button>														
+													</div>
+												</div>
+											</div>
+										</form>
+										<!-- END FORM-->
+									</div>
+								</div>
+            </div>
+         </div>
+{% endblock %}
+{% block extra_script %}
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/select2/select2.js"></script>
+<script src="{{MEDIA_URL}}plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block script_ready %}
+	$('.date-picker').datepicker({
+        rtl: Metronic.isRTL(),
+        orientation: "auto",
+        autoclose: true        
+    });
+    
+{% endblock %}

@@ -1,0 +1,201 @@
+{% extends "easy_pdf/base.html" %}
+
+{% block content %}
+<style>
+
+    img.foto {
+            height: 3cm;
+            width: 2.5cm;
+    }
+
+</style>
+
+<table border="0" style="width:100%">
+<tr>
+                <td colspan="2" width="60mm" align="center">
+                    <br>
+                    <img class="logofront" src="{{MEDIA_URL}}img/logo_cartaporte.jpg">
+                </td>
+                <!--<td width="57mm" align="center">
+                    <br>
+                    <img class="logofront" src="{{MEDIA_URL}}img/logo.jpg">
+                    <p align="center">IMSS<br>{{emp.nss}}</p></td>-->
+            </tr>
+
+    <tr>
+        <td  width="80%"><h1 style="text-align: center;">
+            <span style="font-family:arial,helvetica,sans-serif;"><span style="color: rgb(0, 0, 205);">Expediente del Empleado No. {{form.clave}}</span></span></h1></td>
+        <td  width="20%" align="right"><img class="foto" src="/media/imgEmpleados/{{form.pk}}_FOTO.jpg"></td>
+    </tr>
+
+</table>
+
+
+<h2>Datos Generales</h2>
+<br>
+
+<table border="0" style="background-color:#CCFFFF;border-collapse:collapse;border:0px solid #FFFFFF;color:#000000;width:100%" cellpadding="3" cellspacing="3">
+    <tr>
+        <td><p>Nombre: {% if form.nombre %} {{form.nombre}} {% else %} -- {% endif %}</p></td>
+        <td><p>Segundo Nombre: {% if form.segundo_nombre %} {{form.segundo_nombre}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Apellido Paterno: {% if form.apellidop %} {{form.apellidop}} {% else %} -- {% endif %}</p></td>
+        <td><p>Apellido Materno: {% if form.apellidom %} {{form.apellidom}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Sexo: {% if sexo %} {{sexo}} {% else %} -- {% endif %}</p></td>
+        <td><p>Edad: {% if form.edad %} {{form.edad}} {% else %} -- {% endif %}</p></td>
+        <td><p>Fecha de Nacimiento: {% if form.fecha_nac %} {{form.fecha_nac}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Nacionalidad: {% if nacion %} {{nacion}} {% else %} -- {% endif %}</p></td>
+        <td><p>Estado Civil: {% if estadocivil %} {{estadocivil}} {% else %} -- {% endif %}</p></td>
+        <td><p>Fecha de Matrimonio: {% if form.fecha_civil %} {{form.fecha_civil}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Número de Hijos: {% if hijos %} {{hijos}} {% else %} 0 {% endif %}</p></td>
+        <td><p>Lugar de Nacimiento: {% if form.lugar_nacimiento %} {{form.lugar_nacimiento}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>No de IFE: {% if form.ife %} {{form.ife}} {% else %} -- {% endif %}</p></td>
+        <td><p>Número de Seguro Social: {% if form.nss %} {{form.nss}} {% else %} -- {% endif %}</p></td>
+        <td><p>RFC: {% if form.RFC %} {{form.RFC}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>CURP: {% if form.CURP %} {{form.CURP}} {% else %} -- {% endif %}</p></td>
+        <td><p>Folio Acta de Nacimiento: {% if form.No_ActaNac %} {{form.No_ActaNac}} {% else %} -- {% endif %}</p></td>
+        <td><p>Cartilla: {% if form.Cartilla %} {{form.Cartilla}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Licencia: {% if form.licencia %} {{form.licencia}} {% else %} -- {% endif %}</p></td>
+        <td><p>Tipo de Licencia: {% if tipo_lic %} {{tipo_lic}} {% else %} -- {% endif %}</p></td>
+        <td><p>Vigencia de Licencia: {% if form.lic_vigencia %} {{form.lic_vigencia}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Refrendo de Licencia: {% if form.lic_fecha_ref %} {{form.lic_fecha_ref}} {% else %} -- {% endif %}</p></td>
+        <td><p>Categoria: {% if categoria %} {{categoria}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Certificacion Opalo: {% if form.cer_opalo %} SI {% else %} NO {% endif %}</p></td>
+        <td><p>Fecha Certificación: {% if form.fecha_cer_opalo %} {{form.fecha_cer_opalo}} {% else %} -- {% endif %}</p></td>
+        <td><p>Folio: {% if form.folio_opalo %} {{form.folio_opalo}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Certificacion Recurso Confiable: {% if form.cer_opalo %} SI {% else %} NO {% endif %}</p></td>
+        <td><p>Fecha Certificación: {% if form.fecha_cer_opalo %} {{form.fecha_cer_opalo}} {% else %} -- {% endif %}</p></td>
+        <td><p>Folio: {% if form.folio_opalo %} {{form.folio_opalo}} {% else %} -- {% endif %}</p></td>
+    </tr>
+</table>
+
+
+
+
+<h2>Dirección y datos adicionales</h2>
+<br>
+
+<table border="0" style="background-color:#CCFFFF;border-collapse:collapse;border:0px solid #FFFFFF;color:#000000;width:100%" cellpadding="3" cellspacing="3">
+    <tr>
+        <td><p>Calle: {% if form.calle %} {{form.calle}} {% else %} -- {% endif %}</p></td>
+        <td><p>Numero Exterior: {% if form.exterior %} {{form.exterior}} {% else %} -- {% endif %}</p></td>
+        <td><p>No Interior: {% if form.interior %} {{form.interior}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Colonia: {% if form.colonia %} {{form.colonia}} {% else %} -- {% endif %}</p></td>
+        <td><p>Código Postal: {% if form.cp %} {{form.cp}} {% else %} -- {% endif %}</p></td>
+        <td><p>Estado: {% if form.estado %} {{form.estado}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Teléfono Asignado: {% if form.tel_asig %} {{form.tel_asig}} {% else %} -- {% endif %}</p></td>
+        <td><p>Teléfono Particular: {% if form.tel_casa %} {{form.tel_casa}} {% else %} -- {% endif %}</p></td>
+        <td><p>Religión: {% if form.religion %} {{form.religion}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Número de Cuenta o Tarjeta: {% if form.cuenta %} {{form.cuenta}} {% else %} -- {% endif %}</p></td>
+        <td><p>Banco: {% if form.banco %} {{form.banco}} {% else %} -- {% endif %}</p></td>
+    </tr>
+
+</table>
+
+
+
+<h2>Datos de contacto en caso de emergencia</h2>
+<br>
+
+<table border="0" style="background-color:#CCFFFF;border-collapse:collapse;border:0px solid #FFFFFF;color:#000000;width:100%" cellpadding="3" cellspacing="3">
+    <tr>
+        <td><p>Nombre: {% if form.contacto_emergencia_nom %} {{form.contacto_emergencia_nom}} {% else %} -- {% endif %}</p></td>
+        <td><p>Telefono local: {% if form.contacto_emergencia_tel %} {{form.contacto_emergencia_tel}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Celular: {% if form.contacto_emergencia_cel %} {{form.contacto_emergencia_cel}} {% else %} -- {% endif %}</p></td>
+        <td><p>Parentesco: {% if parentesco %} {{parentesco}} {% else %} -- {% endif %}</p></td>
+    </tr>
+
+</table>
+
+<h2>Información Académica</h2>
+<br>
+
+<table border="0" style="background-color:#CCFFFF;border-collapse:collapse;border:0px solid #FFFFFF;color:#000000;width:100%" cellpadding="3" cellspacing="3">
+    <tr>
+        <td><p>Escolaridad Máxima Obtenida: {% if escolaridad %} {{escolaridad}} {% else %} -- {% endif %}</p></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><p>Nombre Primaria: {% if form.primaria %} {{form.primaria}} {% else %} -- {% endif %}</p></td>
+        <td><p>Folio del Certificado: {% if form.cer_primaria %} {{form.cer_primaria}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Secundaria: {% if form.secundaria %} {{form.secundaria}} {% else %} -- {% endif %}</p></td>
+       <td><p>Folio del Certificado: {% if form.cer_secundaria %} {{form.cer_secundaria}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Preparatoria / Bachillerato o Equivalente: {% if form.preparatoria %} {{form.preparatoria}} {% else %} -- {% endif %}</p></td>
+        <td><p>Folio del Certificado: {% if form.cer_preparatoria %} {{form.cer_preparatoria}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Universidad: {% if form.universidad %} {{form.universidad}} {% else %} -- {% endif %}</p></td>
+        <td><p>Folio del Certificado: {% if form.cer_universidad %} {{form.cer_universidad}} {% else %} -- {% endif %}</p></td>
+    </tr>
+
+</table>
+
+
+<h2>Cursos y Capacitaciones</h2>
+<br>
+
+<table border="0" style="background-color:#CCFFFF;border-collapse:collapse;border:0px solid #FFFFFF;color:#000000;width:100%" cellpadding="3" cellspacing="3">
+
+    <tr>
+        <td><p>Nombre del Curso: {% if form.nombre_curso1 %} {{form.nombre_curso1}} {% else %} -- {% endif %}</p></td>
+        <td><p>Documento que avala el curso: {% if form.curso1 %} {{form.curso1}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Nombre del Curso: {% if form.nombre_curso2 %} {{form.nombre_curso2}} {% else %} -- {% endif %}</p></td>
+        <td><p>Documento que avala el curso: {% if form.curso2 %} {{form.curso2}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Nombre del Curso: {% if form.nombre_curso3 %} {{form.nombre_curso3}} {% else %} -- {% endif %}</p></td>
+        <td><p>Documento que avala el curso: {% if form.curso3 %} {{form.curso3}} {% else %} -- {% endif %}</p></td>
+    </tr>
+
+</table>
+
+
+<h2>Datos de Credencial</h2>
+<br>
+
+<table border="0" style="background-color:#CCFFFF;border-collapse:collapse;border:0px solid #FFFFFF;color:#000000;width:100%" cellpadding="3" cellspacing="3">
+
+    <tr>
+        <td><p>Registro: {% if form.registro %} {{form.registro}} {% else %} -- {% endif %}</p></td>
+        <td><p>Vigencia: {% if form.vigencia %} {{form.vigencia}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Puesto: {% if form.puesto %} {{form.puesto}} {% else %} -- {% endif %}</p></td>
+        <td><p>Fecha de Ingreso: {% if form.ingreso %} {{form.ingreso}} {% else %} -- {% endif %}</p></td>
+    </tr>
+</table>
+
+{% endblock %}

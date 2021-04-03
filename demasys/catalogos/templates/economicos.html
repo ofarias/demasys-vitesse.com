@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load bootstrap_pagination %}
+
+{% block title %}Económicos{% endblock %}
+{% block content_title %} Catálogo de Económicos{% endblock %}
+
+{% block nav-inventario %}<li class="active open">{% endblock %}
+{% block nav-economicos %}<li class="active">{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Catalogos</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Económicos</a>							
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet box grey-cascade">
+			<div class="portlet-title">
+				<div class="caption">
+					Listado de económicos
+				</div>							
+			</div>
+			<div class="portlet-body">
+				<div class="table-toolbar">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="btn-group">
+
+								
+								{% if perms.catalogos.add_economico %}
+								<a href="{% url 'catalogos.views.economicosadd' %}" class="btn blue">
+									Agregar nuevo <i class="fa fa-plus"></i>
+								</a>
+								{% else %}
+								<div class="alert alert-dismissable alert-danger">
+									<button class="close" aria-hidden="true" data-dismiss="alert" type="button"></button>
+									{{user.get_short_name}} no tiene permisos para Agregar.<br/> Solicite permisos al administrador.
+								</div>
+								{% endif %}
+							</div>
+						</div>
+						<div class="col-md-6">
+
+						</div>
+					</div>
+				</div>
+				<div class="table-scrollable">
+					<table class="table table-striped table-bordered table-hover" id="sample_1">
+						<thead>
+							<tr>
+								<th>
+									Número
+								</th>
+								<th>
+									Modelo
+								</th>
+								
+								<th>
+									Activo
+								</th>
+								<th>
+									Status
+								</th>
+								<th>
+									Editar
+								</th>
+								<th>
+									Cargar
+								</th>
+								<th>
+									Generar Pdf
+								</th>
+								<th>
+									Eliminar
+								</th>								
+							</tr>
+						</thead>
+						<tbody>
+							{% for economico in economicos %}
+							<tr class="odd gradeX {{economico.get_status_display}}">
+								<td>
+									{{economico.pk}}
+								</td>
+								<td>
+									{{economico.modelo}}
+								</td>
+								<td>
+									{% if economico.activo %}
+									<i class="glyphicon glyphicon-ok font-green"></i>
+									{% else %}
+									<i class="glyphicon glyphicon-remove font-red"></i>
+									{% endif %}
+								</td>
+								<td>
+									{{economico.get_status_display}}
+									<br>
+									{{economico.enviaje}}
+								</td>
+								<td>
+                                {% if perms.catalogos.change_economico %}
+									<a href="{% url 'catalogos.views.economicosedit' economico.pk %}" class="btn default btn-xs blue-stripe">Editar</a>
+								{% else %}
+								<div class="alert alert-dismissable alert-danger">
+									<button class="close" aria-hidden="true" data-dismiss="alert" type="button"></button>
+									{{user.get_short_name}} no tiene permisos para Editar.<br/> Solicite permisos al administrador.
+								</div>
+								{% endif %}
+								</td>
+								<td>
+
+									<a href="{% url 'catalogos.views.documentosEconomico' economico.pk %}" class="btn default btn-xs blue-stripe">Documentos</a>
+								</td>
+								<td>
+
+									<a href="{% url 'catalogos.views.generaPdfEconomico' economico.pk %}" class="btn default btn-xs blue-stripe">Generar Pdf</a>
+								</td>
+								<td>
+								{% if perms.catalogos.delete_economico %}
+									<a href="{% url 'catalogos.views.economicosdelete' economico.pk %}" onclick="return confirm('Seguro que desea eliminar el económico {{economico.pk}}?')" class="btn default btn-xs red-stripe">Eliminar</a>
+								{% else %}
+								<div class="alert alert-dismissable alert-danger">
+									<button class="close" aria-hidden="true" data-dismiss="alert" type="button"></button>
+									{{user.get_short_name}} no tiene permisos para Eliminar.<br/> Solicite permisos al administrador.
+								</div>
+								{% endif %}
+								</td>
+							</tr>
+							{% endfor %}							
+						</tbody>
+					</table>
+					{% bootstrap_paginate economicos %}
+				</div>
+			</div>
+		</div>					
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+
+{% block title %}{{action}} Modelo{% endblock %}
+{% block content_title %} Modelos de Camionetas {% endblock %}
+
+{% block nav-inventario %}<li class="active open">{% endblock %}
+{% block nav-modeconomicos %}<li class="active">{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Catalogos</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="{% url 'catalogos.views.modelos' %}">Modelos</a>	
+		<i class="fa fa-angle-right"></i>						
+	</li>
+	<li>
+		<a href="#">{{action}}</a>
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+		<div class="row">
+            <div class="col-md-12">
+								<div class="portlet light bg-inverse form-fit">
+									<div class="portlet-title">
+										<div class="caption">
+											<i class="icon-equalizer font-blue"></i>
+											<span class="caption-subject font-blue bold uppercase">{{action}} Modelo</span>											
+										</div>										
+									</div>
+									<div class="portlet-body form">
+										<!-- BEGIN FORM-->
+										<form action="" class="form-horizontal form-row-seperated" method="post">
+											{% csrf_token %}
+											<div class="form-body">
+												<div class="form-group {% if form.modelo.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.modelo.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.modelo}}
+														{% if form.modelo.errors %}<span class="help-block">{{form.modelo.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.capacidad.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.capacidad.label}} Tarimas <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.capacidad}}
+														{% if form.capacidad.errors %}<span class="help-block">{{form.capacidad.errors}}</span>{% endif %}
+													</div>
+												</div>
+											<div class="form-group {% if form.capacidad.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3"> Capacidad Kilos <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.capacidad_kilos}}
+														{% if form.capacidad_kilos.errors %}<span class="help-block">{{form.capacidad_kilos.errors}}</span>{% endif %}
+													</div>
+												</div>	
+											<span class="caption-subject font-blue bold uppercase">Informacion del Volumen, se calculara Altura * Largo * Ancho</span>		
+												<div class="form-group {% if form.capacidad.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Alto <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.alto}}
+														{% if form.alto.errors %}<span class="help-block">{{form.alto.errors}}</span>{% endif %}
+													</div>
+												</div>	
+												<div class="form-group {% if form.capacidad.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Ancho <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.ancho}}
+														{% if form.ancho.errors %}<span class="help-block">{{form.ancho.errors}}</span>{% endif %}
+													</div>
+												</div>	
+												<div class="form-group {% if form.capacidad.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3"> Largo <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.largo}}
+														{% if form.largo.errors %}<span class="help-block">{{form.largo.errors}}</span>{% endif %}
+													</div>
+												</div>	
+											</div>
+											<div class="form-actions">
+												<div class="row">
+													<div class="col-md-offset-3 col-md-9">
+														<button type="submit" class="btn blue"><i class="fa fa-pencil"></i> {{action}}</button>														
+													</div>
+												</div>
+											</div>
+										</form>
+										<!-- END FORM-->
+									</div>
+								</div>
+            </div>
+         </div>
+{% endblock %}

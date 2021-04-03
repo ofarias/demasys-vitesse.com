@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load bootstrap_pagination %}
+
+{% block title %}Solicitudes{% endblock %}
+{% block content_title %} Registro de Beneficiarios{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/bootstrap-datepicker/css/datepicker3.css"/>
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/select2/select2.css"/>
+{% endblock %}
+
+{% block nav-Lista_Sol%}<li class="active">{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Beneficiarios</a>						
+	</li>	
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+							<div class="modal fade" id="ajax" role="basic" aria-hidden="true">
+								<div class="page-loading page-loading-boxed">
+									<img src="{{MEDIA_URL}}img/loading-spinner-grey.gif" alt="" class="loading">
+									<span>
+									&nbsp;&nbsp;Cargando... </span>
+								</div>
+								<div class="modal-dialog">
+									<div class="modal-content">
+									</div>
+								</div>
+							</div>
+							<div class="modal fade" id="ajax2" role="basic" aria-hidden="true">
+								<div class="page-loading page-loading-boxed">
+									<img src="{{MEDIA_URL}}img/loading-spinner-grey.gif" alt="" class="loading">
+									<span>
+									&nbsp;&nbsp;Cargando... </span>
+								</div>
+								<div class="modal-dialog">
+									<div class="modal-content">
+									</div>
+								</div>
+							</div>
+
+							<div class="row">	
+								<div class="col-md-12">
+									<div class="portlet box grey-cascade">
+										<div class="portlet-title">
+											<div class="caption">
+								Beneficiarios
+							</div>							
+						</div>
+						<div class="portlet-body">
+							<div class="table-toolbar">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="btn-group">
+								{% if perms.beneficiarios.add_benefi %}
+								<a href="{% url 'beneficiarios.views.agregar' %}" color=red; class="btn blue">
+											Agregar Beneficiario <i class="fa fa-plus"></i>
+											</a>
+								{% else %}
+								<div class="alert alert-dismissable alert-danger">
+									<button class="close" aria-hidden="true" data-dismiss="alert" type="button"></button>
+									{{user.get_short_name}} no tiene permisos para Agregar.<br/> Solicite permisos al administrador.
+								</div>
+								{% endif %}
+
+
+											
+										</div>
+									</div>
+												
+									</div>
+								</div>
+							</div>
+							<div class="table-scrollable">
+								<table class="table table-striped table-bordered table-hover" id="sample_1">
+								<thead>
+								<tr>
+									<th>
+										 Tipo
+									</th>
+									<th>
+										 Nombre
+									</th>									
+									<th>
+										 Apellido Paterno
+									</th>
+									<th>
+										 Apellido Materno
+									</th>
+									<th>
+										 Tipo de Producto
+									</th>
+									<th>
+										Buscar
+									</th>
+								</tr>
+								<form action="" id="search-form" method="get">
+								<tr role="row" class="filter">									
+									<td>
+										{{searchform.tipo}}
+									</td>
+									<td>
+										{{searchform.nombre}}
+									</td>
+									<td>
+										{{searchform.a_paterno}}
+									</td>
+									<td>
+										{{searchform.a_materno}}
+									</td>
+									<td>										
+										{{searchform.producto}}										
+									</td>
+									<td>
+										<div class="margin-bottom-5">
+											<button type="submit" class="btn btn-sm blue filter-submit margin-bottom"><i class="fa fa-search"></i> Buscar</button>
+										</div>
+										
+									</td>
+								</thead>
+								<tbody>
+								{% for Benefi in benefic %}  <!-- Solicitudes es la class definida en Models y solics es definido aqui miso -->
+								<tr class="odd gradeX">
+									<td>
+										{{Benefi.get_tipo_display}}  <!-- nombre del modelo en models.py + nombre del campo -->
+									</td>
+									<td>
+										{{Benefi.nombre}}
+									</td>									
+									<td>
+										 {{Benefi.a_paterno}}
+									</td>
+									<td>
+										 {{Benefi.a_materno}}
+									</td>
+									<td>
+										 {{Benefi.get_producto_display}}
+									</td>
+									<td>
+										<a href="{% url 'beneficiarios.views.editar' Benefi.pk %}" class="btn default btn-xs blue-stripe">Editar</a>
+									</td>
+								</tr>
+								
+								{% empty %}
+								<tr>
+									<td colspan="6" class="center">No se encontrarón datos.</td>
+								</tr>
+								{% endfor %}							
+								</tbody>
+								</table>
+								{% bootstrap_paginate benefic %} <!-- "solics" debe estar dado de alta en views.py -->
+							</div>
+						</div>
+					</div>					
+            </div>
+         </div>
+{% endblock %}
+
+{% block extra_script %}
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/select2/select2.js"></script>
+{% endblock %}
+
+{% block script_ready %}
+	$('body').on('hidden.bs.modal', '.modal', function () {
+  		$(this).removeData('bs.modal');
+	});
+	
+	$('.date-picker').datepicker({
+        rtl: Metronic.isRTL(),
+        orientation: "auto",
+        autoclose: true        
+    });
+{% endblock %}

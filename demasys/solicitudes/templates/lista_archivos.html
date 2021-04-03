@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load bootstrap_pagination %}
+
+{% block title %}Lista de Movimientos {% endblock %}
+{% block content_title %} Lista de Archivos {% endblock %}
+
+{% block nav-catalogos %}<li class="active open">{% endblock %}
+{% block nav-movInv %}<li class="active">{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Archivos</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Lista Archivos</a>							
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+		<div class="row">
+            <div class="col-md-12">
+				<div class="portlet box grey-cascade">
+						<div class="portlet-title">
+							{% if user.id == 1 or user.id == 5 or user.id == 11 or user.id == 16%}
+							<div class="caption">
+								Subir Archivo
+							</div>							
+							{%else%}
+							<div class="caption">
+								Lista de Archivos 
+							</div>							
+							{%endif%}
+
+						</div>
+						<div class="portlet-body">
+							{% if user.id == 1 or user.id == 5 or user.id == 11 or user.id == 16%}
+							<a href="{% url 'viajes.views.agregaArchivo' %}" color=red; class="btn blue">
+											Subir Archivo</a>
+							{% endif %}
+							<div class="table-scrollable">
+							<table class="table table-striped table-bordered table-hover" id="sample_1">
+
+							<thead>
+							<tr>
+								<th>
+									Nombre
+								</th>
+								<th>
+									Fecha 
+								</th>
+								<th>
+									Tipo
+								</th>
+								<th>
+									Archivo
+								</th>
+								<th>
+									 Descripcion
+								</th>
+								{% if user.id == 1 or user.id == 5 or user.id == 11 or user.id == 16 %}
+								<th>
+									Eliminar
+								</th>
+								{% endif %}
+							</tr>
+							</thead>
+							<tbody>
+							{% for archivo in archivos %}
+							<tr class="odd gradeX">
+								<td>
+									{{archivo.nombre}}
+								</td>
+								<td>
+									{{archivo.fecha}}
+								</td>
+								<td>
+									{{archivo.get_tipo_display}}
+								</td>
+								<td>
+									<a href ="{%url 'viajes.views.descargarArchivo' archivo.archivo %}">{{archivo.archivo}}</a>
+								</td>
+								<td>
+									{{archivo.desc}}
+								</td>
+								{%if user.id == 1 or user.id == 5 or user.id == 11 or user.id == 16%}
+								<td>
+								<br>
+								<a href="{% url 'viajes.views.del_file' archivo.pk %}" class="btn default blue-stripe">Eliminar</a>	
+								</td>
+								{%endif%}
+							</tr>
+							{% endfor %}							
+							</tbody>
+							</table>
+							{% bootstrap_paginate archivos %}
+							</div>
+						</div>
+					</div>					
+            </div>
+         </div>
+{% endblock %}
+
+
+
+
+

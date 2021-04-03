@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load bootstrap_pagination %}
+
+{% block title %}Lista de solicitudes{% endblock %}
+{% block content_title %} Solicitudes de empleo{% endblock %}
+
+{% block nav-RH %}<li class="active open">{% endblock %}
+{% block nav-Empleados %}<li class="active">{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Solicitudes</a>
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet box grey-cascade">
+			<div class="portlet-title">
+				<div class="caption">
+					Solicitudes
+				</div>							
+			</div>
+			<div class="portlet-body">
+				<div class="table-toolbar">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="btn-group">
+
+
+							</div>
+						</div>
+						<div class="col-md-6">
+
+						</div>
+					</div>
+				</div>
+				<div class="table-scrollable">
+					<table class="table table-striped table-bordered table-hover" id="sample_1">
+						<thead>
+							<tr>
+								<th>
+									Nombre
+								</th>
+								<th>
+									Edad
+								</th>
+								<th>
+									Teléfono
+								</th>
+								<th>
+									Celular
+								</th>
+								<th>
+									Correo
+								</th>
+								<th>
+									Estatus actual
+								</th>
+								<th>
+									Acción
+								</th>
+								<th>
+									Generar PDF
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for sol in solicitudes %}
+							<tr class="odd gradeX" >
+								<td>
+									{{sol.nombre}} {{ sol.segundoNombre}} {{sol.paterno}} {{sol.materno}}
+								</td>
+
+								<td>
+									{{sol.edad}}
+								</td>
+								<td>
+									{{sol.telefono}}
+								</td>
+								<td>
+									{{sol.celular}}
+								</td>
+								<td>
+									{{sol.email}}
+								</td>
+								<td>
+									{{estatus|get_item:sol.estatus}}
+								</td>
+								<td>
+									{% if sol.estatus = 1 or  sol.estatus = 2%}
+									<div class="margin-bottom-5">
+										<a href="{% url 'empleados.views.cambiarEstatus' sol.pk 3 %}" class="btn btn-sm red filter-submit margin-bottom"><i class="fa fa-remove"></i> Rechazar</a>
+									</div>
+									{% endif %}
+									{% if sol.estatus = 1 %}
+									<div class="margin-bottom-5">
+										<a href="{% url 'empleados.views.cambiarEstatus' sol.pk 1 %}" class="btn btn-sm yellow filter-submit margin-bottom"><i class="fa fa-refresh"></i> Pre-Aprobar</a>
+									</div>
+
+									{% endif %}
+
+									<div class="margin-bottom-5">
+										<a href="{% url 'empleados.views.cambiarEstatus' sol.pk 4 %}" class="btn btn-sm green filter-submit margin-bottom"><i class="fa fa-users"></i> Contratar</a>
+									</div>
+								</td>
+								<td>
+									<div class="margin-bottom-5">
+										<a href="{% url 'empleados.views.generarPdfSolicitud' sol.pk %}" class="btn btn-sm blue filter-submit margin-bottom"><i class="fa fa-file"></i> Generar PDF</a>
+									</div>
+								</td>
+
+							</tr>
+							{% endfor %}							
+						</tbody>
+					</table>
+					{% bootstrap_paginate solicitudes %}
+				</div>
+			</div>
+		</div>					
+	</div>
+</div>
+{% endblock %}

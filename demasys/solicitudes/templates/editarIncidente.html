@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load i18n humanize %}
+
+{% block title %}{{action}} Solicitud{% endblock %}
+{% block content_title %} Autorizas o Rechazar Incidente{% endblock %}
+
+{% block nav-SeguimientoUnidades%}<li class="active">{% endblock %} <!-- se debe definir en Base.html para que se seleccione--> 
+	
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/bootstrap-datepicker/css/datepicker3.css">
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/select2/select2.css"/>
+
+{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="{% url 'viajes.views.indexIncidentes' %}">Incidentes</a>	<!-- Esto se cambia con la vista de la aplicacion actual, que debe tener la classe Index-->
+		<i class="fa fa-angle-right"></i>					
+	</li>	
+	<li>
+		<a href="#">{{action}}</a>
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+{% block content %}
+
+{% ifequal user alejandro.macias %}
+	
+{% else %}
+  	<form action="" class="form-horizontal form-row-seperated" method="post">
+											{% csrf_token %}
+										   
+											<div class="form-body">
+													
+													<div class="form-group {% if form.status.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.status2}}<span class="required" aria-required="true"> Autorizar / Rechazar: </span></label>
+													<div class="col-md-3">
+														{{form.status2}}
+														{% if form.status.errors %}<span class="help-block">{{form.status2.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div  class="form-group {% if form.colonia.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Motivo: </label>
+													<div class="col-md-3">
+													<div class="controls readonly">
+														 {{form.motivo}}
+														{% if form.motivo.errors %}<span class="help-block">{{form.motivo.errors}}</span>{% endif %}
+													</div>
+													</div >
+												 </div>
+												<div class="form-actions">
+												<div class="row">
+													<div class="col-md-offset-3 col-md-9">
+														<button type="submit" name= "status" value = "2" class="btn blue" data-status = "2"><i class="fa fa-pencil"></i> {{action}}</button>
+													</div>
+												</div>
+											</div>
+										</form>
+												
+{% endifequal %}
+
+{% endblock %}
+
+
+
+{% block extra_script %}
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/select2/select2.js"></script>
+{% endblock %}
+
+<script type="text/javascript">
+{% block script_ready %}
+	
+	
+	var concepto = $("#id_concepts").val();
+    var solbill = $("#id_sol_bill").val();
+
+	$("#id_sol_bill").on("change",function(){
+        solbill = $(this).val();
+    })
+
+    $("#id_concepts").on("change",function(){
+        concepto = $(this).val();
+    })
+
+    $("#formularioDato").on('submit',function(ev){
+
+		 if (usuario != dro){
+            alert("Falta carta porte");
+            return false;
+        }
+    })
+	
+
+    $('.date-picker').datepicker({
+        rtl: Metronic.isRTL(),
+        orientation: "auto",
+        autoclose: true        
+    });
+
+
+  
+{% endblock %}
+</script>
+

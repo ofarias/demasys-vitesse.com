@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load bootstrap_pagination %}
+
+{% block title %}Catalogo Conceptos de Facturación{% endblock %}
+{% block content_title %} Catalogo Conceptos de Facturación {% endblock %}
+
+{% block nav-catalogos %}<li class="active open">{% endblock %}
+{% block nav-conceptos %}<li class="active">{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Catalogos</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Conceptos de Facturación</a>							
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+		<div class="row">
+            <div class="col-md-12">
+				<div class="portlet box grey-cascade">
+						<div class="portlet-title">
+							<div class="caption">
+								Listado de conceptos
+							</div>							
+						</div>
+						<div class="portlet-body">
+							<div class="table-toolbar">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="btn-group">
+								{% if perms.catalogos.add_conceptofacturacion %}
+								<a href="{% url 'catalogos.views.conceptosadd' %}" class="btn blue">
+											Agregar nuevo <i class="fa fa-plus"></i>
+											</a>
+								{% else %}
+								<div class="alert alert-dismissable alert-danger">
+									<button class="close" aria-hidden="true" data-dismiss="alert" type="button"></button>
+									{{user.get_short_name}} no tiene permisos para Agregar.<br/> Solicite permisos al administrador.
+								</div>
+								{% endif %}
+
+											
+										</div>
+									</div>
+									<div class="col-md-6">
+										
+									</div>
+								</div>
+							</div>
+							<div class="table-scrollable">
+							<table class="table table-striped table-bordered table-hover" id="sample_1">
+							<thead>
+							<tr>
+								<th>
+									 Concepto de Facturación
+								</th>														
+								<th>
+									 Editar
+								</th>
+								<th>
+									 Eliminar
+								</th>								
+							</tr>
+							</thead>
+							<tbody>
+							{% for concepto in conceptos %}
+							<tr class="odd gradeX">
+								<td>
+									{{concepto.nombre}}
+								</td>																
+								<td>
+								{% if perms.catalogos.change_conceptofacturacion %}
+									<a href="{% url 'catalogos.views.conceptosedit' concepto.pk %}" class="btn default btn-xs blue-stripe">Editar</a>
+								{% else %}
+								<div class="alert alert-dismissable alert-danger">
+									<button class="close" aria-hidden="true" data-dismiss="alert" type="button"></button>
+									{{user.get_short_name}} no tiene permisos para Editar.<br/> Solicite permisos al administrador.
+								</div>
+								{% endif %}
+
+									 
+								</td>
+								<td>
+								{% if perms.catalogos.delete_conceptofacturacion %}
+									<a href="{% url 'catalogos.views.conceptosdelete' concepto.pk %}" onclick="return confirm('Seguro que desea eliminar el concepto {{concepto.nombre}}?')" class="btn default btn-xs red-stripe">Eliminar</a>
+								{% else %}
+								<div class="alert alert-dismissable alert-danger">
+									<button class="close" aria-hidden="true" data-dismiss="alert" type="button"></button>
+									{{user.get_short_name}} no tiene permisos para Eliminar.<br/> Solicite permisos al administrador.
+								</div>
+								{% endif %}
+
+									 
+								</td>
+							</tr>
+							{% endfor %}							
+							</tbody>
+							</table>
+							{% bootstrap_paginate conceptos %}
+							</div>
+						</div>
+					</div>					
+            </div>
+         </div>
+{% endblock %}

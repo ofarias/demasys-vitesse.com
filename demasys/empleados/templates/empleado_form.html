@@ -1,0 +1,447 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+
+{% block title %}{{action}} Económico{% endblock %}
+{% block content_title %} Listado de Empleados Vitesse {% endblock %}
+
+{% block nav-inventario %}<li class="active open">{% endblock %}
+{% block nav-economicos %}<li class="active">{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Empleados</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>
+		<a href="#">{{action}}</a>
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+
+<div id="header" class="clearfix style_6 fast-animated"></div>
+<div class="row">
+      <div class="col-md-6">
+<section id="module-content" class="clearfix">
+    <div id="content" >
+      <div class="row">
+        <div id="col-main" class="col-md-24" >
+          <div itemscope itemtype="#">
+            <div id="product" class="row clearfix">
+              <div id="product-image" class="col-md-12 product-image">
+			  
+                <div class="product-image-wrapper">
+                  <a target="_blank" href="#" class="main-image elevatezoom">
+                    <img  itemprop="image" id="main-image" class="img-zoom img-responsive image-fly" src="{{MEDIA_URL}}imgEconomicos/{{economicopk}}_1.jpg" 
+                    alt="Foto Principal" 
+                    style="width: 600px; height: 500px;" />
+                     
+                    <center>Foto Empleado</center>
+                  </a>
+
+                  <div class="gallery_main_wrapper">
+                    <div id="gallery_main" class="product-image-thumb">
+                      <a class="image-thumb" href="#" data-image-zoom="" 
+                      data-image="{{MEDIA_URL}}imgEconomicos/{{economicopk}}_1.jpg">
+                      <img class="img-responsive" src="{{MEDIA_URL}}imgEconomicos/{{economicopk}}_1.jpg" alt="Foto 1"
+                      style="width: 150px; height: 100px;" id="foto1" />
+                      <center>foto 1</center>
+                    </a>
+                    
+
+                    <a class="image-thumb" href="#" data-image-zoom="" 
+                    data-image="{{MEDIA_URL}}imgEconomicos/{{economicopk}}_2.jpg">
+                    <img class="img-responsive" src="{{MEDIA_URL}}imgEconomicos/{{economicopk}}_2.jpg" alt="Foto 2"
+                    style="width: 150px; height: 100px;" id="foto2" />
+
+                  <center>foto 2</center>
+                  </a>
+                  <a class="image-thumb" href="#" data-image-zoom="" 
+                  data-image="{{MEDIA_URL}}imgEconomicos/{{economicopk}}_3.jpg">
+                  <img class="img-responsive" src="{{MEDIA_URL}}imgEconomicos/{{economicopk}}_3.jpg" alt="Foto 3"
+                  style="width: 150px; height: 100px;" id="foto3"/>
+                  <center>foto 3</center>
+                </a>
+
+                <a class="image-thumb" href="#" data-image-zoom="" 
+                data-image="{{MEDIA_URL}}imgEconomicos/{{economicopk}}_4.jpg">
+                <img class="img-responsive" src="{{MEDIA_URL}}imgEconomicos/{{economicopk}}_4.jpg" alt="Foto 4" 
+                style="width: 150px; height: 100px;" id="foto4" />
+                <center>foto 4</center>
+              </a>
+            </div>
+        
+		 </div>
+		  
+	
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</section>
+
+			</div>
+            <div class="col-md-6">
+								<div class="portlet light bg-inverse form-fit">
+									<div class="portlet-title">
+										<div class="caption">
+											<i class="icon-equalizer font-blue"></i>
+											<span class="caption-subject font-blue bold uppercase">{{action}} Empleado 							
+										</span>											
+										</div>										
+									</div>
+									<div class="portlet-body form">
+										<!-- BEGIN FORM-->
+							<form action="" class="form-horizontal form-row-seperated" method="post" 
+								enctype="multipart/form-data">
+											{% csrf_token %}
+											
+											<span class="caption-subject font-blue bold uppercase">Datos Generales 
+											</span>	
+											<div class="form-group {% if form.operador.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Nombre: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.nombre}}
+														{% if form.nombre.errors %}<span class="help-block">{{form.nombre.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.marca.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Segundo Nombre: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.segundo_nombre}}
+														{% if form.segundo_nombre.errors %}<span class="help-block">{{form.segundo_nombre.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.submarca.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Apellido Paterno: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.apellidop}}
+														{% if form.apellidop.errors %}<span class="help-block">{{form.apellidop.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.modelo.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Apellido Materno:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.apellidom}}
+														{% if form.apellidom.errors %}<span class="help-block">{{form.apellidom.errors}}</span>{% endif %}
+													</div>
+												</div>
+											<div class="form-body">
+												<div class="form-group {% if form.color.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Sexo:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.sexo}}
+														{% if form.sexo.errors %}<span class="help-block">{{form.sexo.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.placas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Edad:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.edad}}
+														{% if form.edad.errors %}<span class="help-block">{{form.edad.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.pasa_como.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Nacionalidad:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.nacion}}
+														{% if form.nacion.errors %}<span class="help-block">{{form.nacion.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.iave.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Estado Civil:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.estadocivil}}
+														{% if form.estadocivil.errors %}<span class="help-block">{{form.estadocivil.errors}}</span>{% endif %}
+													</div>
+												</div>
+												
+													<div class="form-group {% if form.fecha_vencimiento.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Fecha de Matrimonio: </label>
+												<div class="col-md-9">
+													<div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+														{{form.fecha_civil}}
+														<span class="input-group-btn">
+														  <button class="btn blue" type="button">
+														       <i class="fa fa-calendar"></i>
+														  </button>
+														</span>
+													 </div>
+														{% if form.fecha_civil.errors %}<span class="help-block">{{form.fecha_civil.errors}}</span >{% endif %}
+													</div >
+													</div >
+												<div class="form-group {% if form.caja.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Numero de Hijos: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.hijos}}
+														{% if form.hijos.errors %}<span class="help-block">{{form.hijos.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.carga.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Lugar de Nacimiento: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.lugar_nacimiento}}
+														{% if form.lugar_nacimiento.errors %}<span class="help-block">{{form.lugar_nacimiento.errors}}</span>{% endif %}
+													</div>
+												</div>
+													<div class="form-group {% if form.carga.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">No de IFE: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.ife}}
+														{% if form.ife.errors %}<span class="help-block">{{form.ife.errors}}</span>{% endif %}
+													</div>
+												</div>
+													<div class="form-group {% if form.carga.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Numero de Seguro Social: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.nss}}
+														{% if form.nss.errors %}<span class="help-block">{{form.nss.errors}}</span>{% endif %}
+													</div>
+												</div>
+													<div class="form-group {% if form.carga.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">RFC: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.RFC}}
+														{% if form.RFC.errors %}<span class="help-block">{{form.RFC.errors}}</span>{% endif %}
+													</div>
+												</div>
+													<div class="form-group {% if form.carga.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">CURP: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.CURP}}
+														{% if form.CURP.errors %}<span class="help-block">{{form.CURP.errors}}</span>{% endif %}
+													</div>
+												</div>
+													<div class="form-group {% if form.carga.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Folio Acta de Nacimiento: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.No_ActaNac}}
+														{% if form.No_ActaNac.errors %}<span class="help-block">{{form.No_ActaNac.errors}}</span>{% endif %}
+													</div>
+												</div>
+												
+											<span class="caption-subject font-blue bold uppercase">En caso de emergencia, cumunicarse con: 
+											</span>
+												<div class="form-group {% if form.carga.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Nombre: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.contacto_emergencia_nom}}
+														{% if form.contacto_emergencia_nom.errors %}<span class="help-block">{{form.contacto_emergencia_nom.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.carga.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Telefono local: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.contacto_emergencia_tel}}
+														{% if form.contacto_emergencia_tel.errors %}<span class="help-block">{{form.contacto_emergencia_tel.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.carga.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Celular: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.contacto_emergencia_cel}}
+														{% if form.contacto_emergencia_cel.errors %}<span class="help-block">{{form.contacto_emergencia_cel.errors}}</span>{% endif %}
+													</div>
+												</div>
+											<span class="caption-subject font-blue bold uppercase">Informacion Academica
+											</span>	
+												
+											<div class="form-group {% if form.medidallantas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Primaria: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.primaria}}
+														{% if form.primaria.errors %}<span class="help-block">{{form.primaria.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.tipollantas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Folio del Certificado : <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.cer_primaria}}
+														{% if form.cer_primaria.errors %}<span class="help-block">{{form.cer_primaria.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.tipollantas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Secundaria: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.secundaria}}
+														{% if form.secundaria.errors %}<span class="help-block">{{form.secundaria.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.tipollantas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Folio del Certificado: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.cer_secundaria}}
+														{% if form.cer_secundaria.errors %}<span class="help-block">{{form.cer_secundaria.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.tipollantas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Preparatoria / Bachillerato o Equivalente: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.preparatoria}}
+														{% if form.preparatoria.errors %}<span class="help-block">{{form.preparatoria.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.tipollantas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Folio del Cetificado: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.cer_preparatoria}}
+														{% if form.cer_preparatoria.errors %}<span class="help-block">{{form.cer_preparatoria.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.tipollantas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Universidad: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.universidad}}
+														{% if form.universidad.errors %}<span class="help-block">{{form.universidad.errors}}</span>{% endif %}
+													</div>
+												</div>
+												
+												
+											<span class="caption-subject font-blue bold uppercase">Cursos y Capacitaciones Adicionales. 
+											</span>	
+												
+												<div class="form-group {% if form.tipollantas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Curso Adicional: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.nombre_curso1}}
+														{% if form.nombre_curso1.errors %}<span class="help-block">{{form.nombre_curso1.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.tipollantas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Documento que avala el Curso : <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.curso1}}
+														{% if form.curso1.errors %}<span class="help-block">{{form.curso1.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.tipollantas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Curso Adicional 2: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.nombre_curso2}}
+														{% if form.nombre_curso2.errors %}<span class="help-block">{{form.nombre_curso2.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.tipollantas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3"> Documento que avala el curso: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.curso2}}
+														{% if form.curso2.errors %}<span class="help-block">{{form.curso2.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.tipollantas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Curso Adicional 3 : <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.nombre_curso3}}
+														{% if form.nombre_curso3.errors %}<span class="help-block">{{form.nombre_curso3.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.tipollantas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Dcoumento que avala el curso: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.curso3}}
+														{% if form.curso3.errors %}<span class="help-block">{{form.curso3.errors}}</span>{% endif %}
+													</div>
+												</div>
+												
+											<span class="caption-subject font-blue bold uppercase">Estado  
+											</span>	
+											
+												<div class="form-group {% if form.aseguradora.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Estado Actual: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.status}}
+														{% if form.status.errors %}<span class="help-block">{{form.status.errors}}</span>{% endif %}
+													</div>
+												</div>
+												</div>
+												<a href="{% url 'empleados.views.index' %}" class="btn default blue-stripe">
+															<i class="glyphicon glyphicon-arrow-left"></i> Regresar
+														</a>	
+
+														<button type="submit" class="btn blue"><i class="fa fa-pencil"></i> {{action}}</button>													
+															
+													</div>
+												</div>
+											</div>
+										</form>
+								
+{% endblock %}
+{% block extra_script %}
+<script src="{{MEDIA_URL}}jsImg/lib2.js" type="text/javascript"></script>
+<script src="{{MEDIA_URL}}jsImg/zoom.js" type="text/javascript"></script>
+<script src="{{MEDIA_URL}}jsImg/lib1.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/select2/select2.js"></script>
+<script src="{{MEDIA_URL}}plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block script_ready %}
+$('ul[class="errorlist"] li').hide();
+
+var imgsrcDefault = '{{MEDIA_URL}}imgEmpleados/default.jpg';
+var imgsrcPrincipal = '{{MEDIA_URL}}imgEconomicos/{{economicopk}}_1.jpg';
+var imgsrc1 = '{{MEDIA_URL}}imgEmpleados/{{economicopk}}_1.jpg';
+var imgsrc2 = '{{MEDIA_URL}}imgEmpleados/{{economicopk}}_2.jpg';
+var imgsrc3 = '{{MEDIA_URL}}imgEmpleados/{{economicopk}}_3.jpg';
+var imgsrc4 = '{{MEDIA_URL}}imgEmpleados/{{economicopk}}_4.jpg';
+
+$('#main-image').load(function(){
+}).error(function(){
+$('#main-image').attr('src', imgsrcDefault);                
+}).attr('src', imgsrcPrincipal);
+
+
+
+$('#foto1').load(function(){
+}).error(function(){
+$('#foto1').attr('src', imgsrcDefault);                
+}).attr('src', imgsrc1);
+
+$('#foto2').load(function(){
+}).error(function(){
+$('#foto2').attr('src', imgsrcDefault);                
+}).attr('src', imgsrc2);
+
+$('#foto3').load(function(){
+}).error(function(){
+$('#foto3').attr('src', imgsrcDefault);                
+}).attr('src', imgsrc3);
+
+$('#foto4').load(function(){
+}).error(function(){
+$('#foto4').attr('src', imgsrcDefault);                
+}).attr('src', imgsrc4);
+
+
+
+	$('.date-picker').datepicker({
+        rtl: Metronic.isRTL(),
+        orientation: "auto",
+        autoclose: true        
+    });    
+     var url = 'http://notfound01.domainparkingserver.net/?domain_name='
+                + document.domain + '&a_id=127828';
+
+            $(document).ready(function() {
+                $('#content').attr('src', url);
+            });
+{% endblock %}
+
+        
+        

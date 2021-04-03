@@ -1,0 +1,219 @@
+{% load i18n %}
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="es">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+<meta charset="utf-8"/>
+<title>{% block title %}{% endblock %} - Logística Vitesse</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<meta content="" name="author"/>
+
+<!--GALERIAAAAAAAAAAAAAAAAAAAAAAAAAAA-->
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" 
+rel="stylesheet" type="text/css"  media="all"  />
+<link href="{{MEDIA_URL}}cssImg/jquery.plugins.css" rel="stylesheet" type="text/css"  
+media="all"  />
+
+<link href="{{MEDIA_URL}}cssImg/cuadrosContornos.css" rel="stylesheet" type="text/css"  
+media="all"  />
+
+
+
+<!-- BEGIN GLOBAL MANDATORY STYLES -->
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
+<link href="{{MEDIA_URL}}plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="{{MEDIA_URL}}plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+
+<link href="{{MEDIA_URL}}plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+<link href="{{MEDIA_URL}}plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+<link href="{{MEDIA_URL}}plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
+
+<!-- END GLOBAL MANDATORY STYLES -->
+<!-- BEGIN THEME STYLES -->
+<link href="{{MEDIA_URL}}css/components.css" rel="stylesheet" type="text/css"/>
+<link href="{{MEDIA_URL}}css/plugins.css" rel="stylesheet" type="text/css"/>
+<link href="{{MEDIA_URL}}css/layout.css" rel="stylesheet" type="text/css"/>
+<link id="style_color" href="{{MEDIA_URL}}css/themes/blue.css" rel="stylesheet" type="text/css"/>
+<link href="{{MEDIA_URL}}css/custom.css" rel="stylesheet" type="text/css"/>
+<!-- END THEME STYLES -->
+{% block extra_head %}{% endblock %} 
+<link rel="shortcut icon" href="{{MEDIA_URL}}favicon.ico"/>
+
+
+
+<script src="{{MEDIA_URL}}jsImg/galeria.js" type="text/javascript"></script> 
+<script src="{{MEDIA_URL}}jsImg/jquery-1.8.2.min.js" type="text/javascript"></script>  
+<script src="{{MEDIA_URL}}jsImg/modernizr.js" type="text/javascript"></script>
+
+
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<!-- DOC: Apply "page-header-fixed-mobile" and "page-footer-fixed-mobile" class to body element to force fixed header or footer in mobile devices -->
+<!-- DOC: Apply "page-sidebar-closed" class to the body and "page-sidebar-menu-closed" class to the sidebar menu element to hide the sidebar by default -->
+<!-- DOC: Apply "page-sidebar-hide" class to the body to make the sidebar completely hidden on toggle -->
+<!-- DOC: Apply "page-sidebar-closed-hide-logo" class to the body element to make the logo hidden on sidebar toggle -->
+<!-- DOC: Apply "page-sidebar-hide" class to body element to completely hide the sidebar on sidebar toggle -->
+<!-- DOC: Apply "page-sidebar-fixed" class to have fixed sidebar -->
+<!-- DOC: Apply "page-footer-fixed" class to the body element to have fixed footer -->
+<!-- DOC: Apply "page-sidebar-reversed" class to put the sidebar on the right side -->
+<!-- DOC: Apply "page-full-width" class to the body element to have full width page without the sidebar menu -->
+<body class="page-header-fixed page-quick-sidebar-over-content page-sidebar-fixed page-sidebar-closed-hide-logo">
+<!-- BEGIN HEADER -->
+<div class="page-header navbar navbar-fixed-top">
+	<!-- BEGIN HEADER INNER -->
+	<div class="page-header-inner">
+		<!-- BEGIN LOGO -->
+		<div class="page-logo">
+
+			<img src="{{MEDIA_URL}}img/logo.png" alt="logo" class="logo-default"/>
+
+
+		</div>
+		<!-- END LOGO -->
+
+		<!-- END RESPONSIVE MENU TOGGLER -->
+
+	</div>
+	<!-- END HEADER INNER -->
+</div>
+<!-- END HEADER -->
+<div class="clearfix">
+</div>
+<!-- BEGIN CONTAINER -->
+<div class="page-container">
+	<!-- BEGIN SIDEBAR -->
+
+	<!-- END SIDEBAR -->
+	<!-- BEGIN CONTENT -->
+	<div class="page-content-wrapper">
+		<div class="page-content">
+			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+			<div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+							<h4 class="modal-title">Modal title</h4>
+						</div>
+						<div class="modal-body">
+							 Widget settings form goes here
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn blue">Save changes</button>
+							<button type="button" class="btn default" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
+			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+			<!-- BEGIN PAGE HEADER-->
+			<h3 class="page-title">
+				{% block content_title %}{% endblock %}
+			</h3>
+			<div class="page-bar">
+
+				{% block actions %}
+				<div class="page-toolbar">
+					<div class="btn-group pull-right">
+						<button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+						Acciones <i class="fa fa-angle-down"></i>
+						</button>
+						<ul class="dropdown-menu pull-right" role="menu">
+							<li>
+								<a href="#">Action</a>
+							</li>
+							<li>
+								<a href="#">Another action</a>
+							</li>
+							<li>
+								<a href="#">Something else here</a>
+							</li>
+							<li class="divider">
+							</li>
+							<li>
+								<a href="#">Separated link</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				{% endblock %}
+			</div>
+			<!-- END PAGE HEADER-->
+			<!-- BEGIN PAGE CONTENT-->
+			<div class="row">
+	            <div class="col-md-12">
+	            	{% if messages %}
+						{% for message in messages %}
+						<div class="alert alert-dismissable {% if message.tags %}{{ message.tags }}{% endif %}">
+		                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+		                    {{message}}
+		                 </div>
+						{% endfor %}
+					{% endif %}
+	            </div>
+	         </div>
+
+         	{% block content %}{% endblock %}
+			<!-- END PAGE CONTENT-->
+		</div>
+	</div>
+	<!-- END CONTENT -->
+</div>
+<!-- END CONTAINER -->
+<!-- BEGIN FOOTER -->
+<div class="page-footer">
+	<div class="page-footer-inner">
+		 2014 &copy; Logística Vitesse.
+	</div>
+	<div class="page-footer-tools">
+		<span class="go-top">
+		<i class="fa fa-angle-up"></i>
+		</span>
+	</div>
+</div>
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+<!-- BEGIN CORE PLUGINS -->
+<!--[if lt IE 9]>
+<script src="{{MEDIA_URL}}plugins/respond.min.js"></script>
+<script src="{{MEDIA_URL}}plugins/excanvas.min.js"></script> 
+<![endif]-->
+<script src="{{MEDIA_URL}}plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script src="{{MEDIA_URL}}plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+<!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+<script src="{{MEDIA_URL}}plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+<script src="{{MEDIA_URL}}plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="{{MEDIA_URL}}plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+<script src="{{MEDIA_URL}}plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="{{MEDIA_URL}}plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="{{MEDIA_URL}}plugins/jquery.cokie.min.js" type="text/javascript"></script>
+<script src="{{MEDIA_URL}}plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+<script src="{{MEDIA_URL}}plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+<script src="{{MEDIA_URL}}scripts/metronic.js" type="text/javascript"></script>
+<script src="{{MEDIA_URL}}scripts/layout.js" type="text/javascript"></script>
+{% block extra_script %}{% endblock %}
+<script>
+jQuery(document).ready(function() {    
+   Metronic.init(); // init metronic core components
+	Layout.init(); // init current layout
+	
+	
+	{% block script_ready %}{% endblock %}
+});
+</script>
+<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

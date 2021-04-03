@@ -1,0 +1,307 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load i18n humanize %}
+
+{% block title %}{{action}} Solicitud de Empleo{% endblock %}
+{% block content_title %} Solicitud de Empleo {% endblock %}
+
+{% block nav-sol2 %}<li class="active">{% endblock %} <!-- se debe definir en Base.html para que se seleccione--> 
+	
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/bootstrap-datepicker/css/datepicker3.css">
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/select2/select2.css"/>
+
+{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>
+		<i class="fa fa-archive"></i>		
+		<a href="#">Recursos Humanos</a>	<!-- Esto se cambia con la vista de la aplicacion actual, que debe tener la classe Index-->
+		<i class="fa fa-angle-right"></i>					
+	</li>	
+	<li>
+		<i class="fa fa-pencil-square-o"></i>
+		<a href="#">Solicitud de Empleo</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+{% block content %}
+
+	
+  	<form action="" class="form-horizontal form-row-seperated" method="post">
+	
+										{% csrf_token %}
+
+
+<br/><h3>
+
+
+
+											<span class="caption-subject font-blue bold uppercase">DATOS ECONOMICOS
+											</span></h3>
+											<br/><br/><hr/>
+
+
+<div class="col-lg-6">
+												<div class="form-group {% if formEconomicoForm.ingreso.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Tiene otros Ingresos?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														<p hidden>{{ formEconomicoForm.idsolicitante }}</p>
+														{{formEconomicoForm.ingreso}}
+														{% if formEconomicoForm.ingreso.errors %}<span class="help-block">{{formEconomicoForm.ingreso.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+<div class="col-lg-6">
+												<div class="form-group {% if formEconomicoForm.modo.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Cuales?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEconomicoForm.modo}}
+														{% if formEconomicoForm.modo.errors %}<span class="help-block">{{formEconomicoForm.modo.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+<div class="col-lg-6">
+												<div class="form-group {% if formEconomicoForm.importe.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Importe Mensual:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEconomicoForm.importe}}
+														{% if formEconomicoForm.importe.errors %}<span class="help-block">{{formEconomicoForm.importe.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+
+<div class="col-lg-6">
+												<div class="form-group {% if formEconomicoForm.casa.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Vive en Casa Propia?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEconomicoForm.casa}}
+														{% if formEconomicoForm.casa.errors %}<span class="help-block">{{formEconomicoForm.casa.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+
+<div class="col-lg-6">
+												<div class="form-group {% if formEconomicoForm.importeCasa.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Importe de la Casa:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEconomicoForm.importeCasa}}
+														{% if formEconomicoForm.importeCasa.errors %}<span class="help-block">{{formEconomicoForm.importeCasa.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+<div class="col-lg-6">
+												<div class="form-group {% if formEconomicoForm.auto.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Tiene Auto?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEconomicoForm.auto}}
+														{% if formEconomicoForm.auto.errors %}<span class="help-block">{{formEconomicoForm.auto.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+<div class="col-lg-6">
+												<div class="form-group {% if formEconomicoForm.placas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Placas:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEconomicoForm.placas}}
+														{% if formEconomicoForm.placas.errors %}<span class="help-block">{{formEconomicoForm.placas.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+
+<div class="col-lg-6">
+												<div class="form-group {% if formEconomicoForm.marca.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Marca:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEconomicoForm.marca}}
+														{% if formEconomicoForm.marca.errors %}<span class="help-block">{{formEconomicoForm.marca.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+<div class="col-lg-6">
+												<div class="form-group {% if formEconomicoForm.modelo.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Modelo:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEconomicoForm.modelo}}
+														{% if formEconomicoForm.modelo.errors %}<span class="help-block">{{formEconomicoForm.modelo.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+<div class="col-lg-6">
+												<div class="form-group {% if formEconomicoForm.ingresos.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Ingresos:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEconomicoForm.ingresos}}
+														{% if formEconomicoForm.ingresos.errors %}<span class="help-block">{{formEconomicoForm.ingresos.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+<div class="col-lg-6">
+												<div class="form-group {% if formEconomicoForm.egresos.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Egresos:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEconomicoForm.egresos}}
+														{% if formEconomicoForm.egresos.errors %}<span class="help-block">{{formEconomicoForm.egresos.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+<div class="col-lg-6">
+												<div class="form-group {% if formEconomicoForm.ahorros.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Ahorros:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEconomicoForm.ahorros}}
+														{% if formEconomicoForm.ahorros.errors %}<span class="help-block">{{formEconomicoForm.ahorros.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+
+<div class="col-lg-6">
+												<div class="form-group {% if formEconomicoForm.total.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Total:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEconomicoForm.total}}
+														{% if formEconomicoForm.total.errors %}<span class="help-block">{{formEconomicoForm.total.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+<div class="col-lg-6">
+												<div class="form-group {% if formEconomicoForm.conyuge.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Su conyuge Trabaja?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEconomicoForm.conyuge}}
+														{% if formEconomicoForm.conyuge.errors %}<span class="help-block">{{formEconomicoForm.conyuge.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+<div class="col-lg-6">
+												<div class="form-group {% if formEconomicoForm.ingresoCony.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Ingresos Conyuge<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEconomicoForm.ingresoCony}}
+														{% if formEconomicoForm.ingresoCony.errors %}<span class="help-block">{{formEconomicoForm.ingresoCony.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+
+<div class="col-lg-6">
+												<div class="form-group {% if formEconomicoForm.renta.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Paga Renta?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEconomicoForm.renta}}
+														{% if formEconomicoForm.renta.errors %}<span class="help-block">{{formEconomicoForm.renta.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+
+<div class="col-lg-6">
+												<div class="form-group {% if formEconomicoForm.rentaMensual.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Impote Renta Mensual:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEconomicoForm.rentaMensual}}
+														{% if formEconomicoForm.rentaMensual.errors %}<span class="help-block">{{formEconomicoForm.rentaMensual.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+
+<div class="col-lg-6">
+												<div class="form-group {% if formEconomicoForm.deudas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Tiene Deudas?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEconomicoForm.deudas}}
+														{% if formEconomicoForm.deudas.errors %}<span class="help-block">{{formEconomicoForm.deudas.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+<div class="col-lg-6">
+												<div class="form-group {% if formEconomicoForm.clase.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿De que clase?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEconomicoForm.clase}}
+														{% if formEconomicoForm.clase.errors %}<span class="help-block">{{formEconomicoForm.clase.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+<div class="col-lg-6">
+												<div class="form-group {% if formEconomicoForm.impDeuda.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Importe Deuda:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEconomicoForm.impDeuda}}
+														{% if formEconomicoForm.impDeuda.errors %}<span class="help-block">{{formEconomicoForm.impDeuda.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+<div class="col-lg-6">
+												<div class="form-group {% if formEconomicoForm.abonoMensual.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Abono Mensual Deuda:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEconomicoForm.abonoMensual}}
+														{% if formEconomicoForm.abonoMensual.errors %}<span class="help-block">{{formEconomicoForm.impDeuda.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+
+											
+												
+											<!--	
+												<a href="{% url 'empleados.views.index' %}" class="btn default blue-stripe">
+															<i class="glyphicon glyphicon-arrow-left"></i> Regresar
+														</a>	
+												-->
+												
+												
+
+														<button type="submit" class="btn blue"><i class="fa fa-pencil"></i> {{action}}</button>													
+														
+																					
+																			
+										</form>	
+								
+  {% endblock %}
+
+
+
+{% block extra_script %}
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/select2/select2.js"></script>
+{% endblock %}
+
+{% block script_ready %}
+	
+	
+	$('.date-picker').datepicker({
+        rtl: Metronic.isRTL(),
+        orientation: "auto",
+        autoclose: true        
+    });
+    
+{% endblock %}

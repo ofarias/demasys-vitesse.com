@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load i18n humanize %}
+
+{% block title %}{{action}} Solicitud{% endblock %}
+{% block content_title %} Solicitud de Fondos {% endblock %}
+
+{% block nav-sol2 %}<li class="active">{% endblock %} <!-- se debe definir en Base.html para que se seleccione--> 
+	
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/bootstrap-datepicker/css/datepicker3.css">
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/select2/select2.css"/>
+
+{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="{% url 'solicitudes.views.index' %}">Solicitudes</a>	<!-- Esto se cambia con la vista de la aplicacion actual, que debe tener la classe Index-->
+		<i class="fa fa-angle-right"></i>					
+	</li>	
+	<li>
+		<a href="#">{{action}}</a>
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+{% block content %}
+{{user}}
+{{group}}
+{{user.groups.all}}
+
+	
+  	<form action="" class="form-horizontal form-row-seperated" method="post">
+											{% csrf_token %}
+											<div class="form-body">
+													<div class="form-group {% if form.solicitante.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.solicitante.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.solicitante}}
+														{% if form.solicitante.errors %}<span class="help-block">{{form.solicitante.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.beneficiarios.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Operadores<span class="required" aria-required="False"> * </span></label>
+													<div class="col-md-9">
+														{{form.beneficiario}}
+														{% if form.beneficiario.errors %}<span class="help-block">{{form.beneficiario.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.benef_otros.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Beneficiarios<span class="required" aria-required="False"> * </span></label>
+													<div class="col-md-9">
+														{{form.benef_otros}}
+														{% if form.benef_otros.errors %}<span class="help-block">{{form.benef_otros.errors}}</span>{% endif %}
+													</div>
+												</div>
+												  <div class="form-group {% if form.fecha.errors %}has-error{% endif %}">
+												<label class="control-label col-md-3">Fecha de Solicitud<span class="required" aria-required="true"> * </span></label>
+												<div class="col-md-9">
+													<div class="input-group date date-picker" data-date-format="dd-mm-yyyy">
+														{{form.fecha}}
+														<span class="input-group-btn">
+														  <button class="btn blue" type="button">
+														       <i class="fa fa-calendar"></i>
+														  </button>
+														</span>
+													 </div>
+														{% if form.fecha.errors %}<span class="help-block">{{form.fecha.errors}}</span >{% endif %}
+													</div >
+												</div>											
+												<div class="form-group {% if form.importe.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.importe.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.importe}}
+														{% if form.importe.errors %}<span class="help-block">{{form.importe.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.concepts.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Concepto<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.concepts}}
+														{% if form.concepts.errors %}<span class="help-block">{{form.concepts.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.refer.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Referencia<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.refer}}
+														{% if form.refer.errors %}<span class="help-block">{{form.refer.errors}}</span>{% endif %}
+													</div>
+												</div>	
+												<div class="form-group {% if form.sol_bill.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Carta Porte<span class="required" aria-required="true">  </span></label>
+													<div class="col-md-9">
+														{{form.sol_bill}}
+														{% if form.sol_bill.errors %}<span class="help-block">{{form.sol_bill.errors}}</span>{% endif %}
+													</div>
+												 </div>
+																											
+											<div class="form-actions">
+												<div class="row">
+													<div class="col-md-offset-3 col-md-9">
+														<button type="submit" class="btn blue"><i class="fa fa-pencil"></i> {{action}}</button>														
+													</div>
+												</div>
+											</div>
+
+										
+										</form>	
+								
+  {% endblock %}
+
+{% block extra_script %}
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/select2/select2.js"></script>
+{% endblock %}
+{% block script_ready %}
+	
+	var concepto = $("#id_concepts").val();
+	var solbill = $("#id_sol_bill").val();
+	
+	$("#id_sol_bill").on("change",function(){
+		solbill = $(this).val();
+	})
+	
+	$("#id_concepts").on("change",function(){
+		concepto = $(this).val();
+	})
+	
+	$("#formularioDato").on('submit',function(ev){
+		
+		if((concepto == "6" || concepto == "7" || concepto == "100" || concepto =="1" || concepto == "2")   && solbill==""){
+			alert("Falta carta porte");
+			return false;
+		}
+	})
+	
+	
+	$('.date-picker').datepicker({
+        rtl: Metronic.isRTL(),
+        orientation: "auto",
+        autoclose: true        
+    });
+    
+{% endblock %}
+

@@ -1,0 +1,217 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load sepomex_filters %}
+{% load url from future %}
+{% load bootstrap_pagination %}
+
+{% block title %}Reportes{% endblock %}
+{% block content_title %} Reportes{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/bootstrap-datepicker/css/datepicker3.css"/>
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/select2/select2.css"/>
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/jquery-multi-select/css/multi-select.css"/>
+
+{% endblock %}
+
+{% block nav-reportes %}<li class="active">{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Reportes</a>						
+	</li>	
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+		<div class="modal fade" id="history" role="basic" aria-hidden="true">
+			<div class="page-loading page-loading-boxed">
+				<img src="{{MEDIA_URL}}img/loading-spinner-grey.gif" alt="" class="loading">
+				<span>
+				&nbsp;&nbsp;Cargando... </span>
+			</div>
+			<div class="modal-dialog">
+				<div class="modal-content">
+				</div>
+			</div>
+		</div>
+		<div class="portlet light bg-inverse">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="icon-equalizer font-red-sunglo"></i>
+					<span class="caption-subject font-red-sunglo bold uppercase">Generador de reportes</span>
+					<span class="caption-helper"></span>
+				</div>
+				<div class="actions">
+					
+				</div>
+			</div>
+			<div class="portlet-body form">
+				<!-- BEGIN FORM-->
+				<form action="{% url 'viajes.views.reportsexcel' %}" method="POST" class="horizontal-form" id="form-reports" target="_blank">
+					<div class="form-body">						
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<h3 class="form-section">Campos</h3>									
+									{{searchform.campos}}
+											
+									<h3 class="form-section">Consultas Guardadas</h3>
+									<select name="consultas" class="select2">
+										<option>Reporte LG telecom</option>
+										<option>Reporte Samsung</option>
+									</select>
+									<button class="btn blue" id="restore-btn"><i class="fa fa-upload"></i> Cargar</button>
+								</div>
+							</div>
+							<!--/span-->
+							<div class="col-md-6">
+								<h3 class="form-section">Filtros</h3>
+								<div class="form-group">
+									<label class="control-label">Carta porte</label>
+									{{searchform.pk}}
+									<label class="control-label">Status</label>	
+									{{searchform.status}}														
+									<label class="control-label">Desde</label>
+									<div class="input-group date date-picker" data-date-format="yyyy-mm-dd">	
+										{{searchform.fecha_from}}
+										<span class="input-group-btn">
+											<button class="btn blue" type="button">
+												<i class="fa fa-calendar"></i>																	
+											</button>				
+										</span>
+									</div>									
+									<label class="control-label">Hasta</label>
+									<div class="input-group date date-picker" data-date-format="yyyy-mm-dd">	
+										{{searchform.fecha_to}}
+										<span class="input-group-btn">
+											<button class="btn blue" type="button">
+												<i class="fa fa-calendar"></i>																	
+											</button>				
+										</span>	
+									</div>
+									<label class="control-label">Cliente</label>	
+									{{searchform.cliente}}	
+									<label class="control-label">Departamento</label>	
+									{{searchform.departamento}}	
+									<label class="control-label">Destino</label>	
+									{{searchform.destino}}	
+									<label class="control-label">Referencia</label>	
+									{{searchform.referencia}}	
+									<label class="control-label">Economico</label>	
+									{{searchform.economico}}
+									<label class="control-label">Operador</label>	
+									{{searchform.operador}}																	
+								</div>
+							</div>
+							<!--/span-->
+						</div>						
+					</div>
+					<div class="form-actions left">						
+						<!-- button class="btn blue" id="search-btn"><i class="fa fa-search"></i> Buscar</button -->						
+						<button type="submit" class="btn green" id="export-btn"><i class="fa fa-file-excel-o"></i> Exportar Excel</button>
+						<button class="btn blue" id="save-btn"><i class="fa fa-save"></i> Guardar</button>						
+					</div>
+
+				</form>
+				<!-- END FORM-->
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-12">					
+					<div class="portlet">										
+						<div class="portlet-body">										
+							<div class="table-responsive" id="search-results">				
+								
+							</div>
+						</div>
+					</div>
+				</div>								
+			</div>
+
+{% endblock %}
+
+{% block extra_script %}
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/select2/select2.js"></script>
+<script src="{{MEDIA_URL}}plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/jquery-multi-select/js/jquery.multi-select.js"></script>
+{% endblock %}
+
+
+{% block script_ready %}
+	$('#search-btn').on('click', function(e){
+		e.preventDefault();		
+		var form = $('#form-reports');
+		$.ajax({
+			url: '{% url 'viajes.views.reportesresults' %}',
+			type: 'POST',
+			dataType: 'HTML',
+			data: form.serialize(),
+			success: function(data){
+				$('#search-results').html(data);
+			}
+		});
+	});
+	
+	$('.date-picker').datepicker({
+        rtl: Metronic.isRTL(),
+        orientation: "auto",
+        autoclose: true        
+    });
+    
+    function sepomexFormatResult(municipio) {            
+    	return municipio.municipio+', '+municipio.estado;
+    }
+
+    function sepomexFormatSelection(municipio) {
+        return municipio.municipio;
+    }
+    
+    $('.select2').select2();
+    
+    $('#id_campos').multiSelect();
+    
+    $("#id_destino").select2({    	
+    	minimumInputLength: 2,
+    	allowClear: true,
+        ajax: {   
+        	url: '{% url 'sepomex.views.direccion' %}',
+        	dataType: 'json',
+                data: function(term, page) {
+
+                    return {
+                        term: term
+                    };
+                },
+                results: function(data, page) {
+                    return {
+                        results: data
+                    };
+            }
+        },
+        initSelection: function(element, callback) {
+	        var ids = $(element).val();	        
+	        if (ids!=="") {
+	            $.ajax("{% url 'sepomex.views.direccion_recupera_unico' %}", {
+	                data: {
+	                    ids: ids
+	                },
+	                dataType: "json"
+	            }).done(function(data) { callback(data); });
+	        }
+	    },
+		formatResult: sepomexFormatResult, // omitted for brevity, see the source of this page
+        formatSelection: sepomexFormatSelection, // omitted for brevity, see the source of this page   	
+	});			
+{% endblock %}

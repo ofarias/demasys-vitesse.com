@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load i18n humanize %}
+
+{% block title %}{{action}} Documentos{% endblock %}
+{% block content_title %} Carga de documentos {% endblock %}
+
+{% block nav-sol2 %}<li class="active">{% endblock %} <!-- se debe definir en Base.html para que se seleccione--> 
+	
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/bootstrap-datepicker/css/datepicker3.css">
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/select2/select2.css"/>
+
+{% endblock %}
+
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>
+		<i class="fa fa-angle-right"></i>
+	</li>
+	<li>
+		<a href="#">Catalogos</a>
+		<i class="fa fa-angle-right"></i>
+	</li>
+	<li>
+		<a href="#">Económicos</a>
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+{% block content %}
+{{user}}
+{{group}}
+{{user.groups.all}}
+
+
+
+		<h3>Lista de documentos</h3>
+
+	<div class="table-scrollable">
+					<table class="table table-striped table-bordered table-hover" id="sample_1">
+						<thead>
+							<tr>
+								<th>
+									Tipo de Documento
+								</th>
+								<th>
+									Nombre del documento
+								</th>
+								<th>
+									Borrar
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for arch in archivos %}
+							<tr class="odd gradeX">
+								<td>
+									{{arch.idDoc.nombreDoc}}
+								</td>
+								<td>
+									<a href="{% url 'catalogos.views.descargarDoc' arch.nombreDoc %}">{{arch.nombreDoc}}</a>
+								</td>
+								<td>
+									<a href="{% url 'catalogos.views.borrarDoc' arch.nombreDoc idEconomico %}">Borrar</a>
+								</td>
+
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+
+</div>
+
+
+
+	<div class="row">
+			<div class="col-md-12">
+				<div class="portlet light form-fit">
+					<div class="portlet-body form">
+						<h3 class="form-section">Carga de Documentos</h3>
+
+						<div class="table-responsive">
+							<table class="table table-striped table-hover table-bordered" id="regreso_table">
+								<thead>
+									<tr>
+										<th>
+											Tipo de Archivo
+										</th>
+										<th>
+											Archivo
+										</th>
+										<th>
+											Cargar
+										</th>
+
+									</tr>
+								</thead>
+								<tbody>
+						<form  action="{% url 'catalogos.views.documentosEconomico'  idEconomico %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+									<tr class="tr_form_ap">
+										<td>
+											<p hidden>{{ formDoc.idEconomico }}</p>
+
+											{{ formDoc.idDoc }}
+											{% if form.idDoc.errors %}<span class="help-block">{{form.idDoc.errors}}</span>{% endif %}
+										</td>
+										<td>
+											{{ formDoc.nombreDoc }}
+											{% if form.nombreDoc.errors %}<span class="help-block">{{form.nombreDoc.errors}}</span>{% endif %}
+										</td>
+										<td>
+											<button type="submit" class="btn green" id="export-btn" name="submit" size="40"> <i class="glyphicon glyphicon-arrow-up">&nbsp;&nbsp;</i>Cargar</button>
+										</td>
+
+										</tr>
+						</form>
+									</tbody>
+								</table>
+							</div>
+
+
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+  {% endblock %}

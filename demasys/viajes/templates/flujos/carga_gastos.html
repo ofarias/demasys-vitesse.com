@@ -1,0 +1,472 @@
+{% extends 'base.html' %}
+{% load i18n humanize %}
+{% load sepomex_filters %}
+{% load url from future %}
+
+{% block title %}Viajes{% endblock %}
+{% block content_title %} Viaje {{viaje}} - {{current.state}}{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/bootstrap-datepicker/css/datepicker3.css"/>
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/select2/select2.css"/>
+{% endblock %}
+
+{% block nav-viajes %}<li class="active">{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="{% url 'viajes.views.index' %}">Viajes</a>		
+		<i class="fa fa-angle-right"></i>				
+	</li>	
+	<li>		
+		<a href="#">Carta {{viaje}}</a>							
+	</li>	
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+<form action="{% url 'viajes.views.salida' viaje.pk %}" class="form-horizontal form-row-seperated" method="post" id="statusform">
+	{% csrf_token %}
+	{{ formset_salida.management_form }}
+	{{ formset_regreso.management_form }}
+<div class="row"> 
+            <div class="col-md-12">
+        		<div class="portlet-body form">
+						<div class="form-body">							
+							<h3 class="form-section">Datos Generales</h3>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Carta porte:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Fecha de salida:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.fecha_salida|date:"d-m-Y"}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Cliente:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.cliente}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Departamento:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.departamento}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Bill/Load:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.referencia}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Operador:</label>
+										<div class="col-md-9">
+											{{form.operador}}
+											{% if form.operador.errors %}<span class="help-block">{{form.operador.errors}}</span>{% endif %}
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Economico:</label>
+										<div class="col-md-9">
+											{{form.economico}}
+											{% if form.economico.errors %}<span class="help-block">{{form.economico.errors}}</span>{% endif %}
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Ruta:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.ruta}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Contenido:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.contiene}}
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<h3 class="form-section">Origen</h3>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Municipio:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.origen_clave_municipio|municipio}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Colonia:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.origen_colonia}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Calle:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.origen_calle}} No. {{viaje.origen_numero}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">CP:</label>
+										<div class="col-md-9">
+											<p class="form-control-static">
+												 {{viaje.origen_cp}}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+							</div>
+							<h3 class="form-section">Destino(s)</h3>
+							{% for destino in viaje.destino_set.all %}
+							<div class="row">								
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Destino:</label>										
+										<div class="col-md-9">
+											<p class="form-control-static">												
+												{{destino.destino_clave_municipio|municipio}}										
+											</p>
+										</div>										
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label col-md-3">Fecha de entrega:</label>										
+										<div class="col-md-9">
+											<p class="form-control-static">												
+												{{destino.fecha_entrega|date:"d-m-Y"}}										
+											</p>
+										</div>										
+									</div>
+								</div>
+							</div>
+							{% endfor %}
+							<h3 class="form-section">Observaciones</h3>
+							<div class="form-group {% if form.observaciones.errors %}has-error{% endif %}">
+								<label class="control-label col-md-3">Observaciones</label>
+								<div class="col-md-9">									
+									{{form.observaciones}}
+									{% if form.observaciones.errors %}<span class="help-block">{{form.observaciones.errors}}</span>{% endif %}													
+								</div>
+							</div>	
+						</div>
+				</div>
+			</div>
+		</div>	
+
+	<div class="form-actions">
+		<div class="row">
+			<div class="col-md-offset-3 col-md-9">
+				{{form.status}}
+				{{form.nota}}
+				<a href="{% url 'viajes.views.index' %}" class="btn default">
+								Regresar
+				</a>
+				<button type="submit" name="status" value="17" class="btn red" 
+				data-status="17" data-name="Cancelar">Cancelar</button>
+				<button type="submit" name="status" value="0" class="btn blue" data-status="0">Guardar</button>
+			</div>
+		</div>
+	</div>
+	</form>
+{% endblock %}
+
+{% block extra_script %}
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/select2/select2.js"></script>
+<script src="{{MEDIA_URL}}plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+{% endblock %}
+
+<script type="text/javascript">
+{% block script_ready %}
+	$("#id_economico").select2();
+	$("#id_operador").select2();
+    
+	$(".select2").select2({    	
+    	tags: {{conceptos|safe}},
+    	maximumSelectionSize: 1        
+    });
+	
+	var status = '';
+	var name = '';
+	$("form button[type=submit]").click(function() {	    
+	    status = $(this).data("status");
+	    name = $(this).data("name");
+	    $('#id_status').val(status);
+	});
+	
+	$('#statusform').submit(function(event){		
+		event.preventDefault();	
+		var myform = this;
+		
+		$('#salida_table tbody tr').each(function(){
+			var concepto = $(this).find('input[id$=concepto]').val();
+			if(concepto == ''){
+				$(this).find('input[id$=tipo]').val('');
+				$(this).find('input[id$=viaje]').val('');
+			}
+		});
+		
+		$('#regreso_table tbody tr').each(function(){
+			var concepto = $(this).find('input[id$=concepto]').val();
+			if(concepto == ''){
+				$(this).find('input[id$=tipo]').val('');
+				$(this).find('input[id$=viaje]').val('');
+			}
+		});
+				
+		if(name == 'Cancelar'){
+			bootbox.prompt("¿Cual es el motivo de la cancelación?", function(result) {
+           		if (result === null) {
+					alert('Para cancelar, debe especificar el motivo');
+				}else{
+					if(result!=''){
+						$('#id_nota').val(result);
+						myform.submit();	
+					}else{
+						alert('Para cancelar, debe especificar el motivo');
+					}				
+				}
+			});
+		}else{
+			myform.submit();
+		}		
+	});
+	
+	
+	//Formset gastos de salida
+	var index_salida = parseInt($('#id_salida-TOTAL_FORMS').val());
+	var max_salida = parseInt($('#id_salida-MAX_NUM_FORMS').val());
+	
+	//Validar maximo de forms
+	$('#btn_add_salida').live("click", function(e){	
+				
+		e.preventDefault();
+		if(index_salida < max_salida){					
+		
+			$("#id_salida-0-concepto").select2("destroy");
+			
+			$('#salida_table').append(
+				$('#salida_table .tr_form_ap:first')
+				.clone(false, true)
+				.find('input[name="salida-0-id"]')
+				.attr('id','id_salida-'+index_salida+'-id')
+				.attr('name', 'salida-'+index_salida+'-id')
+				.val('')
+				.end()
+				.find('input[name="salida-0-tipo"]')
+				.attr('id','id_salida-'+index_salida+'-tipo')
+				.attr('name', 'salida-'+index_salida+'-tipo')
+				.end()
+				.find('input[name="salida-0-viaje"]')
+				.attr('id','id_salida-'+index_salida+'-viaje')
+				.attr('name', 'salida-'+index_salida+'-viaje')				
+				.end()
+				.find('input[name="salida-0-concepto"]')
+				.attr('id','id_salida-'+index_salida+'-concepto')
+				.attr('name', 'salida-'+index_salida+'-concepto')
+				.val('')
+				.end()
+				.find('textarea[name="salida-0-comentarios"]')
+				.attr('id','id_salida-'+index_salida+'-comentarios')
+				.attr('name', 'salida-'+index_salida+'-comentarios')
+				.val('')
+				.end()
+				.find('.calculado')
+				.html('')
+				.end()
+				.find('input[name="salida-0-pagado_operaciones"]')
+				.attr('id','id_salida-'+index_salida+'-pagado_operaciones')
+				.attr('name', 'salida-'+index_salida+'-pagado_operaciones')
+				.val('')			
+				.end()
+				.find('input[name="salida-0-pagado_contabilidad"]')
+				.attr('id','id_salida-'+index_salida+'-pagado_contabilidad')
+				.attr('name', 'salida-'+index_salida+'-pagado_contabilidad')
+				.val('')
+				.end()
+				.find('input[name="salida-0-DELETE"]')
+				.attr('id','id_salida-'+index_salida+'-DELETE')
+				.attr('name', 'salida-'+index_salida+'-DELETE')
+				.attr('checked', false)
+				.end()			
+			);
+			
+			$("#id_salida-0-concepto").select2({    	
+		    	tags: {{conceptos|safe}},
+		    	maximumSelectionSize: 1        
+		    });
+			$("#id_salida-"+index_salida+"-concepto").select2({    	
+		    	tags: {{conceptos|safe}},
+		    	maximumSelectionSize: 1        
+		    });
+		    
+			index_salida++;
+			$('#id_salida-TOTAL_FORMS').val(index_salida);
+		}else{
+			alert('No se pueden agregar mas gastos');								
+		}		
+	});
+	
+	//Formset gastos de regreso
+	var index_regreso = parseInt($('#id_regreso-TOTAL_FORMS').val());
+	var max_regreso = parseInt($('#id_regreso-MAX_NUM_FORMS').val());
+	
+	//Validar maximo de forms
+	$('#btn_add_regreso').live("click", function(e){	
+				
+		e.preventDefault();
+		
+		if(index_regreso < max_regreso){
+		
+			$("#id_regreso-0-concepto").select2("destroy");
+			
+			$('#regreso_table').append(
+				$('#regreso_table .tr_form_ap:first')	
+				.clone(false, true)
+				.find('input[name="regreso-0-id"]')
+				.attr('id','id_regreso-'+index_regreso+'-id')
+				.attr('name', 'regreso-'+index_regreso+'-id')
+				.val('')
+				.end()
+				.find('input[name="regreso-0-tipo"]')
+				.attr('id','id_regreso-'+index_regreso+'-tipo')
+				.attr('name', 'regreso-'+index_regreso+'-tipo')
+				.end()
+				.find('input[name="regreso-0-viaje"]')
+				.attr('id','id_regreso-'+index_regreso+'-viaje')
+				.attr('name', 'regreso-'+index_regreso+'-viaje')				
+				.end()
+				.find('input[name="regreso-0-concepto"]')
+				.attr('id','id_regreso-'+index_regreso+'-concepto')
+				.attr('name', 'regreso-'+index_regreso+'-concepto')
+				.val('')
+				.end()
+				.find('input[textarea="regreso-0-comentarios"]')
+				.attr('id','id_regreso-'+index_regreso+'-comentarios')
+				.attr('name', 'regreso-'+index_regreso+'-comentarios')
+				.val('')
+				.end()
+				.find('input[name="regreso-0-pagado_operaciones"]')
+				.attr('id','id_regreso-'+index_regreso+'-pagado_operaciones')
+				.attr('name', 'regreso-'+index_regreso+'-pagado_operaciones')
+				.val('')			
+				.end()
+				.find('input[name="regreso-0-pagado_contabilidad"]')
+				.attr('id','id_regreso-'+index_regreso+'-pagado_contabilidad')
+				.attr('name', 'regreso-'+index_regreso+'-pagado_contabilidad')
+				.val('')
+				.end()
+				.find('input[name="regreso-0-DELETE"]')
+				.attr('id','id_regreso-'+index_regreso+'-DELETE')
+				.attr('name', 'regreso-'+index_regreso+'-DELETE')
+				.attr('checked', false)
+				.end()			
+			);
+			
+			$("#id_regreso-0-concepto").select2({    	
+		    	tags: {{conceptos|safe}},
+		    	maximumSelectionSize: 1        
+		    });
+			$("#id_regreso-"+index_regreso+"-concepto").select2({    	
+		    	tags: {{conceptos|safe}},
+		    	maximumSelectionSize: 1        
+		    });
+		    
+			index_regreso++;
+			$('#id_regreso-TOTAL_FORMS').val(index_regreso);
+		}else{
+			alert('No se pueden agregar mas gastos de regreso');								
+		}
+
+	});
+	
+	$('.delete').live("click", function(){		
+		$(this).siblings('input').val(1);
+		$(this).parent().parent().slideUp('slow');
+	});
+{% endblock %}
+</script>

@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load bootstrap_pagination %}
+
+{% block title %}Catalogo de Gastos{% endblock %}
+{% block content_title %} Catalogo de Gastos {% endblock %}
+
+{% block nav-catalogos %}<li class="active open">{% endblock %}
+{% block nav-movInv %}<li class="active">{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Seguimiento</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Tipos</a>							
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+		<div class="row">
+            <div class="col-md-12">
+				<div class="portlet box grey-cascade">
+						<div class="portlet-title">
+							<div class="caption">
+								Lista de Movimientos
+							</div>							
+						</div>
+						<div class="portlet-body">
+							<div class="table-toolbar">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="btn-group">
+								{% if perms.catalogos.add_gastoviaje %}
+								<a href="{% url 'viajes.views.agregarMov' %}" class="btn blue">
+											Agregar  <i class="fa fa-plus"></i>
+											</a>
+								{% else %}
+								<div class="alert alert-dismissable alert-danger">
+									<button class="close" aria-hidden="true" data-dismiss="alert" type="button"></button>
+									{{user.get_short_name}} no tiene permisos para Agregar.<br/> Solicite permisos al administrador.
+								</div>
+								{% endif %}
+
+											
+										</div>
+									</div>
+									<div class="col-md-6">
+										
+									</div>
+								</div>
+							</div>
+							<div class="table-scrollable">
+							<table class="table table-striped table-bordered table-hover" id="sample_1">
+							<thead>
+							<tr>
+								<th>
+									 Movimiento
+								</th>
+								<th>
+									 Descripcion
+								</th>
+								<th>
+									 Editar
+								</th>					
+							</tr>
+							</thead>
+							<tbody>
+							{% for movs in movi %}
+							<tr class="odd gradeX">
+								<td>
+									{{movs.nombre}}
+								</td>
+								<td>
+									{{movs.observaciones}}
+								</td>	
+								<td>
+								{% if perms.catalogos.change_gastoviaje %}
+									<a href="{% url 'viajes.views.editMov' movs.pk %}" class="btn default btn-xs blue-stripe">Editar</a>
+								{% else %}
+								<div class="alert alert-dismissable alert-danger">
+									<button class="close" aria-hidden="true" data-dismiss="alert" type="button"></button>
+									{{user.get_short_name}} no tiene permisos para Editar.<br/> Solicite permisos al administrador.
+								</div>
+								{% endif %}
+								</td>
+								 
+								</td>
+							</tr>
+							{% endfor %}							
+							</tbody>
+							</table>
+							{% bootstrap_paginate movi %}
+							</div>
+						</div>
+					</div>					
+            </div>
+         </div>
+{% endblock %}

@@ -1,0 +1,348 @@
+{% extends 'baseOut.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load i18n humanize %}
+
+{% block title %}Cuestionario - continuacion{% endblock %}
+{% block content_title %} Solicitud de Empleo {% endblock %}
+
+{% block nav-sol2 %}<li class="active">{% endblock %} <!-- se debe definir en Base.html para que se seleccione-->
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/bootstrap-datepicker/css/datepicker3.css">
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/select2/select2.css"/>
+
+{% endblock %}
+
+
+{% block actions %}
+{% endblock %}
+{% block content %}
+
+
+  	<form action="" class="form-horizontal form-row-seperated" method="post">
+
+	{% csrf_token %}
+		 {{ hijosFormSet.management_form }}
+    <br/>
+        <h3>
+            <span class="caption-subject font-blue bold">CUESTIONARIO, continuación..</span>
+        </h3>
+	<br/><br/><hr/>
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="portlet light form-fit">
+					<div class="portlet-body form">
+						<h3 class="caption-subject font-blue bold">Proporcione, nombre, edad y ocupacion de cada hijo.</h3>
+						<div class="table-toolbar">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="btn-group">
+
+									</div>
+								</div>
+								<div class="col-md-6">
+								</div>
+							</div>
+						</div>
+						<div class="table-responsive">
+							<table class="table table-striped table-hover table-bordered" id="regreso_table_esc">
+								<thead>
+									<tr>
+										<th>
+											Nombre
+										</th>
+										<th>
+											Edad
+										</th>
+										<th>
+											Ocupación
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for formH in hijosFormSet %}
+
+
+									<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-12" style="text-align: left;"><b>Hijo No. {{ forloop.counter }}</b></label>
+													<label class="control-label col-md-3">Nombre: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														<p hidden>{{ formH.idsolicitante }}</p>
+														<p hidden>{{ formH.id }}</p>
+														{{ formH.nombre }}
+														{% if formH.nombre.errors %}<span class="help-block">{{formH.nombre.errors}}</span>{% endif %}
+													</div>
+										</td>
+										<td>
+													<label class="control-label col-md-3">Edad:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{ formH.edad }}
+														{% if formH.edad.errors %}<span class="help-block">{{formH.edad.errors}}</span>{% endif %}
+													</div>
+										</td>
+										<td>
+
+													<label class="control-label col-md-3">Ocupación:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formH.ocupacion}}
+														{% if formH.ocupacion.errors %}<span class="help-block">{{formH.ocupacion.errors}}</span>{% endif %}
+													</div>
+
+
+
+										</td>
+
+										</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+
+
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Ingieres bebidas alcoholicas?:</label>
+		<div class="col-md-3">
+            <p hidden>{{ form.idsolicitante }}</p>
+		{{form.bebida}}
+		{% if form.bebida.errors %}<span class="help-block">{{form.bebida.errors}}</span>{% endif %}
+		</div>
+        <label class="control-label col-md-3">¿Con que frecuencia?: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-2">
+		{{form.freBebida}}
+		{% if form.freBebida.errors %}<span class="help-block">{{form.freBebida.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Fumas?:</label>
+		<div class="col-md-3">
+		{{form.fuma}}
+		{% if form.fuma.errors %}<span class="help-block">{{form.fuma.errors}}</span>{% endif %}
+		</div>
+        <label class="control-label col-md-3">¿Con que frecuencia?: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-2">
+		{{form.freFuma}}
+		{% if form.freFuma.errors %}<span class="help-block">{{form.freFuma.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Has utilizado alguna droga?:</label>
+		<div class="col-md-3">
+		{{form.drog}}
+		{% if form.drog.errors %}<span class="help-block">{{form.drog.errors}}</span>{% endif %}
+		</div>
+        <label class="control-label col-md-3">¿Por cuanto tiempo?: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-2">
+		{{form.tiempoDrog}}
+		{% if form.tiempoDrog.errors %}<span class="help-block">{{form.tiempoDrog.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group {% if form.numHijos.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">¿Que haces cuando tienes tiempo libre?: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-9">
+		{{form.actividad}}
+		{% if form.actividad.errors %}<span class="help-block">{{form.actividad.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group {% if form.numHijos.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">¿Que nivel de escolaridad tienes?: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-9">
+		{{form.escolaridad}}
+		{% if form.escolaridad.errors %}<span class="help-block">{{form.escolaridad.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group {% if form.numHijos.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">¿Tienes auto?: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-2">
+		{{form.auto}}
+		{% if form.auto.errors %}<span class="help-block">{{form.auto.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group {% if form.numHijos.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">¿Porque debemos darte la oportunidad de trabajar en Vitesse?: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-9">
+		{{form.oportunidad}}
+		{% if form.oportunidad.errors %}<span class="help-block">{{form.oportunidad.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group {% if form.numHijos.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">¿Cual sería tu compromiso para integrarte a nuestro equipo?: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-9">
+		{{form.compromiso}}
+		{% if form.compromiso.errors %}<span class="help-block">{{form.compromiso.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Cuanto pretendes ganar?:</label>
+		<div class="col-md-3">
+		{{form.pretenciones}}
+		{% if form.pretenciones.errors %}<span class="help-block">{{form.pretenciones.errors}}</span>{% endif %}
+		</div>
+        <label class="control-label col-md-3">¿A cuanto ascienden tus gastos?: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-2">
+		{{form.gastos}}
+		{% if form.gastos.errors %}<span class="help-block">{{form.gastos.errors}}</span>{% endif %}
+		</div>
+	</div>
+
+
+
+
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Como te ves en 3 años?: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-9">
+		{{form.futuro}}
+		{% if form.futuro.errors %}<span class="help-block">{{form.futuro.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Quién te recomienda?: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-9">
+		{{form.recomienda}}
+		{% if form.recomienda.errors %}<span class="help-block">{{form.recomienda.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Qué beneficio obtendremos de tu trabajo?: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-9">
+		{{form.beneficiosVit}}
+		{% if form.beneficiosVit.errors %}<span class="help-block">{{form.beneficiosVit.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-5">¿Estás de acuerdo en que deberás firmar una responsiva por la unidad y el sistema de comunicación que se te asigne?:</label>
+		<div class="col-md-3">
+		{{form.firma}}
+		{% if form.firma.errors %}<span class="help-block">{{form.firma.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-5">¿Qué harías si ves a un compañero robando una refacción de la camioneta?:</label>
+		<div class="col-md-7">
+		{{form.opinionRef}}
+		{% if form.opinionRef.errors %}<span class="help-block">{{form.opinionRef.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-5">¿Qué harías si detectas que algún compañero esta robando mercancia?:</label>
+		<div class="col-md-7">
+		{{form.opinionMer}}
+		{% if form.opinionMer.errors %}<span class="help-block">{{form.opinionMer.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-5">¿Te gustaría traerle algún regalo o souvenir a tu coordinador de los lugares donde viajas?:</label>
+		<div class="col-md-3">
+		{{form.suvenir}}
+		{% if form.suvenir.errors %}<span class="help-block">{{form.suvenir.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Porqué razón?:</label>
+		<div class="col-md-8">
+		{{form.razonSuvenir}}
+		{% if form.razonSuvenir.errors %}<span class="help-block">{{form.razonSuvenir.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Cómo te ganas a la gente?:</label>
+		<div class="col-md-8">
+		{{form.ganarGente}}
+		{% if form.ganarGente.errors %}<span class="help-block">{{form.ganarGente.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">Cuando te llaman la atención, ¿Cual es tu reacción?:</label>
+		<div class="col-md-8">
+		{{form.reaccion}}
+		{% if form.reaccion.errors %}<span class="help-block">{{form.reaccion.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Te gusta correr en carretera?:</label>
+		<div class="col-md-3">
+		{{form.correr}}
+		{% if form.correr.errors %}<span class="help-block">{{form.correr.errors}}</span>{% endif %}
+		</div>
+        <label class="control-label col-md-3">¿Qué velocidad promedio?: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-2">
+		{{form.velocidad}}
+		{% if form.velocidad.errors %}<span class="help-block">{{form.velocidad.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Qué ciudades te gustan más visitar?:</label>
+		<div class="col-md-3">
+		{{form.ciudad}}
+		{% if form.ciudad.errors %}<span class="help-block">{{form.ciudad.errors}}</span>{% endif %}
+		</div>
+        <label class="control-label col-md-3">¿Porqué?: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-2">
+		{{form.razonCiudad}}
+		{% if form.razonCiudad.errors %}<span class="help-block">{{form.razonCiudad.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Cual es tu meta en la vida?:</label>
+		<div class="col-md-8">
+		{{form.metaVida}}
+		{% if form.metaVida.errors %}<span class="help-block">{{form.metaVida.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Con quién de tu familia te identificas más?:</label>
+		<div class="col-md-8">
+		{{form.familiaIdent}}
+		{% if form.familiaIdent.errors %}<span class="help-block">{{form.familiaIdent.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Qué piensas de la situación actual del país?:</label>
+		<div class="col-md-8">
+		{{form.sitPais}}
+		{% if form.sitPais.errors %}<span class="help-block">{{form.sitPais.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Qué te gustaría que tus hijos fueran de grandes?:</label>
+		<div class="col-md-8">
+		{{form.futuroHijo}}
+		{% if form.futuroHijo.errors %}<span class="help-block">{{form.futuroHijo.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Qué haces los sábados, domingos o días de asueto con tu familia?:</label>
+		<div class="col-md-8">
+		{{form.finesSemana}}
+		{% if form.finesSemana.errors %}<span class="help-block">{{form.finesSemana.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Tienes algún apodo?:</label>
+		<div class="col-md-8">
+		{{form.apodo}}
+		{% if form.apodo.errors %}<span class="help-block">{{form.apodo.errors}}</span>{% endif %}
+		</div>
+	</div>
+
+
+
+
+
+    <button type="submit" class="btn blue"><i class="fa fa-pencil"></i> {{action}}</button>
+
+
+
+	</form>
+{% endblock %}

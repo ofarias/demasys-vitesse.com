@@ -1,0 +1,485 @@
+{% extends 'baseOut.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load i18n humanize %}
+
+{% block title %}Solicitud de Empleo - Continuacion{% endblock %}
+{% block content_title %} Solicitud de Empleo {% endblock %}
+
+{% block nav-sol2 %}<li class="active">{% endblock %} <!-- se debe definir en Base.html para que se seleccione--> 
+	
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/bootstrap-datepicker/css/datepicker3.css">
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/select2/select2.css"/>
+
+{% endblock %}
+
+
+
+{% block actions %}
+{% endblock %}
+{% block content %}
+
+	
+  	<form action="" class="form-horizontal form-row-seperated" method="post">
+	
+		{% csrf_token %}
+		{{ formset_familiares.management_form }}
+		{{ formset_escolaridad.management_form }}
+		{{ formset_empleos.management_form }}
+		{{ formset_referencia.management_form }}
+
+<div class="row">	
+
+<br/><br/>
+
+	<div class="row">
+			<div class="col-md-12">
+				<div class="portlet light form-fit">
+					<div class="portlet-body form">
+						<h3 class="caption-subject font-blue bold uppercase">DATOS FAMILIARES</h3>
+						<div class="table-toolbar">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="btn-group">
+										<button id="btn_add_regreso" class="btn green">
+											Agregar Familiar<i class="fa fa-plus"></i>
+										</button>
+									</div>
+								</div>
+								<div class="col-md-6">
+								</div>
+							</div>
+						</div>
+						<div class="table-responsive">
+							<table class="table table-striped table-hover table-bordered" id="regreso_table">
+								<thead>
+									<tr>
+										<th>
+											Informacion
+										</th>
+
+
+									</tr>
+								</thead>
+								<tbody>
+									{% for formF in formset_familiares %}
+									<p hidden>{{ formF.idsolicitante }}</p>
+									<tr class="tr_form_ap">
+										<td>
+											<label class="control-label col-md-3">Parentesco:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formF.parentesco}}
+														{% if formF.parentesco.errors %}<span class="help-block">{{formF.parentesco.errors}}</span>{% endif %}
+													</div>
+											<label class="control-label col-md-3">Nombre Completo: <span class="required" aria-required="true"> * </span></label>
+											<div class="col-md-9">
+												{{formF.nombreFamiliar}}
+												{% if formF.nombreFamiliar.errors %}<span class="help-block">{{formF.nombreFamiliar.errors}}</span>{% endif %}
+											</div>
+
+											<label class="control-label col-md-3">Edad:<span class="required" aria-required="true"> * </span></label>
+											<div class="col-md-2">
+												{{formF.edadFam}}
+												{% if formF.edadFam.errors %}<span class="help-block">{{formF.edadFam.errors}}</span>{% endif %}
+											</div>
+
+
+											<label class="control-label col-md-2">V/F:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-3">
+														{{formF.viveFinado}}
+														{% if formF.viveFinado.errors %}<span class="help-block">{{formF.viveFinado.errors}}</span>{% endif %}
+													</div>
+
+
+													<label class="control-label col-md-3">Domicilio: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formF.domicilioFam}}
+														{% if formF.domicilioFam.errors %}<span class="help-block">{{formF.domicilioFam.errors}}</span>{% endif %}
+													</div>
+
+													<label class="control-label col-md-3">Ocupación: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formF.ocupacion}}
+														{% if formF.ocupacion.errors %}<span class="help-block">{{formF.ocupacion.errors}}</span>{% endif %}
+													</div>
+
+
+										</td>
+
+
+
+										</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+
+
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+<br/><br/><br/>
+
+
+
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="portlet light form-fit">
+					<div class="portlet-body form">
+						<h3 class="caption-subject font-blue bold uppercase">ESCOLARIDAD</h3>
+						<div class="table-toolbar">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="btn-group">
+										<button id="btn_add_regreso_esc" class="btn green">
+											Agregar Escuela <i class="fa fa-plus"></i>
+										</button>
+									</div>
+								</div>
+								<div class="col-md-6">
+								</div>
+							</div>
+						</div>
+						<div class="table-responsive">
+							<table class="table table-striped table-hover table-bordered" id="regreso_table_esc">
+								<thead>
+									<tr>
+										<th>
+											Informacion
+										</th>
+
+
+									</tr>
+								</thead>
+								<tbody>
+									{% for formE in formset_escolaridad %}
+									<p hidden>{{ formE.idsolicitante }}</p>
+
+									<tr class="tr_form_ap">
+										<td>
+													<label class="control-label col-md-3">Nombre: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formE.nombreEscuela}}
+														{% if formE.nombreEscuela.errors %}<span class="help-block">{{formE.nombreEscuela.errors}}</span>{% endif %}
+													</div>
+
+													<label class="control-label col-md-3">Nivel:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formE.nivel}}
+														{% if formE.nivel.errors %}<span class="help-block">{{formE.nivel.errors}}</span>{% endif %}
+													</div>
+
+													<label class="control-label col-md-3">Domicilio:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formE.domicilioEscuela}}
+														{% if formE.domicilioEscuela.errors %}<span class="help-block">{{formE.domicilioEscuela.errors}}</span>{% endif %}
+													</div>
+
+													<label class="control-label col-md-3">Inicio: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formE.inicial}}
+														{% if formE.inicial.errors %}<span class="help-block">{{formE.inicial.errors}}</span>{% endif %}
+													</div>
+
+													<label class="control-label col-md-3">Fin: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formE.final}}
+														{% if formE.final.errors %}<span class="help-block">{{formE.final.errors}}</span>{% endif %}
+													</div>
+
+													<label class="control-label col-md-3">Años:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formE.anios}}
+														{% if formE.anios.errors %}<span class="help-block">{{formE.anios.errors}}</span>{% endif %}
+													</div>
+													<label class="control-label col-md-3">Título obtenido: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formE.titulo}}
+														{% if formE.titulo.errors %}<span class="help-block">{{formE.titulo.errors}}</span>{% endif %}
+													</div>
+
+
+
+
+										</td>
+
+
+
+										</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+
+
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+<div class="col-lg-6">
+	&nbsp;
+</div>	
+<div class="col-lg-6">
+	&nbsp;
+</div>
+
+<br/><br/><br/>
+
+<br/><br/><br/>
+
+
+
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="portlet light form-fit">
+					<div class="portlet-body form">
+						<h3 class="caption-subject font-blue bold uppercase">EMPLEO ACTUAL Y ANTERIORES</h3>
+						<div class="table-toolbar">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="btn-group">
+										<!--Sin boton, solo 4 -->
+									</div>
+								</div>
+								<div class="col-md-6">
+								</div>
+							</div>
+						</div>
+						<div class="table-responsive">
+							<table class="table table-striped table-hover table-bordered" id="regreso_table_emp">
+								<thead>
+									<tr>
+										<th>
+											Informacion
+										</th>
+
+									</tr>
+								</thead>
+								<tbody>
+									{% for formEmp in formset_empleos %}
+									<p hidden>{{ formEmp.idsolicitante }}</p>
+									<tr class="tr_form_ap">
+										<td>
+													<label class="control-label col-md-3">Nombre: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEmp.nombreEmp}}
+														{% if formEmp.nombreEmp.errors %}<span class="help-block">{{formEmp.nombreEmp.errors}}</span>{% endif %}
+													</div>
+
+													<label class="control-label col-md-3">Domicilio: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEmp.domicilioEmp}}
+														{% if formEmp.domicilioEmp.errors %}<span class="help-block">{{formEmp.domicilioEmp.errors}}</span>{% endif %}
+													</div>
+
+													<label class="control-label col-md-3">Teléfono: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEmp.telefonoEmp}}
+														{% if formEmp.telefonoEmp.errors %}<span class="help-block">{{formEmp.telefonoEmp.errors}}</span>{% endif %}
+													</div>
+
+													<label class="control-label col-md-3">Tiempo: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEmp.tiempo}}
+														{% if formEmp.tiempo.errors %}<span class="help-block">{{formEmp.tiempo.errors}}</span>{% endif %}
+													</div>
+
+													<label class="control-label col-md-3">Puesto Inicial: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEmp.puestoIni}}
+														{% if formEmp.puestoIni.errors %}<span class="help-block">{{formEmp.puestoIni.errors}}</span>{% endif %}
+													</div>
+
+													<label class="control-label col-md-3">Puesto Final: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEmp.puestoFin}}
+														{% if formEmp.puestoFin.errors %}<span class="help-block">{{formEmp.puestoFin.errors}}</span>{% endif %}
+													</div>
+
+													<label class="control-label col-md-3">Sueldo inicial: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEmp.sueldoIni}}
+														{% if formEmp.sueldoIni.errors %}<span class="help-block">{{formEmp.sueldoIni.errors}}</span>{% endif %}
+													</div>
+
+													<label class="control-label col-md-3">Sueldo Final: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEmp.sueldoFin}}
+														{% if formEmp.sueldoFin.errors %}<span class="help-block">{{formEmp.sueldoFin.errors}}</span>{% endif %}
+													</div>
+
+													<label class="control-label col-md-3">Motivo: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEmp.motivo}}
+														{% if formEmp.motivo.errors %}<span class="help-block">{{formEmp.motivo.errors}}</span>{% endif %}
+													</div>
+
+													<label class="control-label col-md-3">Jefe: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEmp.jefe}}
+														{% if formEmp.jefe.errors %}<span class="help-block">{{formEmp.jefe.errors}}</span>{% endif %}
+													</div>
+
+													<label class="control-label col-md-3">Actividades: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEmp.actividad}}
+														{% if formEmp.actividad.errors %}<span class="help-block">{{formEmp.actividad.errors}}</span>{% endif %}
+													</div>
+
+													<label class="control-label col-md-3">¿Podemos solicitar informes de usted?: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formEmp.permiso}}
+														{% if formEmp.permiso.errors %}<span class="help-block">{{formEmp.permiso.errors}}</span>{% endif %}
+													</div>
+
+													<label class="control-label col-md-3">Porque no:</span></label>
+													<div class="col-md-9">
+														{{formEmp.noRazon}}
+														{% if formEmp.noRazon.errors %}<span class="help-block">{{formEmp.noRazon.errors}}</span>{% endif %}
+													</div>
+										</td>
+
+
+
+										</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+
+
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+<div class="col-lg-6">
+	&nbsp;
+</div>	
+<div class="col-lg-6">
+	&nbsp;
+</div>
+
+<br/><br/><br/>
+
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="portlet light form-fit">
+					<div class="portlet-body form">
+						<h3 class="caption-subject font-blue bold uppercase">REFERENCIAS PERSONALES</h3>
+						<div class="table-toolbar">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="btn-group">
+										<!--Sin boton, solo 4 -->
+									</div>
+								</div>
+								<div class="col-md-6">
+								</div>
+							</div>
+						</div>
+						<div class="table-responsive">
+							<table class="table table-striped table-hover table-bordered" id="regreso_table_ref">
+								<thead>
+									<tr>
+										<th>
+											Informacion
+										</th>
+
+									</tr>
+								</thead>
+								<tbody>
+									{% for formRef in formset_referencia %}
+									<p hidden>{{ formRef.idsolicitante }}</p>
+									<tr class="tr_form_ap">
+										<td>
+													<label class="control-label col-md-3">Nombre: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formRef.nombreRef}}
+														{% if formRef.nombreRef.errors %}<span class="help-block">{{formRef.nombreRef.errors}}</span>{% endif %}
+													</div>
+
+													<label class="control-label col-md-3">Domicilio:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formRef.domicilioRef}}
+														{% if formRef.domicilioRef.errors %}<span class="help-block">{{formRef.domicilioRef.errors}}</span>{% endif %}
+													</div>
+
+													<label class="control-label col-md-3">Telefono:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formRef.telefonoRef}}
+														{% if formRef.telefonoRef.errors %}<span class="help-block">{{formRef.telefonoRef.errors}}</span>{% endif %}
+													</div>
+
+													<label class="control-label col-md-3">Ocupacion: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formRef.ocupacionRef}}
+														{% if formRef.ocupacionRef.errors %}<span class="help-block">{{formRef.ocupacionRef.errors}}</span>{% endif %}
+													</div>
+
+													<label class="control-label col-md-3">Tiempo de conocerlo: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formRef.tiempoRef}}
+														{% if formRef.tiempoRef.errors %}<span class="help-block">{{formRef.tiempoRef.errors}}</span>{% endif %}
+													</div>
+
+										</td>
+
+										</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+</div>
+
+
+														<button type="submit" class="btn blue"><i class="fa fa-pencil"></i> {{action}}</button>													
+														
+																					
+</form>
+								
+  {% endblock %}
+
+
+
+{% block extra_script %}
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/select2/select2.js"></script>
+{% endblock %}
+
+{% block script_ready %}
+	
+	
+	$('.date-picker').datepicker({
+        rtl: Metronic.isRTL(),
+        orientation: "auto",
+        autoclose: true        
+    });
+    
+{% endblock %}

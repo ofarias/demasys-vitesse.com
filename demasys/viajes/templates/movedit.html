@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+
+{% block title %}{{action}} Tipo de  Movimiento{% endblock %}
+{% block content_title %} Tipos de Movimiento {% endblock %}
+
+{% block nav-catalogos %}<li class="active open">{% endblock %}
+{% block nav-gastos %}<li class="active">{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Seguimiento</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="{% url 'catalogos.views.gastos' %}">Tipo Movimiento</a>	
+		<i class="fa fa-angle-right"></i>						
+	</li>
+	<li>
+		<a href="#">{{action}}</a>
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+		<div class="row">
+            <div class="col-md-12">
+								<div class="portlet light bg-inverse form-fit">
+									<div class="portlet-title">
+										<div class="caption">
+											<i class="icon-equalizer font-blue"></i>
+											<span class="caption-subject font-blue bold uppercase">{{action}} Tipo de Movimiento</span>											
+										</div>										
+									</div>
+									<div class="portlet-body form">
+										<!-- BEGIN FORM-->
+										<form action="" class="form-horizontal form-row-seperated" method="post">
+											{% csrf_token %}
+											<div class="form-body">
+												<div class="form-group {% if form.nombe.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.nombre.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.nombre}}
+														{% if form.nombre.errors %}<span class="help-block">{{form.nombre.errors}}</span>{% endif %}
+													</div>
+												</div>																																	
+											</div>
+											<div class="form-body">
+												<div class="form-group {% if form.nombe.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.observaciones.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.observaciones}}
+														{% if form.observaciones.errors %}<span class="help-block">{{form.observaciones.errors}}</span>{% endif %}
+													</div>
+												</div>																																	
+											</div>
+											<div class="form-actions">
+												<div class="row">
+													<div class="col-md-offset-3 col-md-9">
+														<button type="submit" class="btn blue"><i class="fa fa-pencil"></i> {{action}}</button>														
+													</div>
+												</div>
+											</div>
+										</form>
+										<!-- END FORM-->
+									</div>
+								</div>
+            </div>
+         </div>
+{% endblock %}

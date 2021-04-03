@@ -1,0 +1,185 @@
+{% extends "easy_pdf/base.html" %}
+{% block content %}
+
+{% load i18n %}
+{% load url from future %}
+{% load i18n humanize %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+table, th, td {
+    border: 1px solid #4a83b6;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    font-size: 16px;
+    vertical-align: bottom;
+
+}
+
+
+
+h4 {
+    background-color: #4a83b6;
+    color: white;
+    font-size: 20px;
+}
+</style>
+</head>
+<body>
+
+
+
+<table>
+  <tr>
+    <td colspan="2"><center><h4>INGRESOS Y EGRESOS DE PERSONAL DE ENERO 2016</h4></center></td>
+  </tr>  
+   <tr>
+    <td>Egreso de personal de choferes</td>
+    <td>{{form.egresoChoferes}}</td>
+  </tr>
+  <tr>
+    <td>Ingreso de personal de choferes</td>
+    <td>{{form.ingresoChoferes}}</td>
+  </tr>
+   <tr>
+    <td>Egreso de personal Administrativo</td>
+    <td>{{form.egresoAdmin}}</td>
+  </tr>
+   <tr>
+    <td>Ingreso de personal de choferes</td>
+    <td>{{form.ingresoAdmin}}</td>
+   </tr>
+</table>
+<br>
+ <table>
+  <tr>
+    <td colspan="2"><center><h4>HEADCOUNT  DE JULIO A ENERO 2016</h4></center></td>
+  </tr>
+  <tr>
+    <td>Directivo</td>
+    <td>{{form.directivo}}</td>
+  </tr>
+  <tr>
+    <td>Administración</td>
+    <td>{{form.administrativo}}</td>
+  </tr>
+	 <tr>
+    <td>Operaciones</td>
+    <td>{{form.operaciones}}</td>
+  </tr>
+	 <tr>
+    <td>Mantenimiento</td>
+    <td>{{form.mantenimiento}}</td>
+  </tr>
+	 <tr>
+    <td>Choferes</td>
+    <td>{{form.choferes}}</td>
+  </tr>
+	 <tr>
+    <td>Total de personal</td>
+    <td>{{form.total}}</td>
+  </tr>
+</table>
+
+<br>
+ <table>
+  <tr>
+    <td colspan="3"><center><h4>ROTACION DE PERSONAL ENERO 2016</h4></center></td>
+  </tr>
+  <tr>
+    <td>Mes</td>
+    <td>Mov</td>
+	<td>%</td>
+  </tr>
+	<tr>
+    <td>{{form.mes}}</td>
+    <td>{{form.mov}}</td>
+	<td>{{form.porcentaje}}</td>
+
+  </tr>
+</table>
+
+
+<br>
+ <table>
+  <tr>
+    <td colspan="4"><center><h4>NOMINA ENERO 2016 SIN IMPUESTO</h4></center></td>
+  </tr>
+  <tr>
+    <td>MES</td>
+    <td>OPERADOR</td>
+	<td>ADMINISTRATIVO</td>
+	  <td>TOTAL</td>
+
+  </tr>
+	<tr>
+    <td>{{nom.mes}}</td>
+    <td>{{nom.operador}}</td>
+	<td>{{nom.administrativo}}</td>
+	<td>{{nom.total}}</td>
+
+  </tr>
+</table>
+
+
+<br>
+ <table>
+  <tr>
+    <td colspan="5"><center><h4>VENTAS BRUTAS</h4></center></td>
+  </tr>
+  <tr>
+    <td>MES</td>
+	<td>CLIENTE</td>
+    <td>2015</td>
+	<td>2016</td>
+	<td>CRECIMIENTO O DECRECIMIENTO</td>
+
+  </tr>
+	<tr>
+    <td>{{vb.mes}}</td>
+    <td>{{vb.cliente}}</td>
+	<td>{{vb.actual}}</td>
+	<td>{{vb.anterior}}</td>
+	<td>{{vb.deocre}}</td>
+
+  </tr>
+</table>
+
+
+<br>
+ <table>
+  <tr>
+    <td colspan="5"><center><h4>VENTAS NETAS</h4></center></td>
+  </tr>
+  <tr>
+    <td>MES</td>
+	<td>CLIENTE</td>
+    <td>2015</td>
+	<td>2016</td>
+	<td>CRECIMIENTO O DECRECIMIENTO</td>
+
+  </tr>
+	<tr>
+    <td>{{vn.mes}}</td>
+    <td>{{vn.cliente}}</td>
+	<td>{{vn.actual}}</td>
+	<td>{{vn.anterior}}</td>
+	<td>{{vn.deocre}}</td>
+
+  </tr>
+</table>
+</body>
+
+</html>
+													
+{% endblock %}

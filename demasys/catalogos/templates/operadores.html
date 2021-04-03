@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load bootstrap_pagination %}
+
+{% block title %}Operadores{% endblock %}
+{% block content_title %} Catálogo de Operadores{% endblock %}
+
+{% block nav-catalogos %}<li class="active open">{% endblock %}
+{% block nav-operadores %}<li class="active">{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Catalogos</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Operadores</a>							
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+		<div class="row">
+            <div class="col-md-12">
+				<div class="portlet box grey-cascade">
+						<div class="portlet-title">
+							<div class="caption">
+								Listado de operadores
+							</div>							
+						</div>
+						<div class="portlet-body">
+							<div class="table-toolbar">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="btn-group">
+								{% if perms.catalogos.add_operador %}
+								<a href="{% url 'catalogos.views.operadoresadd' %}" class="btn blue">
+											Agregar nuevo <i class="fa fa-plus"></i>
+								</a>
+								{% else %}
+								<div class="alert alert-dismissable alert-danger">
+									<button class="close" aria-hidden="true" data-dismiss="alert" type="button"></button>
+									{{user.get_short_name}} no tiene permisos para Agregar.<br/> Solicite permisos al administrador.
+								</div>
+								{% endif %}
+
+											
+										</div>
+									</div>
+									<div class="col-md-6">
+										
+									</div>
+								</div>
+							</div>
+							<div class="table-scrollable">
+								<table class="table table-striped table-bordered table-hover" id="sample_1">
+								<thead>
+								<tr>
+									<th>
+										 Nombre
+									</th>
+									<th>
+										 Apellido Paterno
+									</th>
+									<th>
+										 Apellido Materno
+									</th>
+									<th>
+										 Teléfono
+									</th>
+									<th>
+										 Activo
+									</th>
+									<th>
+										 Editar
+									</th>
+									<th>
+										 Eliminar
+									</th>								
+								</tr>
+								</thead>
+								<tbody>
+								{% for operador in operadores %}
+								<tr class="odd gradeX">
+									<td>
+										{{operador.nombre}}
+									</td>
+									<td>
+										{{operador.apellido_paterno}}
+									</td>
+									<td>
+										{{operador.apellido_materno}}
+									</td>
+									<td>
+										{{operador.telefono}}
+									</td>
+									<td>
+										{% if operador.activo %}
+											<i class="glyphicon glyphicon-ok font-green"></i>
+										{% else %}
+											<i class="glyphicon glyphicon-remove font-red"></i>
+										{% endif %}
+									</td>
+									<td>
+								{% if perms.catalogos.change_operador %}
+									<a href="{% url 'catalogos.views.operadoresedit' operador.pk %}" class="btn default btn-xs blue-stripe">Editar</a>
+								{% else %}
+								<div class="alert alert-dismissable alert-danger">
+									<button class="close" aria-hidden="true" data-dismiss="alert" type="button"></button>
+									{{user.get_short_name}} no tiene permisos para Editar.<br/> Solicite permisos al administrador.
+								</div>
+								{% endif %}
+										 
+
+
+									</td>
+									<td>
+								{% if perms.catalogos.delete_operador %}
+									<a href="{% url 'catalogos.views.operadoresdelete' operador.pk %}" onclick="return confirm('Seguro que desea eliminar al operador: {{operador}}?')" class="btn default btn-xs red-stripe">Eliminar</a>
+								{% else %}
+								<div class="alert alert-dismissable alert-danger">
+									<button class="close" aria-hidden="true" data-dismiss="alert" type="button"></button>
+									{{user.get_short_name}} no tiene permisos para Eliminar.<br/> Solicite permisos al administrador.
+								</div>
+								{% endif %}
+
+										 
+									</td>
+								</tr>
+								{% endfor %}							
+								</tbody>
+								</table>
+								{% bootstrap_paginate operadores %}
+							</div>
+						</div>
+					</div>					
+            </div>
+         </div>
+{% endblock %}

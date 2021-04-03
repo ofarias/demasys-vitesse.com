@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+
+{% block title %}{{action}} Económico{% endblock %}
+{% block content_title %} Catálogo de Económicos {% endblock %}
+
+{% block nav-catalogos %}<li class="active open">{% endblock %}
+{% block nav-economicos %}<li class="active">{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Catalogos</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="{% url 'catalogos.views.economicos' %}">Económicos</a>	
+		<i class="fa fa-angle-right"></i>						
+	</li>
+	<li>
+		<a href="#">{{action}}</a>
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+		<div class="row">
+            <div class="col-md-12">
+								<div class="portlet light bg-inverse form-fit">
+									<div class="portlet-title">
+										<div class="caption">
+											<i class="icon-equalizer font-blue"></i>
+											<span class="caption-subject font-blue bold uppercase">{{action}} Económico</span>											
+										</div>										
+									</div>
+									<div class="portlet-body form">
+										<!-- BEGIN FORM-->
+										<form action="" class="form-horizontal form-row-seperated" method="post">
+											{% csrf_token %}
+											<div class="form-body">
+												<div class="form-group {% if form.color.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.color.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.color}}
+														{% if form.color.errors %}<span class="help-block">{{form.color.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.modelo.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.modelo.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.modelo}}
+														{% if form.modelo.errors %}<span class="help-block">{{form.modelo.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.placas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.placas.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.placas}}
+														{% if form.placas.errors %}<span class="help-block">{{form.placas.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.pasa_como.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.pasa_como.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.pasa_como}}
+														{% if form.pasa_como.errors %}<span class="help-block">{{form.pasa_como.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.saldo.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.saldo.label}}</label>
+													<div class="col-md-9">
+														{{form.saldo}}
+														{% if form.saldo.errors %}<span class="help-block">{{form.saldo.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.saldo_observaciones.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.saldo_observaciones.label}}</label>
+													<div class="col-md-9">
+														{{form.saldo_observaciones}}
+														{% if form.saldo_observaciones.errors %}<span class="help-block">{{form.saldo_observaciones.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.activo.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.activo.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														<div class="checkbox-list" data-error-container="#form_2_services_error">
+														<label>
+														{{form.activo}} Si
+														</div>
+														{% if form.activo.errors %}<span class="help-block">{{form.activo.errors}}</span>{% endif %}
+													</div>
+												</div>												
+											</div>
+											<div class="form-actions">
+												<div class="row">
+													<div class="col-md-offset-3 col-md-9">
+														<button type="submit" class="btn blue"><i class="fa fa-pencil"></i> {{action}}</button>														
+													</div>
+												</div>
+											</div>
+										</form>
+										<!-- END FORM-->
+									</div>
+								</div>
+            </div>
+         </div>
+{% endblock %}

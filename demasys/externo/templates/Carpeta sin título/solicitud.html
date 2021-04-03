@@ -1,0 +1,877 @@
+{% extends 'baseOut.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load i18n humanize %}
+
+{% block title %}Solicitud de Empleo{% endblock %}
+{% block content_title %} Solicitud de Empleo {% endblock %}
+
+{% block nav-sol2 %}<li class="active">{% endblock %} <!-- se debe definir en Base.html para que se seleccione--> 
+	
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/bootstrap-datepicker/css/datepicker3.css">
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/select2/select2.css"/>
+
+{% endblock %}
+
+
+
+{% block actions %}
+{% endblock %}
+{% block content %}
+
+	
+  	<form action="" class="form-horizontal form-row-seperated" method="post">
+	
+		{% csrf_token %}
+
+
+<div class="row">	
+	<div class="col-lg-6">
+
+												<div class="form-group {% if form.fechaSol.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Fecha: </label>
+												<div class="col-md-9">
+													<div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+														{{form.fechaSol}}
+														<span class="input-group-btn">
+														  <button class="btn blue" type="button">
+														       <i class="fa fa-calendar"></i>
+														  </button>
+														</span>
+													 </div>
+														{% if form.fechaSol.errors %}<span class="help-block">{{form.fechaSol.errors}}</span >{% endif %}
+													</div >
+													</div >
+</div>
+<div class="col-lg-6">
+								<div class="form-group {% if form.puestoSol.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Puesto Solicitado: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.puestoSol}}
+														{% if form.puestoSol.errors %}<span class="help-block">{{form.puestoSol.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+<div class="col-lg-6">
+
+											<div class="form-group {% if form.sueldo.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Sueldo Mensual Deseado: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.sueldo}}
+														{% if form.sueldo.errors %}<span class="help-block">{{form.sueldo.errors}}</span>{% endif %}
+													</div>
+												</div>	
+</div>
+
+<div class="col-lg-6">
+	&nbsp;
+</div>	
+<div class="col-lg-6">
+	&nbsp;
+</div>
+
+<br/><br/><br/><h3>
+
+
+
+											<span class="caption-subject font-blue bold uppercase">DATOS PERSONALES 
+											</span>	</h3>
+											<br/><br/>
+<hr/><div class="col-lg-6">										
+											<div class="form-group {% if form.nombreCompleto.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Nombre Completo: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.nombreCompleto}}
+														{% if form.nombreCompleto.errors %}<span class="help-block">{{form.nombreCompleto.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+<div class="col-lg-6">
+												<div class="form-group {% if form.edad.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Edad:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.edad}}
+														{% if form.edad.errors %}<span class="help-block">{{form.edad.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+
+
+</div>
+<div class="col-lg-6">
+
+												<div class="form-group {% if form.domicilio.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Domicilio: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.domicilio}}
+														{% if form.domicilio.errors %}<span class="help-block">{{form.domicilio.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+<div class="col-lg-6">
+												
+												<div class="form-group {% if form.colonia.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Colonia: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.colonia}}
+														{% if form.colonia.errors %}<span class="help-block">{{form.colonia.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+<div class="col-lg-6">							
+												<div class="form-group {% if form.cp.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">CP:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.cp}}
+														{% if form.cp.errors %}<span class="help-block">{{form.cp.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+<div class="col-lg-6">
+											<div class="form-group {% if form.telefono.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Teléfono local: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.telefono}}
+														{% if form.telefono.errors %}<span class="help-block">{{form.telefono.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+<div class="col-lg-6">
+												<div class="form-group {% if form.celular.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Celular: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.celular}}
+														{% if form.celular.errors %}<span class="help-block">{{form.celular.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+<div class="col-lg-6">							
+												<div class="form-group {% if form.lugarNacimiento.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Lugar de Nacimiento: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.lugarNacimiento}}
+														{% if form.lugarNacimiento.errors %}<span class="help-block">{{form.lugarNacimiento.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+<div class="col-lg-6">
+												
+													<div class="form-group {% if form.fechaNacimiento.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Fecha Nacimiento: </label>
+												<div class="col-md-9">
+													<div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+														{{form.fechaNacimiento}}
+														<span class="input-group-btn">
+														  <button class="btn blue" type="button">
+														       <i class="fa fa-calendar"></i>
+														  </button>
+														</span>
+													 </div>
+														{% if form.fechaNacimiento.errors %}<span class="help-block">{{form.fechaNacimiento.errors}}</span >{% endif %}
+													</div >
+													</div >
+</div>
+<div class="col-lg-6">
+													<div class="form-group {% if form.nacionalidad.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Nacionalidad:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.nacionalidad}}
+														{% if form.nacionalidad.errors %}<span class="help-block">{{form.nacionalidad.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+<div class="col-lg-6">
+												<div class="form-group {% if form.viveCon.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Vive con:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.viveCon}}
+														{% if form.viveCon.errors %}<span class="help-block">{{form.viveCon.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+<div class="col-lg-6">
+												<div class="form-group {% if form.dependientes.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Dependientes: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.dependientes}}
+														{% if form.dependientes.errors %}<span class="help-block">{{form.dependientes}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+
+
+
+<div class="col-lg-6">
+												<div class="form-group {% if form.sexo.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Sexo:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.sexo}}
+														{% if form.sexo.errors %}<span class="help-block">{{form.sexo.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												
+
+
+												<div class="form-group {% if form.email.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Email: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.email}}
+														{% if form.email.errors %}<span class="help-block">{{form.email.errors}}</span>{% endif %}
+													</div>
+												</div>
+	<p hidden>{{form.estatus}}</p>
+
+
+</div>
+<div class="col-lg-6">
+							<div class="form-group {% if form.estadoCivil.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Estado Civil:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.estadoCivil}}
+														{% if form.estadoCivil.errors %}<span class="help-block">{{form.estadoCivil.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+
+<div class="col-lg-6">
+	&nbsp;
+</div>	
+<div class="col-lg-6">
+	&nbsp;
+</div>
+
+<br/><br/><br/><h3>
+
+
+
+											<span class="caption-subject font-blue bold uppercase">DOCUMENTACION 
+											</span>	</h3>
+											<br/><br/><hr/>
+
+<div class="col-lg-6">
+
+					<div class="form-group {% if form.rfc.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Reg. Fed. Contribuyentes: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.rfc}}
+														{% if form.rfc.errors %}<span class="help-block">{{form.rfc.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+<div class="col-lg-6">
+
+					<div class="form-group {% if form.nss.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Afiliación Seguro Social No: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.nss}}
+														{% if form.nss.errors %}<span class="help-block">{{form.nss.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+
+
+<div class="col-lg-6">
+
+					<div class="form-group {% if form.numCartilla.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Cartilla Servicio Militar No: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.numCartilla}}
+														{% if form.numCartilla.errors %}<span class="help-block">{{form.numCartilla.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+
+<div class="col-lg-6">
+
+					<div class="form-group {% if form.pasaporte.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Pasaporte No: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.pasaporte}}
+														{% if form.pasaporte.errors %}<span class="help-block">{{form.pasaporte.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+<div class="col-lg-6">
+
+					<div class="form-group {% if form.numLicencia.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Clase y No. de Licencia: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.numLicencia}}
+														{% if form.numLicencia.errors %}<span class="help-block">{{form.numLicencia.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+
+<div class="col-lg-6">
+							<div class="form-group {% if form.tipoLicencia.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Tiene Licencia de Manejo:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.tieneLicencia}}
+														{% if form.tieneLicencia.errors %}<span class="help-block">{{form.tieneLicencia.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+<div class="col-lg-6">
+
+					<div class="form-group {% if form.curp.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">CURP: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.curp}}
+														{% if form.curp.errors %}<span class="help-block">{{form.curp.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+	<div class="col-lg-6">
+
+					<div class="form-group {% if form.afore.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Afore: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.afore}}
+														{% if form.afore.errors %}<span class="help-block">{{form.afore.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+
+
+
+<br/><br/><br/><h3>
+
+
+
+											<span class="caption-subject font-blue bold uppercase">ESTADO DE SALUD Y HABITOS PERSONALES 
+											</span>	</h3>
+											<br/><br/><hr/>
+
+<div class="col-lg-6">
+							<div class="form-group {% if form.salud.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Su Estado de Salud es:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.salud}}
+														{% if form.salud.errors %}<span class="help-block">{{form.salud.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+
+<div class="col-lg-6">
+							<div class="form-group {% if form.cronico.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Padece enfermedad Crónica:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.cronico}}
+														{% if form.cronico.errors %}<span class="help-block">{{form.cronico.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+
+<div class="col-lg-6">
+
+					<div class="form-group {% if form.descripcion.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Descripcion Enfermedad Cronica: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.descripcion}}
+														{% if form.descripcion.errors %}<span class="help-block">{{form.descripcion.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+
+<div class="col-lg-6">
+							<div class="form-group {% if form.deporte.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Practica algun Deporte:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.deporte}}
+														{% if form.deporte.errors %}<span class="help-block">{{form.deporte.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+
+<div class="col-lg-6">
+							<div class="form-group {% if form.club.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Pertenece algun Club Social:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.club}}
+														{% if form.club.errors %}<span class="help-block">{{form.club.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+<div class="col-lg-12">
+
+					<div class="form-group {% if form.hobbie.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿En que ocupa su tiempo libre?: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.hobbie}}
+														{% if form.hobbie.errors %}<span class="help-block">{{form.hobbie.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+
+<div class="col-lg-12">
+
+					<div class="form-group {% if form.meta.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Cual es su meta de vida?: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.meta}}
+														{% if form.meta.errors %}<span class="help-block">{{form.meta.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+</div>
+
+
+<br/><br/><br/><h3>
+
+
+
+											<span class="caption-subject font-blue bold uppercase">CONOCIMIENTOS GENERALES 
+											</span>	</h3>
+											<br/><br/><hr/>
+
+
+						<div class="form-group {% if form.idiomas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Idiomas que domina:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.idiomas}}
+														{% if form.idiomas.errors %}<span class="help-block">{{form.idiomas.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+
+
+
+
+						<div class="form-group {% if form.equipo.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Maquinas y o Equipo de Oficina que sepa manejar:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.equipo}}
+														{% if form.equipo.errors %}<span class="help-block">{{form.equipo.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+
+
+
+
+						<div class="form-group {% if form.funciones.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Funciones de Oficina que domine:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.funciones}}
+														{% if form.funciones.errors %}<span class="help-block">{{form.funciones.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+
+
+
+
+						<div class="form-group {% if form.otros.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Otros Trabajos o Funciones que domine:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.otros}}
+														{% if form.otros.errors %}<span class="help-block">{{form.otros.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+
+
+<div class="col-lg-6">
+	&nbsp;
+</div>	
+<div class="col-lg-6">
+	&nbsp;
+</div>
+
+
+
+<br/><br/><br/>
+
+
+
+
+
+
+
+
+<div class="col-lg-6">
+	&nbsp;
+</div>	
+<div class="col-lg-6">
+	&nbsp;
+</div>
+
+<br/><br/><br/>
+
+
+<div class="col-lg-6">
+	&nbsp;
+</div>	
+<div class="col-lg-6">
+	&nbsp;
+</div>
+
+<br/><br/><br/><h3>
+
+
+
+											<span class="caption-subject font-blue bold uppercase">DATOS GENERALES 
+											</span>	</h3>
+											<br/><br/><hr/>
+
+
+												<div class="form-group {% if form.medio.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Como se enteró del Empleo?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.medio}}
+														{% if form.medio.errors %}<span class="help-block">{{form.medio.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+
+
+												<div class="form-group {% if form.afianzado.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Ha estado Afianzado?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.afianzado}}
+														{% if form.afianzado.errors %}<span class="help-block">{{form.afianzado.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+
+
+												<div class="form-group {% if form.ciaFianza.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Nombre CIA<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.ciaFianza}}
+														{% if form.ciaFianza.errors %}<span class="help-block">{{form.ciaFianza.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+
+												<div class="form-group {% if form.seguro.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Tiene Seguro de Vida?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.seguro}}
+														{% if form.seguro.errors %}<span class="help-block">{{form.seguro.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.ciaSeguro.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">De que CIA<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.ciaSeguro}}
+														{% if form.ciaSeguro.errors %}<span class="help-block">{{form.ciaSeguro.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.residencia.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Esta dispuesto a cambiar de lugar de Residencia?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.residencia}}
+														{% if form.residencia.errors %}<span class="help-block">{{form.residencia.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.razonReside.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Razones:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.razonReside}}
+														{% if form.razonReside.errors %}<span class="help-block">{{form.razonReside.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.familiares.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Tienes Familiares que trabajen en la Empresa?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.familiaresT}}
+														{% if form.familiaresT.errors %}<span class="help-block">{{form.familiaresT.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.nombres.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Nómbrelos:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.nombres}}
+														{% if form.nombres.errors %}<span class="help-block">{{form.nombres.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.sindicato.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Pertenece a algun Sindicato?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.sindicato}}
+														{% if form.sindicato.errors %}<span class="help-block">{{form.sindicato.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.nombreSin.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿A cual?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.nombreSin}}
+														{% if form.nombreSin.errors %}<span class="help-block">{{form.nombreSin.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.viajar.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Puede Viajar?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.viajar}}
+														{% if form.viajar.errors %}<span class="help-block">{{form.viajar.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.razonViaje.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Razones<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.razonViaje}}
+														{% if form.razonViaje.errors %}<span class="help-block">{{form.razonViaje.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.presentar.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Fecha en que podria presentarse a trabajar?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.presentar}}
+														{% if form.presentar.errors %}<span class="help-block">{{form.presentar.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+
+
+<div class="col-lg-6">
+	&nbsp;
+</div>	
+<div class="col-lg-6">
+	&nbsp;
+</div>
+
+<br/><br/><br/><h3>
+
+
+
+											<span class="caption-subject font-blue bold uppercase">DATOS ECONOMICOS 
+											</span>	</h3>
+											<br/><br/><hr/>
+
+
+
+												<div class="form-group {% if form.ingreso.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Tiene otros Ingresos?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.ingreso}}
+														{% if form.ingreso.errors %}<span class="help-block">{{form.ingreso.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.modo.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Cuales?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.modo}}
+														{% if form.modo.errors %}<span class="help-block">{{form.modo.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.importe.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Importe Mensual:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.importe}}
+														{% if form.importe.errors %}<span class="help-block">{{form.importe.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.casa.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Vive en Casa Propia?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.casa}}
+														{% if form.casa.errors %}<span class="help-block">{{form.casa.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.importeCasa.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Importe de la Casa:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.importeCasa}}
+														{% if form.importeCasa.errors %}<span class="help-block">{{form.importeCasa.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.auto.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Tiene Auto?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.auto}}
+														{% if form.auto.errors %}<span class="help-block">{{form.auto.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.placas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Placas:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.placas}}
+														{% if form.placas.errors %}<span class="help-block">{{form.placas.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.marca.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Marca:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.marca}}
+														{% if form.marca.errors %}<span class="help-block">{{form.marca.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.modelo.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Modelo:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.modelo}}
+														{% if form.modelo.errors %}<span class="help-block">{{form.modelo.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.ingresos.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Ingresos:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.ingresos}}
+														{% if form.ingresos.errors %}<span class="help-block">{{form.ingresos.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.egresos.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Egresos:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.egresos}}
+														{% if form.egresos.errors %}<span class="help-block">{{form.egresos.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.ahorros.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Ahorros:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.ahorros}}
+														{% if form.ahorros.errors %}<span class="help-block">{{form.ahorros.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+
+												<div class="form-group {% if form.total.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Total:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.total}}
+														{% if form.total.errors %}<span class="help-block">{{form.total.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.conyuge.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Su conyuge Trabaja?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.conyuge}}
+														{% if form.conyuge.errors %}<span class="help-block">{{form.conyuge.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.ingresoCony.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Ingresos Conyuge<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.ingresoCony}}
+														{% if form.ingresoCony.errors %}<span class="help-block">{{form.ingresoCony.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.renta.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Paga Renta?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.renta}}
+														{% if form.renta.errors %}<span class="help-block">{{form.renta.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.rentaMensual.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Importe Renta Mensual:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.rentaMensual}}
+														{% if form.rentaMensual.errors %}<span class="help-block">{{form.rentaMensual.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.deudas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Tiene Deudas?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.deudas}}
+														{% if form.deudas.errors %}<span class="help-block">{{form.deudas.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.impDeuda.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Importe Deuda:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.impDeuda}}
+														{% if form.impDeuda.errors %}<span class="help-block">{{form.impDeuda.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+
+
+												<div class="form-group {% if form.abonoMensual.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Abono Mensual Deuda:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-8">
+														{{form.abonoMensual}}
+														{% if form.abonoMensual.errors %}<span class="help-block">{{form.impDeuda.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+
+
+
+<!--////////////////////////////////////////////-->
+
+												
+												
+											
+												
+											<!--	
+												<a href="{% url 'empleados.views.index' %}" class="btn default blue-stripe">
+															<i class="glyphicon glyphicon-arrow-left"></i> Regresar
+														</a>	
+												-->
+												
+												
+
+														<button type="submit" class="btn blue"><i class="fa fa-pencil"></i> {{action}}</button>													
+														
+																					
+</form>
+								
+  {% endblock %}
+
+
+
+{% block extra_script %}
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/select2/select2.js"></script>
+{% endblock %}
+
+{% block script_ready %}
+	
+	
+	$('.date-picker').datepicker({
+        rtl: Metronic.isRTL(),
+        orientation: "auto",
+        autoclose: true        
+    });
+    
+{% endblock %}

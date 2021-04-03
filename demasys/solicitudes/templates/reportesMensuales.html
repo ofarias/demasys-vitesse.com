@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load bootstrap_pagination %}
+
+{% block title %}Lista de Movimientos {% endblock %}
+{% block content_title %} Reporte de Incidencias Unidades{% endblock %}
+
+{% block nav-catalogos %}<li class="active open">{% endblock %}
+{% block nav-movInv %}<li class="active">{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Incidentes</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Lista</a>							
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+		<div class="row">
+            <div class="col-md-12">
+				<div class="portlet box grey-cascade">
+						<div class="portlet-title">
+							<div class="caption">
+								Status de Unidades
+							</div>							
+						</div>
+						<div class="portlet-body">
+							
+							<div class="table-scrollable">
+							<table class="table table-striped table-bordered table-hover" id="sample_1">
+							<thead>
+							<tr>
+								<th>
+									Mes
+								</th>
+								<th>
+									 Reporta 
+								</th>
+							</tr>
+							</thead>
+							<tbody>
+							{% for reporte in reportes %}
+							<!--<tr class="odd gradeX">-->
+							<tr class="odd gradeX {{movimiento.get_tipo_display}}">
+								<td>
+									{{reporte.mes}}
+								</td>
+								<td>
+									<a href="{% url 'reportes' reporte.pk %}" target="_blank">
+															<i class="fa fa-file-pdf-o"></i>
+															Imprime Reporte Mensual. 
+														</a>
+								</td>
+							</tr>
+							{% endfor %}							
+							</tbody>
+							</table>
+							{% bootstrap_paginate reportes %}
+							</div>
+						</div>
+					</div>					
+            </div>
+         </div>
+{% endblock %}
+
+
+
+
+

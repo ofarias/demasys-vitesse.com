@@ -1,0 +1,234 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load i18n humanize %}
+
+{% block title %}{{action}} Solicitud de Empleo{% endblock %}
+{% block content_title %} Solicitud de Empleo {% endblock %}
+
+{% block nav-sol2 %}<li class="active">{% endblock %} <!-- se debe definir en Base.html para que se seleccione--> 
+	
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/bootstrap-datepicker/css/datepicker3.css">
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/select2/select2.css"/>
+
+{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>
+		<i class="fa fa-archive"></i>		
+		<a href="#">Recursos Humanos</a>	<!-- Esto se cambia con la vista de la aplicacion actual, que debe tener la classe Index-->
+		<i class="fa fa-angle-right"></i>					
+	</li>	
+	<li>
+		<i class="fa fa-pencil-square-o"></i>
+		<a href="#">Solicitud de Empleo</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+{% block content %}
+
+	
+  	<form action="" class="form-horizontal form-row-seperated" method="post">
+	
+										{% csrf_token %}
+
+
+<br/><h3>
+
+
+
+											<span class="caption-subject font-blue bold uppercase">DATOS GENERALES
+											</span>	</h3>
+											<br/><br/><hr/>
+
+<div class="col-lg-6">
+												<div class="form-group {% if formGeneralesForm.medio.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Como se entero del Empleo?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														<p hidden>{{ formGeneralesForm.idsolicitante }}</p>
+														{{formGeneralesForm.medio}}
+														{% if formGeneralesForm.medio.errors %}<span class="help-block">{{formGeneralesForm.medio.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+<div class="col-lg-6">
+												<div class="form-group {% if formGeneralesForm.afianzado.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Ha estado Afianzado?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formGeneralesForm.afianzado}}
+														{% if formGeneralesForm.afianzado.errors %}<span class="help-block">{{formGeneralesForm.afianzado.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+<div class="col-lg-6">
+												<div class="form-group {% if formGeneralesForm.ciaFianza.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Nombre CIA<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formGeneralesForm.ciaFianza}}
+														{% if formGeneralesForm.ciaFianza.errors %}<span class="help-block">{{formGeneralesForm.ciaFianza.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+<div class="col-lg-6">
+												<div class="form-group {% if formGeneralesForm.seguro.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Tiene Seguro de Vida?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formGeneralesForm.seguro}}
+														{% if formGeneralesForm.seguro.errors %}<span class="help-block">{{formGeneralesForm.seguro.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+
+<div class="col-lg-6">
+												<div class="form-group {% if formGeneralesForm.ciaSeguro.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">De que CIA<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formGeneralesForm.ciaSeguro}}
+														{% if formGeneralesForm.ciaSeguro.errors %}<span class="help-block">{{formGeneralesForm.ciaSeguro.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+
+<div class="col-lg-6">
+												<div class="form-group {% if formGeneralesForm.residencia.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Esta dispuesto a cambiar de lugar de Recidencia?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formGeneralesForm.residencia}}
+														{% if formGeneralesForm.residencia.errors %}<span class="help-block">{{formGeneralesForm.residencia.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+<div class="col-lg-6">
+												<div class="form-group {% if formGeneralesForm.razonReside.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Razones:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formGeneralesForm.razonReside}}
+														{% if formGeneralesForm.razonReside.errors %}<span class="help-block">{{formGeneralesForm.razonReside.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+
+<div class="col-lg-6">
+												<div class="form-group {% if formGeneralesForm.familiares.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Tienes Familiares que trabajen en la Empresa?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formGeneralesForm.familiares}}
+														{% if formGeneralesForm.familiares.errors %}<span class="help-block">{{formGeneralesForm.familiares.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+<div class="col-lg-6">
+												<div class="form-group {% if formGeneralesForm.nombres.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Nombrelos:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formGeneralesForm.nombres}}
+														{% if formGeneralesForm.nombres.errors %}<span class="help-block">{{formGeneralesForm.nombres.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+<div class="col-lg-6">
+												<div class="form-group {% if formGeneralesForm.sindicato.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Pertenece a algun Sintidato?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formGeneralesForm.sindicato}}
+														{% if formGeneralesForm.sindicato.errors %}<span class="help-block">{{formGeneralesForm.sindicato.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+<div class="col-lg-6">
+												<div class="form-group {% if formGeneralesForm.nombreSin.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿A cual?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formGeneralesForm.nombreSin}}
+														{% if formGeneralesForm.nombreSin.errors %}<span class="help-block">{{formGeneralesForm.nombreSin.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+<div class="col-lg-6">
+												<div class="form-group {% if formGeneralesForm.viajar.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Puede Viajar?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formGeneralesForm.viajar}}
+														{% if formGeneralesForm.viajar.errors %}<span class="help-block">{{formGeneralesForm.viajar.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+<div class="col-lg-6">
+												<div class="form-group {% if formGeneralesForm.razonViaje.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Razones<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formGeneralesForm.razonViaje}}
+														{% if formGeneralesForm.razonViaje.errors %}<span class="help-block">{{formGeneralesForm.razonViaje.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+
+<div class="col-lg-6">
+												<div class="form-group {% if formGeneralesForm.presentar.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">¿Fecha en que podria presentarce a trabajar?<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{formGeneralesForm.presentar}}
+														{% if formGeneralesForm.presentar.errors %}<span class="help-block">{{formGeneralesForm.presentar.errors}}</span>{% endif %}
+													</div>
+												</div>
+</div>
+
+
+											
+												
+											<!--	
+												<a href="{% url 'empleados.views.index' %}" class="btn default blue-stripe">
+															<i class="glyphicon glyphicon-arrow-left"></i> Regresar
+														</a>	
+												-->
+												
+												
+
+														<button type="submit" class="btn blue"><i class="fa fa-pencil"></i> {{action}}</button>													
+														
+																					
+																			
+										</form>	
+								
+  {% endblock %}
+
+
+
+{% block extra_script %}
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/select2/select2.js"></script>
+{% endblock %}
+
+{% block script_ready %}
+	
+	
+	$('.date-picker').datepicker({
+        rtl: Metronic.isRTL(),
+        orientation: "auto",
+        autoclose: true        
+    });
+    
+{% endblock %}

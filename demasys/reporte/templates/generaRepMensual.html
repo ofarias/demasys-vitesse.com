@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% block title %}{{action}} Asignación de Ingresos y Egresos{% endblock %}
+{% block content_title %} Registro de Ingresos y Egresos {% endblock %}
+{% block nav-repAgre %}<li class="active">{% endblock %}
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>
+		<i class="fa fa-money"></i>		
+		<a href="{% url 'reporte.views.agregar' %}">Ingresos y Egresos</a>
+								
+	</li>
+	
+</ul>
+{% endblock %}
+{% block actions %}
+{% endblock %}
+{% block content %}
+<div class="portlet box grey-cascade">
+	<div style=" text-align:center; font-size: 20px; font-family: 'Open Sans',sans-serif; color:white;">
+										<div class="portlet-title">
+											<div class="caption" >
+								
+							</div>							
+						</div>
+						</div>
+<style type="text/css">ul{list-style:none;}</style>
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light bg-inverse form-fit">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="icon-equalizer font-blue"></i>
+					<span class="caption-subject font-blue bold uppercase"> Generador de Reportes </span>	
+				</div>										
+			</div>
+
+			<div class="portlet-body form">
+				<!-- BEGIN FORM-->
+				<form action="" class="form-horizontal form-row-seperated" method="post" name="Per">
+					{% csrf_token %}
+					<div class="form-body">
+						
+						<div class="form-group ">
+							<label class="control-label col-md-2">Mes: <span class="required" aria-required="true"> * </span></label>
+							<div class="col-md-9">
+								{{form.mes}}
+							</div>
+						</div>
+						<div class="form-group ">
+							<label class="control-label col-md-2">Texto 1 Nomimas Hoja 3: <span class="required" aria-required="true"> * </span></label>
+							<div class="col-md-9">
+								{{form.text_nom1}}
+							</div>
+						</div>
+						<div class="form-group ">
+							<label class="control-label col-md-2">Texto 2 Nomimas Hoja 3: <span class="required" aria-required="true"> * </span></label>
+							<div class="col-md-9">
+								{{form.text_nom2}}
+							</div>
+						</div>
+						<div class="form-group ">
+							<label class="control-label col-md-2">Texto 3 Nomimas Hoja 3: <span class="required" aria-required="true"> * </span></label>
+							<div class="col-md-9">
+								{{form.text_nom3}}
+							</div>
+						</div>
+						<div class="form-group ">
+							<label class="control-label col-md-2">Texto 4 Nomimas Hoja 3: <span class="required" aria-required="true"> * </span></label>
+							<div class="col-md-9">
+								{{form.text_nom4}}
+							</div>
+						</div>
+						<div class="form-group ">
+							<label class="control-label col-md-2">Texto 5 Nomimas Hoja 3: <span class="required" aria-required="true"> * </span></label>
+							<div class="col-md-9">
+								{{form.text_nom5}}
+							</div>
+						</div>
+						<div class="portlet-title">
+						<div class="caption">
+							<i class="icon-equalizer font-blue"></i>
+							<span class="caption-subject font-blue bold uppercase"> Organigrama </span>	
+						</div>										
+						</div>
+						<div class="form-group ">
+							<label class="control-label col-md-2">Nombre Direccion: <span class="required" aria-required="true"> * </span></label>
+							<div class="col-md-9">
+								{{form.org_dir}}
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-2">Nombre Jefe de Taller: <span class="required" aria-required="true"> * </span></label>
+							<div class="col-md-9">
+								{{form.org_jft}}
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-2">Nombre Jefe de Administracion: <span class="required" aria-required="true"> * </span></label>
+							<div class="col-md-9">
+								{{form.org_jfa}}
+							</div>
+						</div>
+						<div class="form-group ">
+							<label class="control-label col-md-2">Nombre Facturacion: <span class="required" aria-required="true"> * </span></label>
+							<div class="col-md-9">
+								{{form.org_f}}
+							</div>
+						</div>
+						<div class="form-group ">
+							<label class="control-label col-md-2">Nombre Coordinador Logistica Inversa: <span class="required" aria-required="true"> * </span></label>
+							<div class="col-md-9">
+								{{form.org_cli}}
+							</div>
+						</div>
+						<div class="form-group ">
+							<label class="control-label col-md-2">Nombre Coordinador de LG: <span class="required" aria-required="true"> * </span></label>
+							<div class="col-md-9">
+								{{form.org_clg}}
+							</div>
+						</div>
+						<div class="form-group ">
+							<label class="control-label col-md-2">Nombre Jefe de Operaciones: <span class="required" aria-required="true"> * </span></label>
+							<div class="col-md-9">
+								{{form.org_jfo}}
+							</div>
+						</div>
+						<div class="form-group ">
+							<label class="control-label col-md-2">Nombre Choferes: <span class="required" aria-required="true"> * </span></label>
+							<div class="col-md-9">
+								{{form.org_choferes}}
+							</div>
+						</div>
+
+						<div class="portlet-title">
+						<div class="caption">
+							<i class="icon-equalizer font-blue"></i>
+							<span class="caption-subject font-blue bold uppercase"> Distribucion de personal </span>	
+						</div>										
+						</div>
+						<div class="form-group ">
+							<label class="control-label col-md-2">Texto 1: <span class="required" aria-required="true"> * </span></label>
+							<div class="col-md-9">
+								{{form.text_nom6}}
+							</div>
+						</div>
+						<div class="form-group ">
+							<label class="control-label col-md-2">Texto 2: <span class="required" aria-required="true"> * </span></label>
+							<div class="col-md-9">
+								{{form.text_nom7}}
+							</div>
+						</div>
+						<div class="form-group ">
+							<label class="control-label col-md-2">Texto 3: <span class="required" aria-required="true"> * </span></label>
+							<div class="col-md-9">
+								{{form.text_nom8}}
+							</div>
+						</div>
+						<div class="form-group ">
+							<label class="control-label col-md-2">Texto 4: <span class="required" aria-required="true"> * </span></label>
+							<div class="col-md-9">
+								{{form.text_nom9}}
+							</div>
+						</div>
+						<div class="form-group ">
+							<label class="control-label col-md-2">Texto 5: <span class="required" aria-required="true"> * </span></label>
+							<div class="col-md-9">
+								{{form.text_nom10}}
+							</div>
+						</div>
+
+						<div class="form-actions">
+							<div class="row">
+								<div class="col-md-offset-2 col-md-9">
+									<button type="submit" class="btn blue"><i class="fa fa-pencil"></i> Generar  </button>														
+								</div>
+							</div>
+							
+						</div>
+					</form>
+					<!-- END FORM-->
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+{% block script_ready %}
+{% endblock %}

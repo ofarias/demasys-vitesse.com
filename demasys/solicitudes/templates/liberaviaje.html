@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load i18n humanize %}
+{% load url from future %}
+{% block title %}iberaViaje{% endblock %}
+{% block content_title %} Liberar Viaje{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/bootstrap-datepicker/css/datepicker3.css"/>
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/select2/select2.css"/>
+{% endblock %}
+{% block nav-liberaViaje %}<li class="active">{% endblock %}
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>
+		<i class="fa fa-file-excel-o"></i>		
+		<a href="{% url 'viajes.views.liberarViaje' %}">Liberar Viajes</a>
+		<i class="fa fa-angle-right"></i>				
+	</li>	
+</ul>
+{% endblock %}
+{% block actions %}
+{% endblock %}
+{% block content %}	
+<form class="form-horizontal form-row-seperated" role="form" action="{% url 'viajes.views.liberar' %}" method="post"  id="statusform" >
+	{% csrf_token %}
+			<div class="portlet-body form">					
+				<div class="form-body">							
+					<h3 class="form-section"> Ingresar el numero de viaje a Liberar:</h3>
+					<div class="row">
+						<div class="col-md-6" id="carta-porte">
+							<div class="form-group ">
+								<div class="col-md-9">
+								<div class="form-group {% if form.id.errors %}has-error{% endif %}">
+								<label class="control-label col-md-3">Carta porte:</label>
+								<div class="col-md-9">
+									{{form.pk}}
+									{% if form.pk.errors %}<span class="help-block">{{form.pk.errors}}</span>{% endif %}
+								</div>
+							</div>
+									
+								</div>
+							</div>
+						</div>
+					</div>	
+				</div>
+			</div>	
+		
+		<div class="form-actions">
+			<div class="row">
+				<div class="col-md-offset-5 col-md-9">
+					<button id="btn_add_destino" class="btn green">
+						<i class="fa fa-warning"></i>  Liberar Viaje
+					</button>
+				</div>
+			</div>
+		</div> 
+	</form>
+	{% endblock %}

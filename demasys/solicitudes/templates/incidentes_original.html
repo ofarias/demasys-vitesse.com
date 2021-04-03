@@ -1,0 +1,218 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load bootstrap_pagination %}
+
+{% block title %}Lista de Movimientos {% endblock %}
+{% block content_title %} Reporte de Incidencias Unidades{% endblock %}
+
+{% block nav-catalogos %}<li class="active open">{% endblock %}
+{% block nav-movInv %}<li class="active">{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Incidentes</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Lista</a>							
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+		<div class="row">
+            <div class="col-md-12">
+				<div class="portlet box grey-cascade">
+						<div class="portlet-title">
+							<div class="caption">
+								Status de Unidades
+							</div>							
+						</div>
+						<div class="portlet-body">
+							
+							<div class="table-scrollable">
+							<table class="table table-striped table-bordered table-hover" id="sample_1">
+							<thead>
+							<tr>
+								<th>
+									Usuario
+								</th>
+								<th>
+									 Reporta 
+								</th>
+								<th>
+									 Daño
+								</th>
+								<th>
+									 Evidencia 1
+								</th>
+								<th>
+									 Evidencia 2
+								</th>
+								<th>
+									 Evidencia 3
+								</th>
+								<th>
+									 Evidencia 4 
+								</th>
+								<th>
+									 Fecha
+								</th>
+								<th>
+									 Observaciones
+								</th<>
+								<th>
+									Status
+								</th>
+								<th>
+									Imprimir Incidente
+								</th>
+								<th>
+									Atender
+								</th>
+								<th>
+									 Crear 
+								</th>
+
+				
+							</tr>
+							</thead>
+							<tbody>
+							{% for incidentes in incidente %}
+							<!--<tr class="odd gradeX">-->
+							<tr class="odd gradeX {{movimiento.get_tipo_display}}">
+								<td>
+									{{incidentes.usuario}}
+								</td>
+								<td>
+									{{incidentes.reporta}}
+								</td>
+								<td>
+									{{incidentes.dano}}
+								</td>
+								<td>
+									{{incidentes.imagen1}}
+									<img class="foto" src="{{MEDIA_URL}}{{incidentes.imagen1}}" width="250" height="250" style="visibility:{{fotosFlag}}">
+								</td>
+								<td>
+									{{incidentes.imagen2}}
+									<img class="foto" src="{{MEDIA_URL}}{{incidentes.imagen2}}" width="250" height="250" style="visibility:{{fotosFlag}}">
+								</td>
+								</td>
+								<td>
+									{{incidentes.imagen3}}
+									<img class="foto" src="{{MEDIA_URL}}{{incidentes.imagen3}}" width="250" height="250" style="visibility:{{fotosFlag}}">
+								</td>
+								<td>
+									{{incidentes.imagen4}}
+									<img class="foto" src="{{MEDIA_URL}}{{incidentes.imagen4}}" width="250" height="250" style="visibility:{{fotosFlag}}">
+								</td>
+								<td>
+									{{incidentes.fecha}}
+								</td>
+								<td>
+									{{incidentes.obs}}
+								</td<>
+								<td>
+									{{incidentes.get_status_display}}
+								</td>
+
+								<td>
+									<a href="{% url 'incidente' incidentes.pk %}" target="_blank">
+															<i class="fa fa-file-pdf-o"></i>
+															Reporte Incidente 
+								</a>
+								
+
+								</td>
+
+								 <td>
+
+								{% ifequal incidentes.status 1 %}
+								<br>
+								<a href="{% url 'viajes.views.statusIncidente' incidentes.pk 4 %}" class="btn default  blue-stripe">
+												Autorizar</a>
+								</br>
+								<br>
+								<a href="{% url 'viajes.views.statusIncidente' incidentes.pk 6 %}" class="btn default  red-stripe">
+												Rechazar </a>
+								</br>
+
+								{% else %}
+								<br>
+								<a href="{% url 'viajes.views.statusIncidente' incidentes.pk 4 %}" class="btn default  blue-stripe" disabled>Autorizar</a>
+								</br>
+								<br>
+								<a href="{% url 'viajes.views.statusIncidente' incidentes.pk 6 %}" class="btn default  red-stripe" disabled>
+												Rechazar </a>
+								</br>
+						    	{%endifequal%}
+
+								</td>
+
+								{% if incidentes.status == 4 %} <!-- 4 es autorizado -->
+											<td>
+											<br>
+												<a href="{% url 'viajes.views.statusIncidente' incidentes.pk 2 %}" class="btn default blue-stripe">Solicitud</a>
+												<!--<a href="{% url 'solicitudes.views.agregar' %}" class="btn deafult btn-xs blue-stripe"> Solicitud </a>	-->
+											<br/> 
+											<br>
+											<a href="{% url 'viajes.views.statusIncidente' incidentes.pk 3 %}" class="btn default  blue-stripe">
+												Movimiento </a>
+											</br>
+											</td>
+								{% elif incidentes.status == 2 %} <!-- 2 es Solicitado -->
+											
+											<td>
+											<br>
+												<a href="{% url 'viajes.views.statusIncidente' incidentes.pk 2 %}" class="btn default blue-stripe" disabled >Solicitud</a>
+											<br/>
+											<br> 
+											</div>
+											<a href="{% url 'viajes.views.statusIncidente' incidentes.pk 3 %}" class="btn default red-stripe" >
+												<!--<a href="{% url 'catalogos.views.movUnidad' %}" class="btn default btn-xs red-stripe" > -->
+												Movimiento </a>
+											</br>
+											</td>
+								{% elif incidentes.status == 6 or incidentes.status == 3 or incidentes.status == 1 %}
+
+											<td>
+											<br>
+												<a href="{% url 'viajes.views.statusIncidente' incidentes.pk 2 %}" class="btn default  blue-stripe" disabled >Solicitud</a>
+											<br/>
+											<br> 
+											</div>
+											<a href="{% url 'viajes.views.statusIncidente' incidentes.pk 3 %}" class="btn deafult  red-stripe" disabled>
+												Movimiento </a>
+											</br>
+											</td>
+
+								{% endif %}
+						
+								
+							</tr>
+							{% endfor %}							
+							</tbody>
+							</table>
+							{% bootstrap_paginate incidente %}
+							</div>
+						</div>
+					</div>					
+            </div>
+         </div>
+{% endblock %}
+
+
+
+
+

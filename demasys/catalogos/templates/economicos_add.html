@@ -1,0 +1,433 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+
+{% block title %}{{action}} Económico{% endblock %}
+{% block content_title %} Catálogo de Económicos {{id}}{% endblock %}
+
+{% block nav-inventario %}<li class="active open">{% endblock %}
+{% block nav-economicos %}<li class="active">{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Catalogos</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="{% url 'catalogos.views.economicos' %}">Económicos</a>	
+		<i class="fa fa-angle-right"></i>						
+	</li>
+	<li>
+		<a href="#">{{action}}</a>
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+
+<div id="header" class="clearfix style_8 fast-animated"></div>
+<div class="row">
+            <div class="col-md-8">
+								<div class="portlet light bg-inverse form-fit">
+									<div class="portlet-title">
+										<div class="caption">
+											<i class="icon-equalizer font-blue"></i>
+											<span class="caption-subject font-blue bold uppercase">{{action}} Económico {{economico_id}}
+
+												
+
+											</span>											
+										</div>										
+									</div>
+
+
+									<div class="portlet-body form">
+										<!-- BEGIN FORM-->
+										<form action="" class="form-horizontal form-row-seperated" method="post" 
+										enctype="multipart/form-data">
+											{% csrf_token %}
+											
+
+ {% for upload in queryset %}
+            <li>{{ upload.imagen }}</li>
+        {% endfor %}
+
+											<div class="form-group {% if form.clave.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Numero de Economico: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.clave}}
+														{% if form.clave.errors %}<span class="help-block">{{form.clave.errors}}</span>{% endif %}
+													</div>
+												</div>
+											<div class="form-group {% if form.operador.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">operador: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.operador}}
+														{% if form.operador.errors %}<span class="help-block">{{form.operador.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.marca.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Marca: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.marca}}
+														{% if form.marca.errors %}<span class="help-block">{{form.marca.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.submarca.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Submarca: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.submarca}}
+														{% if form.submarca.errors %}<span class="help-block">{{form.submarca.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.modelo.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.modelo.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.modelo}}
+														{% if form.modelo.errors %}<span class="help-block">{{form.modelo.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.anio.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Año :<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.anio}}
+														{% if form.anio.errors %}<span class="help-block">{{form.anio.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.ns.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Numero de Serie :<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.ns}}
+														{% if form.ns.errors %}<span class="help-block">{{form.ns.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.modelo.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Tipo de Combustible:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.combustible}}
+														{% if form.combustible.errors %}<span class="help-block">{{form.combustible.errors}}</span>{% endif %}
+													</div>
+												</div>
+												
+											<div class="form-body">
+												<div class="form-group {% if form.color.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.cilindros.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.cilindros}}
+														{% if form.cilindros.errors %}<span class="help-block">{{form.cilindros.errors}}</span>{% endif %}
+													</div>
+												</div>
+											<div class="form-body">
+												<div class="form-group {% if form.color.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.color.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.color}}
+														{% if form.color.errors %}<span class="help-block">{{form.color.errors}}</span>{% endif %}
+													</div>
+												</div>										
+												<div class="form-group {% if form.placas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.placas.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.placas}}
+														{% if form.placas.errors %}<span class="help-block">{{form.placas.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.pasa_como.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Cruza peaje:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.pasa_como}}
+														{% if form.pasa_como.errors %}<span class="help-block">{{form.pasa_como.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.iave.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.iave.label}}</span></label>
+													<div class="col-md-9">
+														{{form.iave}}
+														{% if form.iave.errors %}<span class="help-block">{{form.iave.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.tipoPlaca.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Tipo Placa: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.tipoPlaca}}
+														{% if form.tipoPlaca.errors %}<span class="help-block">{{form.tipoPlaca.errors}}</span>{% endif %}
+													</div>
+												</div>											
+												<div class="form-group {% if form.caja.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Marca de la Caja: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.caja}}
+														{% if form.caja.errors %}<span class="help-block">{{form.caja.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.carga.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Capacidad de Carga: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.carga}}
+														{% if form.carga.errors %}<span class="help-block">{{form.carga.errors}}</span>{% endif %}
+													</div>
+												</div>
+												
+
+												
+											<span class="caption-subject font-blue bold uppercase">Informacion de Motor y Llantas
+											</span>	
+											<div class="form-group {% if form.medidallantas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Tipo de Filtro: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.filtro}}
+														{% if form.filtro.errors %}<span class="help-block">{{form.filtro.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+											<div class="form-group {% if form.medidallantas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Tipo de Aceite: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.tipo_aceite}}
+														{% if form.tipo_aceite.errors %}<span class="help-block">{{form.tipo_aceite.errors}}</span>{% endif %}
+													</div>
+												</div>
+											<div class="form-group {% if form.medidallantas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Capacidad de Aceite (litros): <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.litros}}
+														{% if form.litros.errors %}<span class="help-block">{{form.litros.errors}}</span>{% endif %}
+													</div>
+												</div>
+											<div class="form-group {% if form.medidallantas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Filtro de Aire No de Parte: </label>
+													<div class="col-md-9">
+														{{form.filtro_aire}}
+														{% if form.filtro_aire.errors %}<span class="help-block">{{form.filtro_aire.errors}}</span>{% endif %}
+													</div>
+												</div>
+											<div class="form-group {% if form.medidallantas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Filtro de Gasolina / Diesel No de Parte: </label>
+													<div class="col-md-9">
+														{{form.filtro_gas}}
+														{% if form.filtro_gas.errors %}<span class="help-block">{{form.filtro_gas.errors}}</span>{% endif %}
+													</div>
+												</div>
+											<div class="form-group {% if form.medidallantas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Filtro de Aceite No de Parte: </label>
+													<div class="col-md-9">
+														{{form.filtro_aceite}}
+														{% if form.filtro_aceite.errors %}<span class="help-block">{{form.filtro_aceite.errors}}</span>{% endif %}
+													</div>
+												</div>
+											<div class="form-group {% if form.medidallantas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Filtro de Aire Acondicionado No de Parte: </label>
+													<div class="col-md-9">
+														{{form.filtro_airea}}
+														{% if form.filtro_airea.errors %}<span class="help-block">{{form.filtro_airea.errors}}</span>{% endif %}
+													</div>
+												</div>		
+												<div class="form-group {% if form.medidallantas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Rendimiento Combustilble (KM/L): <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.rendimiento}}
+														{% if form.rendimiento.errors %}<span class="help-block">{{form.rendimiento.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.medidallantas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Medida llantas: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.medidallantas}}
+														{% if form.medidallantas.errors %}<span class="help-block">{{form.medidallantas.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.tipollantas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Tipo llantas: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.tipollantas}}
+														{% if form.tipollantas.errors %}<span class="help-block">{{form.tipollantas.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.medidallantas.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">PSI: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.psi}}
+														{% if form.psi.errors %}<span class="help-block">{{form.psi.errors}}</span>{% endif %}
+													</div>
+												</div>
+									<span class="caption-subject font-blue bold uppercase">Seguridad 
+											</span>	
+											
+												<div class="form-group {% if form.aseguradora.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Aseguradora: <span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.aseguradora}}
+														{% if form.aseguradora.errors %}<span class="help-block">{{form.aseguradora.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.poliza.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Poliza: </label>
+													<div class="col-md-9">
+														{{form.poliza}}
+														{% if form.poliza.errors %}<span class="help-block">{{form.poliza.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.fecha_vencimiento.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">fecha_vencimiento: </label>
+												<div class="col-md-9">
+													<div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+														{{form.fecha_vencimiento}}
+														<span class="input-group-btn">
+														  <button class="btn blue" type="button">
+														       <i class="fa fa-calendar"></i>
+														  </button>
+														</span>
+													 </div>
+														{% if form.fecha_vencimiento.errors %}<span class="help-block">{{form.fecha_vencimiento.errors}}</span >{% endif %}
+													</div >
+													</div >
+												<div class="form-group {% if form.cctv.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Camara Interior:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.camara_int}}
+														{% if form.camara_int.errors %}<span class="help-block">{{form.camara_int.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.cctv.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Camara Interior Lugar:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.lugar_camara_int}}
+														{% if form.lugar_camara_int.errors %}<span class="help-block">{{form.lugar_camara_int.errors}}</span>{% endif %}
+													</div>
+												</div>
+												
+												<div class="form-group {% if form.cctv.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Camara Exterior:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.camara_ext}}
+														{% if form.camara_ext.errors %}<span class="help-block">{{form.camara_ext.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.cctv.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Camara Exterior Lugar:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.lugar_camara_ext}}
+														{% if form.lugar_camara_ext.errors %}<span class="help-block">{{form.lugar_camara_ext.errors}}</span>{% endif %}
+													</div>
+												</div>
+												
+												<div class="form-group {% if form.cerradura.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Cerradura:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.cerradura}}
+														{% if form.cerradura.errors %}<span class="help-block">{{form.cerradura.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.cerradura.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Antijamer:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.antijamer}}
+														{% if form.antijamer.errors %}<span class="help-block">{{form.antijamer.errors}}</span>{% endif %}
+													</div>
+												</div>
+												
+													<div class="form-group {% if form.fecha_vencimiento.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Fecha de instalación del Antijamer: </label>
+												<div class="col-md-9">
+													<div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+														{{form.fecha_antijamer}}
+														<span class="input-group-btn">
+														  <button class="btn blue" type="button">
+														       <i class="fa fa-calendar"></i>
+														  </button>
+														</span>
+													 </div>
+														{% if form.fecha_antijamer.errors %}<span class="help-block">{{form.fecha_antijamer.errors}}</span >{% endif %}
+													</div >
+													</div >	
+												<div class="form-group {% if form.cerradura.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Boton de Panico:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.boton_panico}}
+														{% if form.boton_panico.errors %}<span class="help-block">{{form.boton_panico.errors}}</span>{% endif %}
+													</div>
+												</div>
+												
+											<span class="caption-subject font-blue bold uppercase">Kilometraje 
+											</span>	
+
+												<div class="form-group {% if form.ultimoKilometraje.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Último Kilometraje: </label>
+													<div class="col-md-9">
+														{{form.ultimoKilometraje}}
+														{% if form.ultimoKilometraje.errors %}<span class="help-block">{{form.ultimoKilometraje.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+												<div class="form-group {% if form.kilometrajeServicio.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Kilometraje de Servicio: </label>
+													<div class="col-md-9">
+														{{form.kilometrajeServicio}}
+														{% if form.kilometrajeServicio.errors %}<span class="help-block">{{form.kilometrajeServicio.errors}}</span>{% endif %}
+													</div>
+												</div>
+
+
+												<div class="form-group {% if form.activo.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">{{form.activo.label}}<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														<div class="checkbox-list" data-error-container="#form_2_services_error">
+														<label>
+														{{form.activo}} Si
+														</div>
+														{% if form.activo.errors %}<span class="help-block">{{form.activo.errors}}</span>{% endif %}
+													</div>
+												</div>												
+											</div>
+											<div class="form-actions">
+												<div class="row">
+													<div class="col-md-offset-3 col-md-9">
+													
+
+														<a href="{% url 'catalogos.views.economicos' %}" class="btn default blue-stripe">
+															<i class="glyphicon glyphicon-arrow-left"></i> Regresar
+														</a>	
+
+														<button type="submit" class="btn blue"><i class="fa fa-pencil"></i> {{action}}</button>													
+															
+													</div>
+												</div>
+											</div>
+										</form>
+										<!-- END FORM-->
+							
+{% endblock %}
+{% block extra_script %}
+<script src="{{MEDIA_URL}}jsImg/lib2.js" type="text/javascript"></script>
+<script src="{{MEDIA_URL}}jsImg/zoom.js" type="text/javascript"></script>
+<script src="{{MEDIA_URL}}jsImg/lib1.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}plugins/select2/select2.js"></script>
+<script src="{{MEDIA_URL}}plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block script_ready %}
+
+
+	$('.date-picker').datepicker({
+        rtl: Metronic.isRTL(),
+        orientation: "auto",
+        autoclose: true        
+    });    
+{% endblock %}
+
+        
+        

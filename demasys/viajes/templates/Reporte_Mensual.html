@@ -1,0 +1,816 @@
+{% extends "easy_pdf/base.html" %}
+{% load humanize %}
+{% load sepomex_filters %}
+{% block content %} 
+<table border="0" cellpadding="3">
+            <tr>       
+                <td align="center" width="80%">
+                    <table cellpadding="3">
+                        <tr>
+                            <td width="35%"> <img src="{{MEDIA_URL}}img/logo_cartaporte.jpg" width="100%" > &nbsp;</td>
+                            <td width="65%" align="center">
+                                <h1>VITESSE OPCIONES EN DISTRIBUCION SA DE CV.</h1>
+                                <p align="center">CALLE TOLUCA # 26 <br>COL. BARRIO CAPULA C.P. 54603</p>
+                                &nbsp;
+                            </td>
+                        </tr>
+                    </table>                                                            
+                </td>
+            </tr>
+        </table>
+       <br>
+        <br>
+         <div align="center" style=" font-size:17px;">
+            <table cellpadding="5">
+                <td BGCOLOR="green">INGRESOS Y EGRESOS DE PERSONAL DE {{info.mes}} 2016</td>
+            </table>
+        </div>
+        <br>
+        <br>
+        <table border="1" bordercolor="#666" cellpadding="6" align="center">
+        	<tr>
+        		<td align="left">EGRESO DE PERSONAL DE CHOFERES:</td>
+        		<td align="center" >{{info.mes}}</td>
+        	</tr>
+        	<tr>
+        		<td align="rigth">INGRESO DE PERSONAL DE CHOFERES:</td>
+        		<td  align="center">{{info.egresoChoferes}}</td>
+        	</tr>
+        	<tr>
+        		<td align="rigth">INGRESO DE PERSONAL ADMINISTRATIVO:</td>
+        		<td  align="center">{{mov_alta_adm}}</td>
+        	</tr>
+        	<tr>
+        		<td align="rigth">EGRESO DE PERSONAL ADMINISTRATIVO:</td>
+        		<td  align="center">{{info.egresoChoferes}}</td>
+        	</tr>
+        	
+        </table>
+        <br>
+        <br>
+        <br>
+
+        <div align="center" style=" font-size:17px;">
+            <table cellpadding="5" >
+           <td bgcolor="green" >HEADCOUNT  ENERO 2016</td>
+           </table>
+        </div>
+        <br>
+        <br>
+        <div style="float: left; width: 220px">
+        <table border = "1" cellpadding="6" class="center-table">
+            <tr>
+                <td>Directivo = </td>
+                <td>{{nd}}</td>
+            </tr>
+            <tr>
+                <td>Administrativo =</td>
+                <td>{{na}}</td>
+            </tr>
+            <tr>
+                <td>Operaciones =</td>
+                <td>{{no}}</td>
+            </tr>
+            <tr>
+                <td>Mantenimiento =</td>
+                <td>{{nm}}</td>
+            </tr>
+            <tr>
+                <td>Choferes =</td>
+                <td>{{nc}}</td>
+            </tr>
+            <tr>
+                <td>Total =</td>
+                <td>{{nt}}</td>
+            </tr>    
+        </table>
+        </div>
+       
+        <br>
+        <br>
+        <div align="center" style=" font-size:17px;">
+            <table cellpadding="5">
+            <td bgcolor="green">ROTACION DE PERSONAL ENERO 2016</td>
+            </table>
+        </div>
+        <br>
+        <br/>
+         <table border = "1" cellpadding="6" class="center-table">
+            <tr>
+                <td> MES:</td>
+                <td> Movs </td>
+                <td> Porcentaje </td>
+            </tr>
+            <tr>
+                <td> {{info.mes}}</td>
+                <td> {{altas}} </td>
+                <td> {{bajas}} </td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+<table border="0" cellpadding="3">
+            <tr>       
+                <td align="center" width="80%">
+                    <table cellpadding="3">
+                        <tr>
+                            <td width="35%"> <img src="{{MEDIA_URL}}img/logo_cartaporte.jpg" width="100%" > &nbsp;</td>
+                            <td width="65%" align="center">
+                                <h1>VITESSE OPCIONES EN DISTRIBUCION SA DE CV.</h1>
+                                <p align="center">CALLE TOLUCA # 26 <br>COL. BARRIO CAPULA C.P. 54603</p>
+                                &nbsp;
+                            </td>
+                        </tr>
+                    </table>                                                            
+                </td>
+                <td align="center" width="20%">                 
+                    <p align="center">{{viaje}}</p>                                                     
+                </td>
+            </tr>
+        </table>
+      <div align="center" style=" font-size:17px;" >
+        <table  align="center" cellpadding = "6">
+            <td BGCOLOR="#81BEF7" >NOMINA {{info.mes}} 2016 SIN IMPUESTO</td>
+        </table>
+      </div>
+      <br>
+      <br>
+         <table border = "1" cellpadding="6" class="center-table">
+            <tr >
+                <td BGCOLOR="#81BEF7"></td>
+                <td align = "center" colspan="2" style="font-size:12px;" BGCOLOR="#81BEF7" >2015</td>
+                <td align="center" colspan="2" style=" font-size:12px;" BGCOLOR="#81BEF7">2016</td>
+            </tr>
+            <tr style=" font-size:10px;">
+                <td> MES:</td>
+                <td> Operador:</td>
+                <td> Administrativo:</td>
+                <td> Operador:</td>
+                <td> Administrativo:</td>
+            </tr>
+            <tr>
+               <td> Enero </td>
+               <td> Valor Enero Operador 2015</td>
+               <td> Valor Enero Administrativo 2015 </td>
+               <td> Valor Enero Operador 2015</td>
+               <td> Valor Enero Administrativo 2016</td>
+            </tr>
+            <tr>
+               <td> Febrero </td>
+               <td> Valor Enero Operador 2015</td>
+               <td> Valor Enero Administrativo 2015 </td>
+               <td> Valor Enero Operador 2015</td>
+               <td> Valor Enero Administrativo 2016</td>
+            </tr>
+            <tr>
+               <td> Marzo </td>
+               <td> Valor Enero Operador 2015</td>
+               <td> Valor Enero Administrativo 2015 </td>
+               <td> Valor Enero Operador 2015</td>
+               <td> Valor Enero Administrativo 2016</td>
+            </tr>
+            <tr>
+               <td> Abril </td>
+               <td> Valor Enero Operador 2015</td>
+               <td> Valor Enero Administrativo 2015 </td>
+               <td> Valor Enero Operador 2015</td>
+               <td> Valor Enero Administrativo 2016</td>
+            </tr>
+           <tr>
+               <td> Mayo </td>
+               <td> Valor Enero Operador 2015</td>
+               <td> Valor Enero Administrativo 2015 </td>
+               <td> Valor Enero Operador 2015</td>
+               <td> Valor Enero Administrativo 2016</td>
+            </tr>
+            <tr>
+               <td> Junio </td>
+               <td> Valor Enero Operador 2015</td>
+               <td> Valor Enero Administrativo 2015 </td>
+               <td> Valor Enero Operador 2015</td>
+               <td> Valor Enero Administrativo 2016</td>
+            </tr>
+            <tr>
+               <td> Julio </td>
+               <td> Valor Enero Operador 2015</td>
+               <td> Valor Enero Administrativo 2015 </td>
+               <td> Valor Enero Operador 2015</td>
+               <td> Valor Enero Administrativo 2016</td>
+            </tr>
+            <tr>
+               <td> Agosto </td>
+               <td> Valor Enero Operador 2015</td>
+               <td> Valor Enero Administrativo 2015 </td>
+               <td> Valor Enero Operador 2015</td>
+               <td> Valor Enero Administrativo 2016</td>
+            </tr>
+            <tr>
+               <td> Septiembre </td>
+               <td> Valor Enero Operador 2015</td>
+               <td> Valor Enero Administrativo 2015 </td>
+               <td> Valor Enero Operador 2015</td>
+               <td> Valor Enero Administrativo 2016</td>
+            </tr>
+            <tr>
+               <td> Octubre </td>
+               <td> Valor Enero Operador 2015</td>
+               <td> Valor Enero Administrativo 2015 </td>
+               <td> Valor Enero Operador 2015</td>
+               <td> Valor Enero Administrativo 2016</td>
+            </tr>
+            <tr>
+               <td> Noviembre </td>
+               <td> Valor Enero Operador 2015</td>
+               <td> Valor Enero Administrativo 2015 </td>
+               <td> Valor Enero Operador 2015</td>
+               <td> Valor Enero Administrativo 2016</td>
+            </tr>
+            <tr>
+               <td> Diciembre </td>
+               <td> Valor Enero Operador 2015</td>
+               <td> Valor Enero Administrativo 2015 </td>
+               <td> Valor Enero Operador 2015</td>
+               <td> Valor Enero Administrativo 2016</td>
+            </tr>
+            <tr>
+               <td> </td>
+               <td> </td>
+               <td> </td>
+               <td> </td>
+               <td> </td>
+            </tr>
+            <tr>
+               <td> Total </td>
+               <td> Suma operativos 2015</td>
+               <td> Suma Administrativos 2015 </td>
+               <td> Suma operativos 2015</td>
+               <td> Suma Administrativo 2016</td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <br>
+
+        <label style="font-size:12px;"> {{info.text_nom1}}</label><br/>
+        <br> 
+        <label style="font-size:12px;"> {{info.text_nom2}}</label><br/>
+        <br>
+        <label style="font-size:12px;"> {{info.text_nom3}}</label><br/>
+        <br>
+        <label style="font-size:12px;"> {{info.text_nom4}}</label><br/>
+        <br>
+        <label style="font-size:12px;"> {{info.text_nom5}}</label><br/>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+<table border="0" cellpadding="3">
+            <tr>       
+                <td align="center" width="80%">
+                    <table cellpadding="3">
+                        <tr>
+                            <td width="35%"> <img src="{{MEDIA_URL}}img/logo_cartaporte.jpg" width="100%" > &nbsp;</td>
+                            <td width="65%" align="center">
+                                <h1>VITESSE OPCIONES EN DISTRIBUCION SA DE CV.</h1>
+                                <p align="center">CALLE TOLUCA # 26 <br>COL. BARRIO CAPULA C.P. 54603</p>
+                                &nbsp;
+                            </td>
+                        </tr>
+                    </table>                                                            
+                </td>
+                <td align="center" width="20%">                 
+                    <p align="center">{{viaje}}</p>                                                     
+                </td>
+            </tr>
+        </table>
+        <div>
+         <table  cellpadding="6" class="center-table" style="font-size: 17px">
+         <td align="center" BGCOLOR="#E1F5A9"> ORGANIGRAMA DEL MES DE {{info.mes}} 2016</td>
+        </div>
+        <div>
+            <table cellpadding="4" class="center-table" style="font-size: 15px">
+                <tr>
+                <td></td>
+                <td></td>
+                <td>DIRECTOR GENERAL: {{info.org_dir}}</td>
+                <td></td>
+                <td></td>
+                </tr>
+                <tr>
+                    <td>Jefe de Taller: <br\> {{info.org_jft}}</td>
+                    <td>Jefe de Administracion: <br\> {{info.org_jfa}}</td>
+                    <td>Jefe de Operaciones: <br\> {{info.org_jfo}}</td>
+                    <td>Facturacion: <br\> {{info.org_f}}</td>
+                    <td></td>
+                </tr>
+                <br>
+                <br>
+                    <tr>
+                    <td align="center">|</td>
+                    <td align="center">|</td>
+                    <td align="center">|</td>
+                    <td align="center">|</td>
+                    <td align="center"></td>
+                </tr>
+                <br>
+                <br>
+                <tr>
+                    <td></td>
+                    <td>Coordinador Logistica Inversa</td>
+                    <td>Coordinador LG</td>
+                    <td>Choferes</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+        <div >
+            <table cellpadding="5" class="center-table" style="font-size: 15px">
+                <td align="center" bgcolor="#E1F5A9" > DISTRIBUCION DE PERSONAL DEL MES DE {{info.mes}} del 2016 </td>
+            </table>
+        <br>
+        <br>
+        <label style="font-size:12px;">1.-  {{info.text_nom6}}</label><br/>
+        <br> 
+        <label style="font-size:12px;">2.- {{info.text_nom7}}</label><br/>
+        <br>
+        <label style="font-size:12px;">3.- {{info.text_nom8}}</label><br/>
+        <br>
+        <label style="font-size:12px;">4.- {{info.text_nom9}}</label><br/>
+        <br>
+        <label style="font-size:12px;">5.- {{info.text_nom10}}</label><br/>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+<table border="0" cellpadding="3">
+            <tr>       
+                <td align="center" width="80%">
+                    <table cellpadding="3">
+                        <tr>
+                            <td width="35%"> <img src="{{MEDIA_URL}}img/logo_cartaporte.jpg" width="100%" > &nbsp;</td>
+                            <td width="65%" align="center">
+                                <h1>VITESSE OPCIONES EN DISTRIBUCION SA DE CV.</h1>
+                                <p align="center">CALLE TOLUCA # 26 <br>COL. BARRIO CAPULA C.P. 54603</p>
+                                &nbsp;
+                            </td>
+                        </tr>
+                    </table>                                                            
+                </td>
+                <td align="center" width="20%">                 
+                    <p align="center">{{viaje}}</p>                                                     
+                </td>
+            </tr>
+        </table>        
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div>
+            <table cellpadding="5">
+                <td style="font-size: 25px" bgcolor="ORANGE" >OPERACIONES</td>
+            </table>    
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <table border="0" cellpadding="3">
+            <tr>       
+                <td align="center" width="80%">
+                    <table cellpadding="3">
+                        <tr>
+                            <td width="35%"> <img src="{{MEDIA_URL}}img/logo_cartaporte.jpg" width="100%" > &nbsp;</td>
+                            <td width="65%" align="center">
+                                <h1>VITESSE OPCIONES EN DISTRIBUCION SA DE CV.</h1>
+                                <p align="center">CALLE TOLUCA # 26 <br>COL. BARRIO CAPULA C.P. 54603</p>
+                            </td>
+                        </tr>
+                    </table>                                                            
+                </td>
+            </tr>
+        </table> 
+        <table cellpadding="5" >
+            <td bgcolor="ORANGE" style="font-size: 17px">VENTAS BRUTAS VS YTY DE SAMSUNG  Y LG  ENERO A DICIEMBRE 2015  VS  2016</td>
+        </table>
+        <div>
+            <table border ="1" cellpadding="5" style="font-size: 11px" class="center-table">
+            <tr>
+                <td></td>
+                <td colspan="2" align="center" bgcolor="ORANGE" style="font-size: 14px"> SAMSUNG </td>
+                <td></td>
+            </tr>
+            <tr >
+                <td style="font-size: 12px" align="center" >Mes</td>
+                <td style="font-size: 12px" align="center" >2015</td>
+                <td style="font-size: 12px" align="center" >2016</td>
+                <td style="font-size: 12px" align="center" >Deficit o Superávit</td>
+            </tr>
+            <tr>
+                <td> Enero: </td>
+                <td align="center">{{venta0115}}</td>
+                <td align="center">{{venta0116}}</td>
+                <td align="center">{{difEnero}} %</td>
+            </tr>
+            <tr>
+                <td> Febrero: </td>
+                <td align="center">{{venta0215}}</td>
+                <td align="center">{{venta0216}}</td>
+                <td align="center">{{difFebrero}}</td>
+            </tr>
+            <tr>
+                <td> Marzo: </td>
+                <td align="center"> {{venta0315}}</td>
+                <td align="center"> {{venta0316}}</td>
+                <td align="center">{{difMarzo}}</td>
+            </tr>
+            <tr>
+                <td> Abril: </td>
+                <td align="center"> {{venta0415}}</td>
+                <td align="center">{{venta0416}}</td>
+                <td align="center">{{difAbril}}</td>
+            </tr>
+            <tr>
+                <td> Mayo: </td>
+                <td align="center">{{venta0515}}</td>
+                <td align="center">{{venta0516}}</td>
+                <td align="center">{{difMayo}}</td>
+            </tr>
+            <tr>
+                <td> Junio: </td>
+                <td align="center">{{venta0615}}</td>
+                <td align="center">{{venta0616}}</td>
+                <td align="center">{{difJunio}}</td>
+            </tr>
+            <tr>
+                <td> Julio: </td>
+                <td align="center"> {{venta0715}}</td>
+                <td align="center">{{venta0716}}</td>
+                <td align="center">{{difJulio}}</td>
+            </tr>
+            <tr>
+                <td> Agosto: </td>
+                <td align="center"> {{venta0815}}</td>
+                <td align="center"> {{venta0816}}</td>
+                <td align="center"> {{difAgosto}}</td>
+            </tr>
+            <tr>
+                <td> Septiembre: </td>
+                <td align="center"> {{venta0915}}</td>
+                <td align="center">{{venta0916}}</td>
+                <td align="center">{{difSeptiembre}}</td>
+            </tr>
+            <tr>
+                <td> Octubre: </td>
+                <td align="center"> {{venta1015}}</td>
+                <td align="center">{{venta1016}}</td>
+                <td align="center">{{difOctubre}}</td>
+            </tr>
+            <tr>
+                <td> Noviembre: </td>
+                <td align="center"> {{venta1115}}</td>
+                <td align="center">{{venta1116}}</td>
+                <td align="center">{{difNoviembre}}</td>
+            </tr>
+            <tr>
+                <td> Diciembre: </td>
+                <td align="center">{{venta1215}}</td>
+                <td align="center">{{venta1216}}</td>
+                <td align="center">{{difDiciembre}}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td> Total: </td>
+                <td align="center">{{venta1315}}</td>
+                <td align="center">{{venta1316}}</td>
+                <td align="center">{{difAnual}}}</td>
+            </tr>
+        </div>
+        <br>
+        <br>
+        <div>
+            <table border ="1" cellpadding="5" style="font-size: 11px" class="center-table">
+            <tr>
+                <td></td>
+                <td colspan="2" align="center" bgcolor="ORANGE" style="font-size: 14px"> LG </td>
+                <td></td>
+            </tr>
+            <tr >
+                <td style="font-size: 12px" align="center" >Mes</td>
+                <td style="font-size: 12px" align="center" >2015</td>
+                <td style="font-size: 12px" align="center" >2016</td>
+                <td style="font-size: 12px" align="center" >Deficit o Superávit</td>
+            </tr>
+            <tr>
+                <td> Enero: </td>
+                <td align="center">{{venta0115LG}}</td>
+                <td align="center">{{venta0116LG}}</td>
+                <td align="center">{{difEneroLG}} %</td>
+            </tr>
+            <tr>
+                <td> Febrero: </td>
+                <td align="center">{{venta0215LG}}</td>
+                <td align="center">{{venta0216LG}}</td>
+                <td align="center">{{difFebreroLG}}</td>
+            </tr>
+            <tr>
+                <td> Marzo: </td>
+                <td align="center"> {{venta0315LG}}</td>
+                <td align="center"> {{venta0316LG}}</td>
+                <td align="center">{{difMarzoLG}}</td>
+            </tr>
+            <tr>
+                <td> Abril: </td>
+                <td align="center"> {{venta0415LG}}</td>
+                <td align="center">{{venta0416LG}}</td>
+                <td align="center">{{difAbrilLG}}</td>
+            </tr>
+            <tr>
+                <td> Mayo: </td>
+                <td align="center">{{venta0515LG}}</td>
+                <td align="center">{{venta0516LG}}</td>
+                <td align="center">{{difMayoLG}}</td>
+            </tr>
+            <tr>
+                <td> Junio: </td>
+                <td align="center">{{venta0615LG}}</td>
+                <td align="center">{{venta0616LG}}</td>
+                <td align="center">{{difJunioLG}}</td>
+            </tr>
+            <tr>
+                <td> Julio: </td>
+                <td align="center"> {{venta0715LG}}</td>
+                <td align="center">{{venta0716LG}}</td>
+                <td align="center">{{difJulioLG}}</td>
+            </tr>
+            <tr>
+                <td> Agosto: </td>
+                <td align="center"> {{venta0815LG}}</td>
+                <td align="center"> {{venta0816LG}}</td>
+                <td align="center"> {{difAgostoLG}}</td>
+            </tr>
+            <tr>
+                <td> Septiembre: </td>
+                <td align="center"> {{venta0915LG}}</td>
+                <td align="center">{{venta0916LG}}</td>
+                <td align="center">{{difSeptiembreLG}}</td>
+            </tr>
+            <tr>
+                <td> Octubre: </td>
+                <td align="center"> {{venta1015LG}}</td>
+                <td align="center">{{venta1016LG}}</td>
+                <td align="center">{{difOctubreLG}}</td>
+            </tr>
+            <tr>
+                <td> Noviembre: </td>
+                <td align="center"> {{venta1115}}</td>
+                <td align="center">{{venta1116}}</td>
+                <td align="center">{{difNoviembre}}</td>
+            </tr>
+            <tr>
+                <td> Diciembre: </td>
+                <td align="center">{{venta1215}}</td>
+                <td align="center">{{venta1216}}</td>
+                <td align="center">{{difDiciembre}}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td> Total: </td>
+                <td align="center">{{venta1315}}</td>
+                <td align="center">{{venta1316}}</td>
+                <td align="center">{{difAnual}}}</td>
+            </tr>
+
+        </div>
+        <br>
+        <br>
+<div>
+      <table border="0" cellpadding="3">
+            <tr>       
+                <td align="center" width="80%">
+                    <table cellpadding="3">
+                        <tr>
+                            <td width="35%"> <img src="{{MEDIA_URL}}img/logo_cartaporte.jpg" width="100%" > &nbsp;</td>
+                            <td width="65%" align="center">
+                                <h1>VITESSE OPCIONES EN DISTRIBUCION SA DE CV.</h1>
+                                <p align="center">CALLE TOLUCA # 26 <br>COL. BARRIO CAPULA C.P. 54603</p>
+                            </td>
+                        </tr>
+                    </table>                                                            
+                </td>
+            </tr>
+        </table> 
+        <table cellpadding="5" >
+            <td bgcolor="#A9E2F3" style="font-size: 17px" align="center">Reporte De Ventas Brutas Correspondiente al mes de {{info.mes}} Facturado En El Mes De Febrero 2016 Cliente LG Y SAMSUNG</td>
+        </table>
+</div>
+<br>
+<br>
+<div>
+           <table border ="1" cellpadding="5" style="font-size: 11px" class="center-table">
+           <tr>
+                <td></td>
+                <td colspan="2" align="center" bgcolor="#A9D0F5" style="font-size: 14px"> LG </td>
+                <td></td>
+            </tr>
+            <tr >
+                <td style="font-size: 12px" align="center" >Viaje</td>
+                <td style="font-size: 12px" align="center" >No. Factura</td>
+                <td style="font-size: 12px" align="center" >Monto</td>
+                <td style="font-size: 12px" align="center" >Fecha Facturacion</td>
+            </tr>
+        {% for flg in fact_lg%}
+            <tr>
+                <td align="center">{{flg.id}} </td>
+                <td align="center">{{flg.factura}}</td>
+                <td align="center">$ {{flg.facturacion_flete|floatformat:2|intcomma}}</td>
+                <td align="center">{{flg.fecha_factura}}</td>
+            </tr>
+        {% endfor%}
+    </table>
+</div>
+<br>
+<br>
+<div>
+           <table border ="1" cellpadding="5" style="font-size: 11px" class="center-table">
+           <tr>
+                <td></td>
+                <td colspan="2" align="center" bgcolor="#A9D0F5" style="font-size: 14px"> SAMSUNG </td>
+                <td></td>
+            </tr>
+            <tr >
+                <td style="font-size: 12px" align="center" >Viaje</td>
+                <td style="font-size: 12px" align="center" >No. Factura</td>
+                <td style="font-size: 12px" align="center" >Monto</td>
+                <td style="font-size: 12px" align="center" >Fecha Facturacion</td>
+            </tr>
+        {% for flg in fact_sam%}
+            <tr>
+                <td align="center">{{flg.id}} </td>
+                <td align="center">{{flg.factura}}</td>
+                <td align="center">$ {{flg.facturacion_flete|floatformat:2|intcomma}}</td>
+                <td align="center">{{flg.fecha_factura}}</td>
+            </tr>
+        {% endfor%}
+    </table>
+</div>
+
+{% endblock %}
+
+{%block page_foot%}
+    
+        <pdf:pagenumber />
+    
+{%endblock%}

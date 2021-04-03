@@ -1,0 +1,148 @@
+{% extends "easy_pdf/base.html" %}
+
+{% block content %}
+
+<style>
+
+    img.foto {
+            height: 3cm;
+            width: 4cm;
+    }
+
+</style>
+
+<table border="0" style="width:100%">
+
+    <td colspan="2" width="60mm" align="center">
+                    <br>
+                    <img class="logofront" src="{{MEDIA_URL}}img/logo_cartaporte.jpg">
+                </td>
+
+    <tr>
+        <td  width="80%"><h1 style="text-align: center;">
+            <span style="font-family:arial,helvetica,sans-serif;"><span style="color: rgb(0, 0, 205);">Documentos Económico No. {{form.clave}}</span></span></h1></td>
+        <td  width="20%" align="right"><img class="foto" src="/media/imgEconomicos/{{form.clave}}_1.jpg"></td>
+    </tr>
+
+</table>
+
+
+<h2>Información General</h2>
+<br>
+
+<table border="0" style="background-color:#CCFFFF;border-collapse:collapse;border:0px solid #FFFFFF;color:#000000;width:100%" cellpadding="3" cellspacing="3">
+    <tr>
+        <td><p>Operador: {% if form.operador %} {{form.operador}} {% else %} Sin Operador {% endif %}</p></td>
+        <td><p>Color: {% if form.color %} {{form.color}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Marca: {% if form.marca %} {{form.marca}} {% else %} -- {% endif %}</p></td>
+        <td><p>Placas: {% if form.placas %} {{form.placas}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Submarca: {% if form.submarca %} {{form.submarca}} {% else %} -- {% endif %}</p></td>
+        <td><p>Cruza peaje: {% if form.pasa_como %} {{form.pasa_como}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Modelo: {% if form.modelo %} {{form.modelo}} {% else %} -- {% endif %}</p></td>
+        <td><p>IAVE: {% if form.iave %} {{form.iave}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Año: {% if form.anio %} {{form.anio}} {% else %} -- {% endif %}</p></td>
+        <td><p>Tipo Placa: {% if form.tipoPlaca %} {{form.tipoPlaca}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Numero de Serie : {% if form.ns %} {{form.ns}} {% else %} -- {% endif %}</p></td>
+        <td><p>Marca de la Caja: {% if form.caja %} {{form.caja}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Tipo de Combustible: {% if form.combustible %} {{form.combustible}} {% else %} -- {% endif %}</p></td>
+        <td><p>Capacidad de Carga: {% if form.carga %} {{form.carga}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Cilindro: {% if form.cilindros %} {{form.cilindros}} {% else %} -- {% endif %}</p></td>
+        <td></td>
+    </tr>
+</table>
+
+
+
+<h2>Información de Motor y Llantas </h2>
+<br>
+<table border="0" style="background-color:#CCFFFF;border-collapse:collapse;border:0px solid #FFFFFF;color:#000000;width:100%" cellpadding="3" cellspacing="3">
+    <tr>
+        <td><p>Tipo de Filtro: {% if form.filtro %} {{form.filtro}} {% else %} -- {% endif %}</p></td>
+        <td><p>Filtro de Aire Acondicionado No de Parte: {% if form.filtro_airea %} {{form.filtro_airea}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Tipo de Aceite: {% if form.tipo_aceite %} {{form.tipo_aceite}} {% else %} -- {% endif %}</p></td>
+        <td><p>Rendimiento Combustilble (KM/L): {% if form.rendimiento %} {{form.rendimiento}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Capacidad de Aceite (litros): {% if form.litros %} {{form.litros}} {% else %} -- {% endif %}</p></td>
+        <td><p>Medida llantas: {% if form.medidallantas %} {{form.medidallantas}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Filtro de Aire No de Parte: {% if form.filtro_aire %} {{form.filtro_aire}} {% else %} -- {% endif %}</p></td>
+        <td><p>Tipo llantas: {% if form.tipollantas %} {{form.tipollantas}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Filtro de Gasolina / Diesel No de Parte: {% if form.filtro_gas %} {{form.filtro_gas}} {% else %} -- {% endif %}</p></td>
+        <td><p>PSI: {% if form.psi %} {{form.psi}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Filtro de Aceite No de Parte: {% if form.filtro_aceite %} {{form.filtro_aceite}} {% else %} -- {% endif %}</p></td>
+        <td></td>
+    </tr>
+</table>
+
+
+
+<h2>Seguridad</h2>
+<br>
+<table border="0" style="background-color:#CCFFFF;border-collapse:collapse;border:0px solid #FFFFFF;color:#000000;width:100%" cellpadding="3" cellspacing="3">
+    <tr>
+        <td><p>Aseguradora: {% if form.aseguradora %} {{form.aseguradora}} {% else %} -- {% endif %}</p></td>
+        <td><p>Camara Exterior Lugar: {% if form.lugar_camara_ext %} {{form.lugar_camara_ext}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Poliza: {% if form.poliza %} {{form.poliza}} {% else %} -- {% endif %}</p></td>
+        <td><p>Cerradura: {% if form.cerradura %} {{form.cerradura}} {% else %} Desconocido {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Fecha vencimiento: {% if form.fecha_vencimiento %} {{form.fecha_vencimiento}} {% else %} -- {% endif %}</p></td>
+        <td><p>Antijamer: {% if form.antijamer %} {{form.antijamer}} {% else %} Desconocido {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Camara Interior: {% if form.camara_int %} {{form.camara_int}} {% else %} Desconocido {% endif %}</p></td>
+        <td><p>Fecha de instalación del Antijamer: {% if form.fecha_antijamer %} {{form.fecha_antijamer}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Camara Interior Lugar: {% if form.lugar_camara_int %} {{form.lugar_camara_int}} {% else %} -- {% endif %}</p></td>
+        <td><p>Boton de Panico: {% if form.boton_panico %} {{form.boton_panico}} {% else %} -- {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Camara Exterior: {% if form.camara_ext %} {{form.camara_ext}} {% else %} Desconocido {% endif %}</p></td>
+        <td></td>
+    </tr>
+
+</table>
+
+
+
+<h2>Kilometraje</h2>
+<br>
+<table border="0" style="background-color:#CCFFFF;border-collapse:collapse;border:0px solid #FFFFFF;color:#000000;width:100%" cellpadding="3" cellspacing="3">
+    <tr>
+        <td><p>Último Kilometraje: {% if form.ultimoKilometraje %} {{form.ultimoKilometraje}} {% else %} -- {% endif %}</p></td>
+        <td><p>Activo: {% if form.activo %} SI {% else %} NO {% endif %}</p></td>
+    </tr>
+    <tr>
+        <td><p>Kilometraje de Servicio: {% if form.kilometrajeServicio %} {{form.kilometrajeServicio}} {% else %} -- {% endif %}</p></td>
+        <td></td>
+    </tr>
+</table>
+
+
+
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "easy_pdf/base.html" %}
+{% load humanize %}
+{% load sepomex_filters %}
+{% block content %}
+    <div id="content">
+        <table border="0" cellpadding="3">
+        	<tr>        		
+        		<td align="center" width="80%">
+        			<table cellpadding="3">
+        				<tr>
+        					<td width="35%"> <img src="{{MEDIA_URL}}img/logo_cartaporte.jpg" width="100%"/> &nbsp;</td>
+        					<td width="65%" align="center">
+        						
+        						<h1>VITESSE OPCIONES EN DISTRIBUCION SA DE CV.</h1>
+        						<p>CAMINO A SANTA CRUZ 27 S/N NUMERO<br>LA ALTEÑA II MEXICO C.P. 53120</p>
+        						&nbsp;
+        					</td>
+        				</tr>
+        			</table>        			        			        			
+        		</td>
+        		<td align="center" width="20%">
+        			<h1>Reporte de Incidencias: {{incidente.id}}</h1>	
+        			      			        			        		
+        		</td>
+        	</tr>
+        </table>
+        <table >
+        	<tr>
+        		<td>USURAIO QUE REPORTA INCIDENTE :</td>
+        		<td style= "font-size:140%" colspan="3">{{incidente.usuario}}</td>
+        	</tr>
+        	<tr>
+        		<td>FECHA DEL INCIDENTE :</td>
+                <td style= "font-size:140%" colspan="3">{{incidente.fecha}}</td>
+         	</tr>
+        	<tr>
+        		<td>UNIDAD:</td>
+        		<td style= "font-size:140%" >{{incidente.reporta}}</td>		
+        	</tr>
+        	<tr>
+        		<td>DAÑO:</td>
+        		<td style= "font-size:140%" >{{incidente.dano}}</td>
+        	</tr>
+        	<tr>
+        		<td>Detalles:</td>
+        		<td style= "font-size:140%" >{{incidente.obs}}</td>
+        	</tr>
+        	<tr>
+        		<td>Estado Actual de la unidad:</td>
+        		<td style= "font-size:140%" >{{incidente.get_status_display}}</td>
+        	</tr>
+        </table>
+
+            {% if incidente.imagen1%}
+            <br> <p style= "font-size:140%"> Foto de Evidencia 1: {{incidente.imagen1}}
+            <br> <img class="foto" src="{{MEDIA_URL}}{{incidente.imagen1}}" width="250" height="250" style="visibility:{{fotosFlag}}"></br>
+            {% endif%}
+
+            {% if incidente.imagen2%}
+            <br> <p style= "font-size:140%"> Foto de Evidencia 2: {{incidente.imagen2}}
+            <br><img class="foto" src="{{MEDIA_URL}}{{incidente.imagen2}}" width="250" height="250" style="visibility:{{fotosFlag}}"></br>
+            {% endif %}
+
+            {% if incidente.imagen3%}
+            <br> <p style= "font-size:140%"> Foto de Evidencia 3: {{incidente.imagen3}}
+            <br><img class="foto" src="{{MEDIA_URL}}{{incidente.imagen3}}" width="250" height="250" style="visibility:{{fotosFlag}}"></br>
+            {% endif%}
+
+            {% if incidente.imagen4%}
+            <br> <p style= "font-size:140%"> Foto de Evidencia 4: {{incidente.imagen4}}
+            <br><img class="foto" src="{{MEDIA_URL}}{{incidente.imagen4}}" width="250" height="250" style="visibility:{{fotosFlag}}"></br>
+            {% endif %}
+
+            <br>
+             <p style="background-color:powderblue; font-size:140%;" >FIN DEL REPORTE.<br> PARA MAYOR INFORMACION COMUNICARSE CON: VITESSE SA DE CV <br>A LOS TELEFONOS. 55-55-55-55-55 O AL CORREO ELECTRONICO VITESSE@VITESSE.COM
+
+    </div>  
+{% endblock %}
+{%block page_foot%}   
+        <pdf:pagenumber />
+    
+{%endblock%}

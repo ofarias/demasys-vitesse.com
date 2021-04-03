@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title|default:"" }}</title>
+
+    {% block style_base %}
+        {% comment %}
+            See DEFAULT_CSS in https://github.com/chrisglass/xhtml2pdf/blob/master/xhtml2pdf/default.py
+            for base style.
+        {% endcomment %}
+
+        {% block layout_style %}
+            <style type="text/css">
+            	@page {			        
+			        margin-top: 3cm;
+			        margin-left: 1.5cm;
+                    margin-right: 1.5cm;                    
+                    margin-bottom: 1.5cm; 
+			    }
+                @page default_template {
+                    size: {{ pagesize|default:"A4" }};
+                    margin-left: 5mm;
+                    margin-right: 5mm;
+                    margin-top: 1cm;
+                    margin-bottom: 1.5cm;   
+                    border: 2;			                    
+
+                    @frame footer {
+                        -pdf-frame-content: page-footer;
+                        bottom: 0cm;
+                        margin-left: 1cm;
+                        margin-right: 1cm;
+                        height: 1.5cm;        
+                        border: 0;                                        
+                    }
+                }
+                
+                body{
+                	font-size: 6pt;		
+                }
+                td{
+                	line-height: 6pt;
+                }
+                h2{text-align: center;}
+                p{text-align: justify;}
+            </style>
+        {%endblock%}
+        {% block extra_style %}{% endblock %}
+    {% endblock %}
+</head>
+<body>	 
+    <div>        
+        {%block content%}
+        {%endblock%}
+    </div>
+
+    <div id="page-footer">
+        {%block page_foot%}
+            {% comment %}
+                <pdf:pagenumber />
+            {% endcomment %}
+        {%endblock%}
+    </div>
+</body>
+</html>

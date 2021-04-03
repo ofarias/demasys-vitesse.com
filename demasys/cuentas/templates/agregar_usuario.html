@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% block title %}{{action}} Usuario{% endblock %}
+{% block content_title %} Catálogo de Usuarios {% endblock %}
+{% block nav-usuarios %}<li class="active">{% endblock %}
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="{% url 'cuentas.views.usuarios' %}">Usuarios</a>	
+		<i class="fa fa-angle-right"></i>						
+	</li>
+	<li>
+		<a href="#">{{action}} Usuario</a>
+	</li>
+</ul>
+{% endblock %}
+{% block actions %}
+{% endblock %}
+{% block content %}
+<style type="text/css">ul{list-style:none;}</style>
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light bg-inverse form-fit">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="icon-equalizer font-blue"></i>
+					<span class="caption-subject font-blue bold uppercase">{{action}} Usuario</span>	
+
+
+
+				</div>										
+			</div>
+
+			<div class="portlet-body form">
+				<!-- BEGIN FORM-->
+				<form action="" class="form-horizontal form-row-seperated" method="post" name="Per">
+					{% csrf_token %}
+					<div class="form-body">
+						<div class="form-group {% if form.username.errors %}has-error{% endif %}">
+							<label class="control-label col-md-3">{{form.username.label}}<span class="required" aria-required="true"> * </span></label>
+							<div class="col-md-9">
+								{{form.username}}
+								{% if form.username.errors %}<span class="help-block">{{form.username.errors}}</span>{% endif %}
+							</div>
+						</div>
+						<div class="form-group {% if form.first_name.errors %}has-error{% endif %}">
+							<label class="control-label col-md-3">{{form.first_name.label}}<span class="required" aria-required="true"> * </span></label>
+							<div class="col-md-9">
+								{{form.first_name}}
+								{% if form.first_name.errors %}<span class="help-block">{{form.first_name.errors}}</span>{% endif %}
+							</div>
+						</div>
+						<div class="form-group {% if form.last_name.errors %}has-error{% endif %}">
+							<label class="control-label col-md-3">Apellido Paterno<span class="required" aria-required="true"> * </span></label>
+							<div class="col-md-9">
+								{{form.last_name}}
+								{% if form.last_name.errors %}<span class="help-block">{{form.last_name.errors}}</span>{% endif %}
+							</div>
+						</div>												
+						<div class="form-group {% if form2.apellido_materno.errors %}has-error{% endif %}">
+							<label class="control-label col-md-3">{{form2.apellido_materno.label}}</label>
+							<div class="col-md-9">
+								{{form2.apellido_materno}}
+								{% if form2.apellido_materno.errors %}<span class="help-block">{{form2.apellido_materno.errors}}</span>{% endif %}
+							</div>
+						</div>
+						<div class="form-group {% if form.email.errors %}has-error{% endif %}">
+							<label class="control-label col-md-3">{{form.email.label}}<span class="required" aria-required="true"> * </span></label>
+							<div class="col-md-9">
+								{{form.email}}
+								{% if form.email.errors %}<span class="help-block">{{form.email.errors}}</span>{% endif %}
+							</div>
+						</div>
+						<div class="form-group {% if form2.telefono.errors %}has-error{% endif %}">
+							<label class="control-label col-md-3">{{form2.telefono.label}}</label>
+							<div class="col-md-9">
+								{{form2.telefono}}
+								{% if form2.telefono.errors %}<span class="help-block">{{form2.telefono.errors}}</span>{% endif %}
+							</div>
+						</div>
+						<div class="form-group {% if form.is_superuser.errors %}has-error{% endif %}">
+							<label class="control-label col-md-3">{{form.is_superuser.label}}</label>
+							<div class="col-md-9">
+								<div class="checkbox-list" data-error-container="#form_2_services_error">
+									<label>
+										{{form.is_superuser}} Si
+									</div>
+									{% if form.is_superuser.errors %}<span class="help-block">{{form.is_superuser.errors}}</span>{% endif %}
+								</div>
+							</div>	
+							<div class="form-group {% if form.is_active.errors %}has-error{% endif %}">
+								<label class="control-label col-md-3">{{form.is_active.label}}</label>
+								<div class="col-md-9">
+									<div class="checkbox-list" data-error-container="#form_2_services_error">
+										<label>
+											{{form.is_active}} Si
+										</div>
+										{% if form.is_active.errors %}<span class="help-block">{{form.is_active.errors}}</span>{% endif %}
+									</div>
+								</div>	
+<!---->							</div>
+<div id="TODOS">
+							<h3 class="form-section">Módulo de Perfiles</h3>
+							<div class="form-group {% if form.user_permissions.errors %}has-error{% endif %}">
+								<label class="control-label col-md-3">{{form.user_permissions.label}}</label>
+								<div class="col-md-9">
+									<div class="checkbox-list" data-error-container="#form_2_services_error" >
+										
+										{{form.user_permissions}} 
+									</div>
+									{% if form.user_permissions.errors %}
+									<span class="help-block">{{form.user_permissions.errors}}</span>
+									{% endif %}
+								</div>
+							</div>
+</div>
+							<!---->	
+						</div>						
+						<div class="form-actions">
+							<div class="row">
+								<div class="col-md-offset-3 col-md-9">
+									<button type="submit" class="btn blue"><i class="fa fa-pencil"></i> {{action}}</button>														
+								</div>
+							</div>
+						</div>
+					</form>
+					<!-- END FORM-->
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+
+{% block script_ready %}
+
+$('#id_is_superuser').bind('change', function () {
+   if ($(this).is(':checked')){
+   $("#TODOS").hide();
+   alert('Al ser superusuario, se asignan todos los permisos')
+     seleccionar_todo();
+   }else{
+   $("#TODOS").show();
+}
+});
+function seleccionar_todo(){
+   for (i=0;i<document.Per.elements.length;i++)
+      if(document.Per.elements[i].type == "checkbox")
+         document.Per.elements[i].checked=1
+} 
+{% endblock %}

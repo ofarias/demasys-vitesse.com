@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load bootstrap_pagination %}
+
+{% block title %}Rutas{% endblock %}
+{% block content_title %} Rutas de viaje {% endblock %}
+
+{% block nav-rutas %}<li class="active">{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Rutas</a>						
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+		<div class="row">
+            <div class="col-md-12">
+				<div class="portlet box grey-cascade">
+						<div class="portlet-title">
+							<div class="caption">
+								Listado de rutas disponibles
+							</div>							
+						</div>
+						<div class="portlet-body">
+							<div class="table-toolbar">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="btn-group">
+
+								{% if perms.viajes.add_ruta %}
+								<a href="{% url 'viajes.views.rutasadd' %}" class="btn blue">
+											Agregar nueva <i class="fa fa-plus"></i>
+											</a>
+								{% else %}
+								<div class="alert alert-dismissable alert-danger">
+									<button class="close" aria-hidden="true" data-dismiss="alert" type="button"></button>
+									{{user.get_short_name}} no tiene permisos para Agregar.<br/> Solicite permisos al administrador.
+								</div>
+								{% endif %}
+											
+										</div>
+									</div>
+									<div class="col-md-6">
+										
+									</div>
+								</div>
+							</div>
+							<div class="table-scrollable">
+							<table class="table table-striped table-bordered table-hover" id="sample_1">
+							<thead>
+							<tr>
+								<th>
+									 Ruta
+								</th>
+								<th>
+									 Activa
+								</th>
+								<th>
+									 Editar
+								</th>
+								<th>
+									 Copiar
+								</th>							
+							</tr>
+							</thead>
+							<tbody>
+							{% for ruta in rutas %}
+							<tr class="odd gradeX">
+								<td>
+									{{ruta}}
+								</td>
+								<td>
+									{% if ruta.activo %}
+										<i class="glyphicon glyphicon-ok font-green"></i>
+									{% else %}
+										<i class="glyphicon glyphicon-remove font-red"></i>
+									{% endif %}
+								</td>
+								<td>
+								{% if perms.viajes.change_ruta %}
+									<a href="{% url 'viajes.views.rutasedit' ruta.pk %}" class="btn default btn-xs blue-stripe">Editar</a>
+								{% else %}
+								<div class="alert alert-dismissable alert-danger">
+									<button class="close" aria-hidden="true" data-dismiss="alert" type="button"></button>
+									{{user.get_short_name}} no tiene permisos para Editar.<br/> Solicite permisos al administrador.
+								</div>
+								{% endif %}
+									 
+								</td>
+								<td>
+								{% if perms.viajes.add_ruta %}
+								<a href="{% url 'viajes.views.rutasadd' ruta.pk %}" class="btn default btn-xs blue-stripe">Copiar</a>
+								{% else %}
+								<div class="alert alert-dismissable alert-danger">
+									<button class="close" aria-hidden="true" data-dismiss="alert" type="button"></button>
+									{{user.get_short_name}} no tiene permisos para Copiar.<br/> Solicite permisos al administrador.
+								</div>
+								{% endif %}
+
+									 
+								</td>
+							</tr>
+							{% endfor %}							
+							</tbody>
+							</table>
+							{% bootstrap_paginate rutas %}
+							</div>
+						</div>
+					</div>					
+            </div>
+         </div>
+{% endblock %}

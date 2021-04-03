@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load i18n humanize %}
+{% load url from future %}
+{% block title %}Reportes{% endblock %}
+{% block content_title %} Reporte de Incidentes en Excel{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/bootstrap-datepicker/css/datepicker3.css"/>
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/select2/select2.css"/>
+{% endblock %}
+{% block nav-repGasto %}<li class="active">{% endblock %}
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>
+		<i class="fa fa-file-excel-o"></i>		
+		<a href="{% url 'viajes.views.RepIncidentes' %}">Reporte de Incidentes</a>
+		<i class="fa fa-angle-right"></i>				
+	</li>	
+</ul>
+{% endblock %}
+{% block actions %}
+{% endblock %}
+{% block content %}	
+<form class="form-horizontal form-row-seperated" role="form" action="{% url 'viajes.views.imprimeIncidentes' %}" method="post"  id="statusform" >
+	{% csrf_token %}
+	<div class="row"  id="carta-general">
+		<div class="col-md-12">
+			<div class="portlet-body form">					
+				<div class="form-body">							
+					<h3 class="form-section"> Opciones de búsqueda <span id="opciones"></span></h3>
+					<!--/span-->
+					<div class="row">
+						<div class="col-md-6" id="inicial-porte">
+							<div class="form-group">
+								<label class="control-label col-md-3">Fecha Inicial:</label>
+								<div class="col-md-9">
+									<div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
+											{{form.fecha_ini}}
+										<span class="input-group-btn">
+											<button class="btn blue" type="button">
+												<i class="fa fa-calendar"></i>	
+											</button>				
+										</span>		
+									</div>										
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-6" id="final-porte">
+							<div class="form-group">
+								<label class="control-label col-md-3">Fecha Final:</label>
+								<div class="col-md-9">
+									<div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
+											{{form.fecha_fin}}
+										<span class="input-group-btn">
+											<button class="btn blue" type="button">
+												<i class="fa fa-calendar"></i>
+											</button>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+					</div>
+					<h3 class="form-section"></h3>
+					
+				</div>
+			</div>	
+		</div>
+		<div class="form-actions">
+			<div class="row">
+				<div class="col-md-offset-5 col-md-9">
+					<button id="btn_add_destino" class="btn green">
+						<i class="fa fa-file-excel-o"></i> Generar Reporte
+					</button>
+				</div>
+			</div>
+		</div> 
+	</form>
+{% endblock %}
+{% block extra_script %}
+	<script type="text/javascript" src="{{MEDIA_URL}}plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript" src="{{MEDIA_URL}}plugins/select2/select2.js"></script>
+{% endblock %}
+{% block script_ready %}
+
+	$('.date-picker').datepicker({
+		rtl: Metronic.isRTL(),
+		orientation: "auto",
+		autoclose: true        
+	});
+
+{% endblock %}

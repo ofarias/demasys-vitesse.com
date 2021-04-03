@@ -1,0 +1,202 @@
+{% extends 'baseOut.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load i18n humanize %}
+
+{% block title %}Cuestionario{% endblock %}
+{% block content_title %} Solicitud de Empleo {% endblock %}
+
+{% block nav-sol2 %}<li class="active">{% endblock %} <!-- se debe definir en Base.html para que se seleccione--> 
+	
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/bootstrap-datepicker/css/datepicker3.css">
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/select2/select2.css"/>
+
+{% endblock %}
+
+
+{% block actions %}
+{% endblock %}
+{% block content %}
+
+	
+  	<form action="" class="form-horizontal form-row-seperated" method="post">
+	
+	{% csrf_token %}
+
+    <br/>
+        <h3>
+            <span class="caption-subject font-blue bold uppercase">CUESTIONARIO</span>
+        </h3>
+	<br/><br/><hr/>
+    <div class="form-group">
+	    <label class="control-label col-md-3">Nombre Completo: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-4">
+            <p hidden>{{ form.idsolicitante }}</p>
+		{{form.nombreCompleto}}
+		{% if form.nombreCompleto.errors %}<span class="help-block">{{form.nombreCompleto.errors}}</span>{% endif %}
+		</div>
+        <label class="control-label col-md-2">Teléfono: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-3">
+		{{form.telefono}}
+		{% if form.telefono.errors %}<span class="help-block">{{form.telefono.errors}}</span>{% endif %}
+		</div>
+	</div>
+
+    <div class="form-group {% if form.edoCivil.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">Estado Civil: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-3">
+		{{form.edoCivil}}
+		{% if form.edoCivil.errors %}<span class="help-block">{{form.edoCivil.errors}}</span>{% endif %}
+		</div>
+
+        <label class="control-label col-md-3">Casado por: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-2">
+		{{form.cadadoPor}}
+		{% if form.cadadoPor.errors %}<span class="help-block">{{form.cadadoPor.errors}}</span>{% endif %}
+		</div>
+	</div>
+
+    <div class="form-group {% if form.numHijos.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">¿Cuantos hijos tiene?: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-9">
+		{{form.numHijos}}
+		{% if form.numHijos.errors %}<span class="help-block">{{form.numHijos.errors}}</span>{% endif %}
+		</div>
+	</div>
+
+    <div class="form-group {% if form.nomEsposa.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">Nombre de su esposa: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-9">
+		{{form.nomEsposa}}
+		{% if form.nomEsposa.errors %}<span class="help-block">{{form.nomEsposa.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group {% if form.ocupacionEsp.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">Ocupación de su esposa: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-9">
+		{{form.ocupacionEsp}}
+		{% if form.ocupacionEsp.errors %}<span class="help-block">{{form.ocupacionEsp.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group {% if form.vivenPadres.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">¿Viven sus papás?: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-9">
+		{{form.vivenPadres}}
+		{% if form.vivenPadres.errors %}<span class="help-block">{{form.vivenPadres.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group {% if form.ocupacionPadres.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">¿A que se dedican?: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-9">
+		{{form.ocupacionPadres}}
+		{% if form.ocupacionPadres.errors %}<span class="help-block">{{form.ocupacionPadres.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group {% if form.ultimaEmp.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">Nombre de la última empresa donde laboró: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-9">
+		{{form.ultimaEmp}}
+		{% if form.ultimaEmp.errors %}<span class="help-block">{{form.ultimaEmp.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group {% if form.telEmp.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">Teléfono: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-9">
+		{{form.telEmp}}
+		{% if form.telEmp.errors %}<span class="help-block">{{form.telEmp.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group {% if form.nombreJefe.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">Nombre de su último jefe: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-9">
+		{{form.nombreJefe}}
+		{% if form.nombreJefe.errors %}<span class="help-block">{{form.nombreJefe.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group {% if form.puestoJefe.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">Puesto de su último jefe: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-9">
+		{{form.puestoJefe}}
+		{% if form.puestoJefe.errors %}<span class="help-block">{{form.puestoJefe.errors}}</span>{% endif %}
+		</div>
+	</div>
+    <div class="form-group {% if form.razonEmp.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">¿Porqué has dejado tu último empleo?: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-9">
+		{{form.razonEmp}}
+		{% if form.razonEmp.errors %}<span class="help-block">{{form.razonEmp.errors}}</span>{% endif %}
+		</div>
+    </div>
+    <div class="form-group {% if form.explicaEmp.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">Explique: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-9">
+		{{form.explicaEmp}}
+		{% if form.explicaEmp.errors %}<span class="help-block">{{form.explicaEmp.errors}}</span>{% endif %}
+		</div>
+    </div>
+    <div class="form-group {% if form.demandas.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">¿Has tenido demandas civiles judiciales o laborales?: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-9">
+		{{form.demandas}}
+		{% if form.demandas.errors %}<span class="help-block">{{form.demandas.errors}}</span>{% endif %}
+		</div>
+    </div>
+    <div class="form-group {% if form.explicaDem.errors %}has-error{% endif %}">
+	    <label class="control-label col-md-3">Explique: <span class="required" aria-required="true"> </span></label>
+		<div class="col-md-9">
+		{{form.explicaDem}}
+		{% if form.explicaDem.errors %}<span class="help-block">{{form.explicaDem.errors}}</span>{% endif %}
+		</div>
+    </div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Cuentas con licencia?:</label>
+		<div class="col-md-1">
+		{{form.tieneLic}}
+		{% if form.tieneLic.errors %}<span class="help-block">{{form.tieneLic.errors}}</span>{% endif %}
+		</div>
+        <label class="control-label col-md-3">¿Qué tipo?:</label>
+        <div class="col-md-1">
+		{{form.tipoLic}}
+		{% if form.tipoLic.errors %}<span class="help-block">{{form.tipoLic.errors}}</span>{% endif %}
+		</div>
+    </div>
+
+
+    <div class="form-group">
+	    <label class="control-label col-md-3">Número:</label>
+		<div class="col-md-2">
+		{{form.numeroLic}}
+		{% if form.numeroLic.errors %}<span class="help-block">{{form.numeroLic.errors}}</span>{% endif %}
+		</div>
+        <label class="control-label col-md-3">Vigencia:</label>
+        <div class="col-md-2">
+		{{form.vigenciaLic}}
+		{% if form.vigenciaLic.errors %}<span class="help-block">{{form.vigenciaLic.errors}}</span>{% endif %}
+		</div>
+    </div>
+    <div class="form-group">
+	    <label class="control-label col-md-3">¿Vives en casa propia?:</label>
+		<div class="col-md-1">
+		{{form.casaPropia}}
+		{% if form.casaPropia.errors %}<span class="help-block">{{form.casaPropia.errors}}</span>{% endif %}
+		</div>
+        <label class="control-label col-md-3">¿Cuántas personas viven ahí?:</label>
+        <div class="col-md-1">
+		{{form.numHabitantes}}
+		{% if form.numHabitantes.errors %}<span class="help-block">{{form.numHabitantes.errors}}</span>{% endif %}
+		</div>
+    </div>
+
+
+
+
+
+
+
+    <button type="submit" class="btn blue"><i class="fa fa-pencil"></i> {{action}}</button>
+
+
+
+	</form>
+{% endblock %}

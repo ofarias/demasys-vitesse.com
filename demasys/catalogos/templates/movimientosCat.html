@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load bootstrap_pagination %}
+
+{% block title %}Lista de Movimientos {% endblock %}
+{% block content_title %} Lista de Movimientos{% endblock %}
+
+{% block nav-catalogos %}<li class="active open">{% endblock %}
+{% block nav-movInv %}<li class="active">{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Seguimiento</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Lista</a>							
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+		<div class="row">
+            <div class="col-md-12">
+				<div class="portlet box grey-cascade">
+						<div class="portlet-title">
+							<div class="caption">
+								Status de Unidades
+							</div>							
+						</div>
+						<div class="portlet-body">
+							
+							<div class="table-scrollable">
+							<table class="table table-striped table-bordered table-hover" id="sample_1">
+							<thead>
+							<tr>
+								<th>
+									Unidad
+								</th>
+								<th>
+									 Status
+								</th>
+								<th>
+									 Viaje
+								</th>
+								<th>
+									 Cliente
+								</th>
+								<th>
+									 Departamento
+								</th>
+								<th>
+									 Descripcion
+								</th<>
+								<th>
+									Operador
+								</th>
+								<th>
+									Fecha Movimiento 
+								</th>
+								<th>
+									 Kilometro Entrada 
+								</th>
+								<th>
+									Kilometro Salida
+								</th>
+				
+							</tr>
+							</thead>
+							<tbody>
+							{% for movimiento in movunidad %}
+							<!--<tr class="odd gradeX">-->
+							<tr class="odd gradeX {{movimiento.get_tipo_display}}">
+								<td>
+									{{movimiento.unidad}}
+								</td>
+								<td>
+									{{movimiento.get_tipo_display}}
+								</td>
+								<td>
+									{{movimiento.destino2}}
+								</td>
+								<td>
+									{{movimiento.cliente}}
+								</td>
+								<td>
+									{{movimiento.departamento}}
+								</td>
+								<td>
+									{{movimiento.obs}}
+								</td<>
+								<td>
+									{{movimiento.operador}}
+								</td>
+								<td>
+									{{movimiento.fecha}}
+								</td>
+								<td>
+									{{movimiento.kmen}}
+								</td>	
+								<td>
+									{{movimiento.kmsa}}
+								</td>												 
+								
+							</tr>
+							{% endfor %}							
+							</tbody>
+							</table>
+							{% bootstrap_paginate movunidad %}
+							</div>
+						</div>
+					</div>					
+            </div>
+         </div>
+{% endblock %}
+
+$(document).ready(function() {
+$('#sample-1').dataTable({
+"bPaginate": true,
+"bAutoWidth":false
+});
+<!--$('#tablefailed').dataTable({
+"bPaginate": true,
+"bAutoWidth":false
+});-->
+nextpage();
+function nextpage()
+{
+if($('#sample_1_paginate').find('.paginate_disabled_next').length>0){
+$('#sample_1_previous').trigger('click');
+$('#sample_1_previous').trigger('click');
+$('#sample_1_previous').trigger('click');
+$('#sample_1_previous').trigger('click');
+$('#sample_1_previous').trigger('click');
+$('#sample_1_previous').trigger('click');
+$('#sample_1_previous').trigger('click');
+$('#sample_1_previous').trigger('click');
+$('#sample_1_previous').trigger('click');
+$('#sample_1_previous').trigger('click');
+}
+else
+$('#sample_1_next').trigger('click');
+if($('#sample_1_paginate').find('.paginate_disabled_next').length>0){
+$('#sample_1_previous').trigger('click');
+$('#sample_1_previous').trigger('click');
+$('#sample_1_previous').trigger('click');
+$('#sample_1_previous').trigger('click');
+$('#sample_1_previous').trigger('click');
+$('#sample_1_previous').trigger('click');
+$('#sample_1_previous').trigger('click');
+$('#sample_1_previous').trigger('click');
+$('#sample_1_previous').trigger('click');
+$('#sample_1_previous').trigger('click');
+}
+else
+$('#tablefail_next').trigger('click');
+setTimeout( function()
+{
+nextpage();
+}, (60*1000));
+
+
+}
+} );
+
+
+

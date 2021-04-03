@@ -1,0 +1,131 @@
+{% extends "easy_pdf/base.html" %}
+{% load humanize %}
+{% block content %}
+<style>
+    table {
+    border:1px solid #CCC;
+    border-collapse:collapse;
+    }
+    td {
+        border:none;
+    }
+    tr {
+    border:none;
+}
+
+    img.foto {
+            height: 3cm;
+            width: 2.5cm;
+    }
+
+    img.logofront {
+            width: 5cm;
+    }
+
+    td.azul{
+        background-color: blue;
+    }
+</style>
+    <div id="content">
+
+        <table border="1">
+
+            <tr>
+                <td colspan="2" width="60mm" align="center">
+                    <br>
+                    <img class="logofront" src="{{MEDIA_URL}}img/logo_cartaporte.jpg">
+                </td>
+                <td width="57mm" align="center">
+                    <br>
+                    <img class="logofront" src="{{MEDIA_URL}}img/logo.jpg">
+                    <p align="center">IMSS<br>{{emp.nss}}</p></td>
+            </tr>
+            <tr>
+                <td rowspan="7" width="30mm"><br><img class="foto" src="{{MEDIA_URL}}imgEmpleados/{{emp.pk}}_FOTO.jpg"></td>
+                <td align="center" width="28mm"><br><font size="5"><b>{{emp.apellidop}} {{emp.apellidom}}</b></font></td>
+                <td rowspan="7" align="center">
+                    <p align="center"><br>
+                        <font size="4">Esta credencial es intransferible y<br>
+                            acredita como personal de la empresa<br>
+                            cuyo nombre y fotografía y<br>
+                            firma aparecen en ella y deberá<br>
+                            ser devuelta al finalizar la relación<br>
+                            laboral, la empresa no se hace<br>
+                            responsable por el uso indebido<br>
+                            que se haga de ella.
+                            </font>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="center"><font size="5"><b>{{emp.nombre}} {{emp.segundo_nombre}}</b></font></td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+            <tr>
+                <td align="center"><font size="5">Vigencia</font></td>
+            </tr>
+            <tr>
+                <td align="center"> {{emp.vigencia}}</td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+            <tr>
+                <td align="center"><font size="5">{{emp.registro}}</font></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <br>
+                    <img src="{{MEDIA_URL}}imgEmpleados/{{emp.pk}}_BARRAS.jpg" width="70"><br>
+                    FECHA DE INGRESO<br>
+                    {{emp.ingreso}}
+                </td>
+
+                <td>
+                    <p align="center" >
+                        <font size="4">
+                        VITESSE OPCIONES DE<br>
+                        DISTRIBUCION S.A. DE C.V.<br>
+                        Tel. 53436751<br>
+                                    <br>
+                        </font>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="azul" align="center"><font color="white" size="6"><b>{{emp.puesto}}</b></font></td>
+
+                <td align="center"><img rowspan="7" width="12mm" height="12mm" class="foto" src="{{MEDIA_URL}}imgEmpleados/{{emp.pk}}_QR.jpg"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">http://www.logisticavitesse.com.mx/</td>
+                <td>
+                    <br>
+                    <p align="center">Camino a Santa Cruz 27, Col. La Alteña II<br>
+                    Naucalpan de Juárez, Estado de México
+                    </p>
+                    <p>
+                    {{HOLA}}
+                    <br>
+                    </p>
+                    <p>
+                    {{HOLA}}
+                    <br>
+                    </p>
+
+                </td>
+            </tr>
+
+        </table>
+
+
+    </div>  
+{% endblock %}
+
+{%block page_foot%}
+
+        <pdf:pagenumber />
+
+{%endblock%}

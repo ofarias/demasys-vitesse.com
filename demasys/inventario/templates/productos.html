@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load bootstrap_pagination %}
+
+{% block title %}Inventario-Productos{% endblock %}
+{% block content_title %} Inventario {% endblock %}
+
+{% block nav-inventario %}<li class="active open">{% endblock %}
+{% block nav-invProd %}<li class="active">{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Inventario</a>
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Productos</a>
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet box grey-cascade">
+			<div class="portlet-title">
+				<div class="caption">
+					Listado de productos en inventario
+				</div>							
+			</div>
+			<div class="portlet-body">
+				<div class="table-toolbar">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="btn-group">
+								
+								{% if perms.inventario.add_productos %}
+								<a href="{% url 'inventario.views.productoadd' %}" class="btn blue">
+									Agregar nuevo <i class="fa fa-plus"></i>
+								</a> 
+								{% else %}
+								<div class="alert alert-dismissable alert-danger">
+									<button class="close" aria-hidden="true" data-dismiss="alert" type="button"></button>
+									{{user.get_short_name}} no tiene permisos para Agregar.<br/> Solicite permisos al administrador.
+								</div>
+								{% endif %} 
+                            </div>
+						</div>
+						<div class="col-md-6">
+
+						</div>
+					</div>
+				</div>
+				<div class="table-scrollable">
+					<table class="table table-striped table-bordered table-hover" id="sample_1">
+						<thead>
+							<tr>
+								<th>
+									Descripción
+								</th>
+								<th>
+									Existencia
+								</th>
+								<th>
+									Ultimo Costo (Unitario)
+								</th>
+								<!--<th>
+									Editar
+								</th> -->
+								<th>
+									Eliminar
+								</th>								
+							</tr>
+						</thead>
+						<tbody>
+							{% for seg in productos %}
+							<tr class="odd gradeX">
+								<td>
+									{{seg.descripcion}}
+								</td>
+								<td>
+									{{seg.existencia}}
+								</td>
+								<td>
+									{{seg.costoUnitario}}
+								</td>
+								<!--<td>
+								{% if perms.inventario.change_productos %}
+									<a href="{% url 'inventario.views.productoedit' seg.pk %}" class="btn default btn-xs blue-stripe">Editar</a>
+								{% else %}
+								<div class="alert alert-dismissable alert-danger">
+									<button class="close" aria-hidden="true" data-dismiss="alert" type="button"></button>
+									{{user.get_short_name}} no tiene permisos para Editar.<br/> Solicite permisos al administrador.
+								</div>
+								{% endif %}	
+								</td>-->
+								<td>
+								{% if perms.inventario.delete_productos %}
+									<a href="{% url 'inventario.views.productodelete' seg.pk %}" onclick="return confirm('Seguro que desea eliminar el producto {{seg.nombre}}?')" class="btn default btn-xs red-stripe">Eliminar</a>
+								{% else %}
+								<div class="alert alert-dismissable alert-danger">
+									<button class="close" aria-hidden="true" data-dismiss="alert" type="button"></button>
+									{{user.get_short_name}} no tiene permisos para Eliminar.<br/> Solicite permisos al administrador.
+								</div>
+								{% endif %}
+								</td>
+							</tr>
+							{% endfor %}							
+						</tbody>
+					</table>
+					{% bootstrap_paginate productos %}
+				</div>
+			</div>
+		</div>					
+	</div>
+</div>
+{% endblock %}

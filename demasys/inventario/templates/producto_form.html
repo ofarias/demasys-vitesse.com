@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+
+{% block title %}{{action}} Producto{% endblock %}
+{% block content_title %} Producto {% endblock %}
+
+{% block nav-inventario %}<li class="active open">{% endblock %}
+{% block nav-invProd %}<li class="active">{% endblock %}
+
+{% block breadcrumb %}
+<ul class="page-breadcrumb">
+	<li>
+		<i class="fa fa-home"></i>
+		<a href="{% url 'dashboards.views.index' %}">Dashboard</a>	
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="#">Inventario</a>
+		<i class="fa fa-angle-right"></i>					
+	</li>
+	<li>		
+		<a href="{% url 'inventario.views.productoadd' %}">Producto</a>
+		<i class="fa fa-angle-right"></i>						
+	</li>
+	<li>
+		<a href="#">{{action}}</a>
+	</li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+{% endblock %}
+
+{% block content %}
+		<div class="row">
+            <div class="col-md-12">
+								<div class="portlet light bg-inverse form-fit">
+									<div class="portlet-title">
+										<div class="caption">
+											<i class="icon-equalizer font-blue"></i>
+											<span class="caption-subject font-blue bold uppercase">{{action}} Producto</span>
+										</div>										
+									</div>
+									<div class="portlet-body form">
+										<!-- BEGIN FORM-->
+										<form action="" class="form-horizontal form-row-seperated" method="post">
+											{% csrf_token %}
+											<div class="form-body">
+												<div class="form-group {% if form.nombre.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Descripcion:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.descripcion}}
+														{% if form.descripcion.errors %}<span class="help-block">{{form.descripcion.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<!--<div class="form-group {% if form.direccion.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Existencia:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.existencia}}
+														{% if form.existencia.errors %}<span class="help-block">{{form.existencia.errors}}</span>{% endif %}
+													</div>
+												</div>
+												<div class="form-group {% if form.telefono_siniestros.errors %}has-error{% endif %}">
+													<label class="control-label col-md-3">Costo Unitario:<span class="required" aria-required="true"> * </span></label>
+													<div class="col-md-9">
+														{{form.costoUnitario}}
+														{% if form.costoUnitario.errors %}<span class="help-block">{{form.costoUnitario.errors}}</span>{% endif %}
+													</div>
+												</div> -->
+											</div>
+											<div class="form-actions">
+												<div class="row">
+													<div class="col-md-offset-3 col-md-9">
+														<button type="submit" class="btn blue"><i class="fa fa-pencil"></i> {{action}}</button>														
+													</div>
+												</div>
+											</div>
+										</form>
+										<!-- END FORM-->
+									</div>
+								</div>
+            </div>
+         </div>
+{% endblock %}
