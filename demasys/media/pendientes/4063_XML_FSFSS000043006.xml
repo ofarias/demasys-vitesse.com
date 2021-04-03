@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv32.xsd" version="3.2" serie="FSS" folio="43006" fecha="2017-01-30T16:42:55" sello="uU7G73OS1nEpU4s4ZC3o/4NghGDVcIsYQ79yoC6N70p6lrn6JzlYnAI1IleP6X+Gv2ptesLx4/DRrMNObBLabA7DEeT32xcTcB+sBuAZLrgP3IfAzZ7jG6t8P+WFQ1tBd+oVNvkgDc8Hw9cUqEZai3fG2GTYzQDsD037d5pllvs=" formaDePago="PAGO EN UNA SOLA EXHIBICION" noCertificado="00001000000304129547" certificado="MIIEbjCCA1agAwIBAgIUMDAwMDEwMDAwMDAzMDQxMjk1NDcwDQYJKoZIhvcNAQEFBQAwggGKMTgwNgYDVQQDDC9BLkMuIGRlbCBTZXJ2aWNpbyBkZSBBZG1pbmlzdHJhY2nDs24gVHJpYnV0YXJpYTEvMC0GA1UECgwmU2VydmljaW8gZGUgQWRtaW5pc3RyYWNpw7NuIFRyaWJ1dGFyaWExODA2BgNVBAsML0FkbWluaXN0cmFjacOzbiBkZSBTZWd1cmlkYWQgZGUgbGEgSW5mb3JtYWNpw7NuMR8wHQYJKoZIhvcNAQkBFhBhY29kc0BzYXQuZ29iLm14MSYwJAYDVQQJDB1Bdi4gSGlkYWxnbyA3NywgQ29sLiBHdWVycmVybzEOMAwGA1UEEQwFMDYzMDAxCzAJBgNVBAYTAk1YMRkwFwYDVQQIDBBEaXN0cml0byBGZWRlcmFsMRQwEgYDVQQHDAtDdWF1aHTDqW1vYzEVMBMGA1UELRMMU0FUOTcwNzAxTk4zMTUwMwYJKoZIhvcNAQkCDCZSZXNwb25zYWJsZTogQ2xhdWRpYSBDb3ZhcnJ1YmlhcyBPY2hvYTAeFw0xNDA1MTQxNzA1MDRaFw0xODA1MTQxNzA1MDRaMIG6MRswGQYDVQQDExJFVVJPIENJVFkgU0EgREUgQ1YxGzAZBgNVBCkTEkVVUk8gQ0lUWSBTQSBERSBDVjEbMBkGA1UEChMSRVVSTyBDSVRZIFNBIERFIENWMSUwIwYDVQQtExxFQ0k4MjAyMjNLUjAgLyBWQVNKNjcxMjE0Q1Q3MR4wHAYDVQQFExUgLyBWQVNKNjcxMjE0SFNMTE5OMDkxGjAYBgNVBAsTEUVVUk9DSVRZIFNBIERFIENWMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDA1myLe0BkUrGmk4pOTP63b1RLJuZFuJCxfsUhxI9Cqfc1BTCirphuVcu19rD35573O+/jIaXMFzLpGW+cmXXTcJ4t1Sk1M/RUNjkOqMOCsIdwqw5nuiEDxDyr1rWN+LX9HpiFxZ9pg9mziJ81YrlGyKlQgvTMj+e1W1ihcKtoMQIDAQABox0wGzAMBgNVHRMBAf8EAjAAMAsGA1UdDwQEAwIGwDANBgkqhkiG9w0BAQUFAAOCAQEAqs9lSJ0yz/pnu/CzBVodFyTyreMEQuCr2W63oS9drAW7bZPkqyY6m2mPk2OrRfbRxtiL1wR/9lJNtGD2IbQ+7mSg1oIqjdD2gzBtAalWGTIB43cFF7/t+J+rjusWxh7nnI8tFhrOfRWDDjhMJ0kKydWl5YNI0Yp30giLu34IIIfozHkttBjzFqAYB+QtQIJTy6lfVo0gEjxiHFVwuiGEJa2DX2QvOfgYgbn0b5yG5A/ZkGy6cvklzRlGcbhl3bXGIrd9beVhuFnH9WWzuegaWJ6UwiiAx/xdNhKCBq7n4JqP8Jj7pnz9ZmTMZ7wZOwmVvXB0F+aNrBqQiBa/QaOTRQ==" condicionesDePago="CONTADO" subTotal="30000.00" TipoCambio="1.00" Moneda="MXN" total="34800.00" tipoDeComprobante="ingreso" metodoDePago="03" LugarExpedicion="BLVD. EMILIANO ZAPATA N° 455 PTE., GUADALUPE, CULIACAN" NumCtaPago="NO IDENTIFICADO">
+  <cfdi:Emisor rfc="ECI820223KR0" nombre="EURO CITY SA DE CV">
+    <cfdi:DomicilioFiscal calle="BLVD. EMILIANO ZAPATA" colonia="GUADALUPE" municipio="CULIACAN" estado="SINALOA" pais="MEXICO" codigoPostal="80220" />
+    <cfdi:ExpedidoEn calle="BLVD. EMILIANO ZAPATA N° 455 PTE." colonia="GUADALUPE" municipio="CULIACAN" estado="SINALOA" pais="MEXICO" codigoPostal="80220" />
+    <cfdi:RegimenFiscal Regimen="REGIMEN GENERAL DE LEY PERSONAS MORALES" />
+  </cfdi:Emisor>
+  <cfdi:Receptor rfc="VOD110907TB4" nombre="VITESSE OPCIONES EN DISTRIBUCION SA DE CV">
+    <cfdi:Domicilio calle="CALLE TOLUCA" noExterior="26" colonia="CAPULA" localidad="MEXICO" municipio="TEPOTZOTLAN" estado="ESTADO DE MEXICO" pais="MEXICO" codigoPostal="54603" />
+  </cfdi:Receptor>
+  <cfdi:Conceptos>
+    <cfdi:Concepto cantidad="926.00" unidad="NO APLICA" noIdentificacion="01240000" descripcion="DIAGNOSTICO DE UNIDAD" valorUnitario="5.4" importe="5000.40" />
+    <cfdi:Concepto cantidad="1.00" unidad="NO APLICA" noIdentificacion="01" descripcion="PENSION POR ESTACIONAMIENTO EN TALLER" valorUnitario="24999.60" importe="24999.60" />
+  </cfdi:Conceptos>
+  <cfdi:Impuestos totalImpuestosTrasladados="4800.00">
+    <cfdi:Traslados>
+      <cfdi:Traslado tasa="16.00" importe="4800.00" impuesto="IVA" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/TimbreFiscalDigital/TimbreFiscalDigital.xsd" version="1.0" UUID="D20D0E5D-4F05-4106-A40F-2EF561D42626" FechaTimbrado="2017-01-30T17:42:48" selloCFD="uU7G73OS1nEpU4s4ZC3o/4NghGDVcIsYQ79yoC6N70p6lrn6JzlYnAI1IleP6X+Gv2ptesLx4/DRrMNObBLabA7DEeT32xcTcB+sBuAZLrgP3IfAzZ7jG6t8P+WFQ1tBd+oVNvkgDc8Hw9cUqEZai3fG2GTYzQDsD037d5pllvs=" noCertificadoSAT="00001000000404477432" selloSAT="B4vbpBw0VJpyyKmM3caGCfswaragNANlCACWGQh7B+mLM1sQcDr5EOgY1CkfHp6jM/e6nEo6dD4OFl8uIzsyCvLXakMuRoNbMYJCYBWCbf6YRRVfKz6SpoacYY5LmNCXZavZwh+VJJMfnX1/xEddBH8AgNLYn7SntMrmABolwA7gFjT8mNg8r8mDp6f6V7FD4LKW0pTnHPcEmexESprroscIq3bz3PEFeTwe6wv9CuYVLywMOBnSWSm4n7hWvscbFvMwcxA1TAOoPYB4Io41B2xJtWX5wayN7U9u1YZutP/bTJiDIL268CJ7RTIlX8r6L21qrPTTyFG7Rs1aX0HJcA==" />
+  </cfdi:Complemento>
+</cfdi:Comprobante>
