@@ -71,9 +71,7 @@ logger = logging.getLogger(__name__)
 
 @login_required
 def index(request):        
-    #Obtener catálogos    
     searchform = SearchForm(request.GET)
-    
     filters = {}    
     if ('pk' in request.GET) and request.GET['pk'].strip():        
         filters['workflowactivity__pk'] = request.GET['pk']
