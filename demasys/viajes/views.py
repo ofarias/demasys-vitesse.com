@@ -754,9 +754,9 @@ def agregar(request):
             h = datetime.strptime(fecha_viaje, "%d-%m-%Y")
             ho = str(hoy)
             ho = datetime.strptime(ho, "%Y-%m-%d")
-
-            if h >= ho:
-                    
+            pasa = 1
+            ##if h >= ho:
+            if pasa == 1:        
                lic = empleado.objects.filter(id = operador)
                for l in lic:
                   vig = l.lic_vigencia
