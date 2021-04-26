@@ -2,7 +2,6 @@
 {% load humanize %}
 {% load sepomex_filters %}
 {% block content %} 
-<meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″ />
     <div id="content">
 
         <table border="0" cellpadding="3">
@@ -84,16 +83,16 @@
         </table>
         <table border="1" bordercolor="#666" cellpadding="3">
         	<tr>
-        		<td colspan="2" align="center" width="34%">BULTOS</td>
-        		<td rowspan="2" align="center" width="70%">QUE EL REMITENTE DICE QUE CONTIENE</td>
+        		<td colspan="2" align="center">BULTOS</td>
+        		<td rowspan="2" align="center">QUE EL REMITENTE DICE QUE CONTIENE</td>
         		<td rowspan="2" align="center" width="15%">PESO</td>
         		<td colspan="2" align="center">VOLUMEN</td>
-        		<td rowspan="2" align="center" width="30%">CONCEPTO</td>
-        		<td rowspan="2" align="center" width="25%">IMPORTE</td>
+        		<td rowspan="2" align="center" width="45%">CONCEPTO</td>
+        		<td rowspan="2" align="center" width="30%">IMPORTE</td>
         	</tr>
         	<tr>
-        		<td align="center" width="17%">NUMERO</td>
-        		<td align="center" width="17%">EMBALAJE</td>
+        		<td align="center" width="20%">NUMERO</td>
+        		<td align="center" width="20%">EMBALAJE</td>
         		<td align="center" width="20%">M3</td>
         		<td align="center" width="20%">PESO ESTIMADO</td>
         	</tr>
@@ -172,13 +171,12 @@
         		<td align="right">{{retencion|floatformat:2|intcomma}}</td>
         	</tr>
         </table>
-
         <table border="1" bordercolor="#666" cellpadding="3">
         	<tr>
-        		<td rowspan="3" width="30%"><img src="{{MEDIA_URL}}img/rfc.jpg" width="100%" /></td>
-        		<td colspan="2" width="54%">IMPUESTO RETENIDO DE CONFORMIDAD CON LA LEY DEL IMPUESTO AL VALOR AGREGADO</td>
-        		<td align="right" width="13.5%"><strong>TOTAL $</strong></td>
-        		<td width="12.5%" align="right">{{total|floatformat:2|intcomma}}</td>
+        		<td rowspan="3" width="60%"><img src="{{MEDIA_URL}}img/rfc.jpg" width="100%" /></td>
+        		<td colspan="2">IMPUESTO RETENIDO DE CONFORMIDAD CON LA LEY DEL IMPUESTO AL VALOR AGREGADO</td>
+        		<td align="right" width="37%"><strong>TOTAL $</strong></td>
+        		<td width="25%" align="right">{{total|floatformat:2|intcomma}}</td>
         	</tr>
         	<tr>
         		<td>IMPORTE CON LETRA</td>        		
